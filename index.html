@@ -346,6 +346,30 @@ footer .cols{display:grid;grid-template-columns:2fr 1fr;gap:40px}
 footer p{margin:0 0 10px;line-height:1.7}
 footer .brand{font-family:'GFS Didot',serif;font-size:1.3rem;letter-spacing:.14em;color:var(--ink);margin-bottom:14px}
 
+/* ============ STRIPS / FAQ / COLLAPSE / TOP ============ */
+.strip{margin-top:26px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px 20px;margin-bottom:8px}
+.strip .s-k{font-family:'Source Sans 3',sans-serif;font-size:.82rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);margin-bottom:10px}
+.strip-bar{display:flex;height:16px;border-radius:4px;overflow:hidden;gap:2px}
+.strip-bar span{height:100%}
+.strip-legend{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:10px;font-family:'Source Sans 3',sans-serif;font-size:.9rem;color:var(--ink2)}
+.strip-legend i{width:10px;height:10px;border-radius:2px;display:inline-block;margin-right:6px}
+.mini-pair{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:6px}
+@media(max-width:640px){.mini-pair{grid-template-columns:1fr}}
+.show-more{display:block;margin:22px auto 0;font-size:.95rem;font-weight:700;padding:12px 28px;border-radius:6px;cursor:pointer;border:1px solid var(--bronze);background:var(--bronze-soft);color:var(--bronze-ink);font-family:'Source Sans 3',sans-serif}
+.show-more:hover{background:var(--bronze);color:var(--ground)}
+.collapsed-item{display:none !important}
+.faq{display:flex;flex-direction:column;gap:14px;margin-top:34px}
+.faq details{background:var(--surface);border:1px solid var(--line);border-radius:8px}
+.faq summary{cursor:pointer;list-style:none;display:flex;gap:14px;align-items:baseline;padding:18px 22px;font-family:'Source Sans 3',sans-serif;font-weight:700;font-size:1.05rem;color:var(--ink)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::before{content:'+';color:var(--bronze);font-size:1.3rem;line-height:1;flex:none}
+.faq details[open] summary::before{content:'−'}
+.faq .a{padding:0 22px 20px 51px;color:var(--ink2);font-size:1rem}
+.faq .a p{margin:0 0 10px}
+@media(max-width:640px){.faq .a{padding-left:22px}}
+#toTop{position:fixed;right:18px;bottom:18px;z-index:60;width:48px;height:48px;border-radius:50%;border:1px solid var(--bronze);background:var(--surface);color:var(--bronze-ink);font-size:1.25rem;cursor:pointer;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:opacity .3s;font-family:'Source Sans 3',sans-serif}
+#toTop.show{opacity:1;pointer-events:auto}
+
 /* ============ READABILITY — μεγαλύτερα, καθαρά γράμματα ============ */
 body{font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif;font-size:18px}
 .lead{font-size:1.18rem}
@@ -419,12 +443,15 @@ footer{font-size:.95rem}
       <a href="#geopolitiki">Θ΄ Γεωπολιτική</a>
       <a href="#kommata">Ι΄ Κόμματα</a>
       <a href="#radar">Το Ραντάρ</a>
+      <a href="#faq">Ερωτήσεις</a>
       <a href="#synedrio">Το Συνέδριο</a>
       <a href="#symmetoxi">Συμμετοχή</a>
       <a href="#plus">Νομόσιο+</a>
     </div>
   </div>
 </nav>
+
+<button id="toTop" aria-label="Επιστροφή στην κορυφή">↑</button>
 
 <!-- ============ HERO ============ -->
 <header class="hero" id="top">
@@ -818,6 +845,20 @@ footer{font-size:.95rem}
       </blockquote>
     </div>
     <div style="display:flex;flex-direction:column;gap:22px" id="radarGrid"></div>
+  </div>
+</section>
+
+<div class="meander" aria-hidden="true"><svg preserveAspectRatio="none" viewBox="0 0 1080 14"><path class="meander-copy" fill="none" stroke="var(--bronze)" stroke-width="1.4" opacity=".55"/></svg></div>
+
+<!-- ============ FAQ ============ -->
+<section id="faq">
+  <div class="wrap">
+    <div class="eyebrow">Απαντάμε πριν ρωτήσεις</div>
+    <div class="section-head">
+      <h2>Συχνές Ερωτήσεις — πώς κρίνουμε, και γιατί να μας πιστέψεις</h2>
+    </div>
+    <p class="lead">Η ζυγαριά θα αμφισβητηθεί — και έτσι πρέπει. Εδώ είναι οι απαντήσεις στις ερωτήσεις που θα κάνει το 99% των ανθρώπων, με τα ίδια τεκμήρια που χρησιμοποιούμε παντού. Αν έχεις ερώτηση που δεν απαντιέται εδώ, στείλ' τη μας με στοιχεία.</p>
+    <div class="faq" id="faqList"></div>
   </div>
 </section>
 
@@ -1664,6 +1705,131 @@ document.getElementById('instRows').innerHTML = INSTITUTIONS.map(r=>`
   bar.innerHTML = seats.map(s=>`<span style="width:${(s.v/seatTotal*100).toFixed(2)}%;background:${s.c}" title="${s.n}: ${s.approx?'≈':''}${s.v}"></span>`).join('');
   bar.setAttribute('aria-label','Κατανομή εδρών: '+seats.map(s=>`${s.n} ${s.approx?'περίπου ':''}${s.v}`).join(', '));
   document.getElementById('seatLegend').innerHTML = seats.map(s=>`<span><i style="background:${s.c}"></i>${s.n} <b class="num">${s.approx?'≈':''}${s.v}</b></span>`).join('');
+})();
+
+/* ---------- FAQ ---------- */
+const FAQ = [
+  { q:'Ποιος αποφασίζει τι είναι «υπέρ» και τι «κατά των πολιτών»; Η γνώμη σας;',
+    a:'<p>Όχι η γνώμη μας. Κάθε κατάταξη κωδικοποιεί τεκμηριωμένες κρίσεις και αντιδράσεις τρίτων: αποφάσεις δικαστηρίων (ΣτΕ, Άρειος Πάγος, ΕΔΔΑ), πορίσματα ανεξάρτητων αρχών (ΑΠΔΠΧ, ΑΔΑΕ, Συνήγορος του Πολίτη), διεθνείς δείκτες, μαζικές καταγεγραμμένες κινητοποιήσεις και μετρήσιμη υιοθέτηση ή αποτυχία στην πράξη.</p><p>Σε κάθε κάρτα υπάρχει το «Γιατί αυτή η κατάταξη» με τις πηγές — μπορείς να ελέγξεις κάθε βαθμό και να διαφωνήσεις με στοιχεία. Αυτή είναι η διαφορά μας από τη γνώμη: η γνώμη δεν ελέγχεται· εμείς ελεγχόμαστε.</p>' },
+  { q:'Κι αν κάτι ωφελεί κάποιους και βλάπτει άλλους;',
+    a:'<p>Τότε παίρνει «ΜΙΚΤΟ» και βαθμό 0 — δεν γέρνει τη ζυγαριά καθόλου. Έτσι είναι βαθμολογημένα, π.χ., ο εργασιακός νόμος του 2021 (η κάρτα εργασίας και οι γονικές άδειες υπέρ· οι νέοι όροι απεργιών κατά), οι αμερικανικές βάσεις, η Mercosur.</p><p>«Υπέρ» σημαίνει τεκμηριωμένο όφελος χωρίς τεκμηριωμένη αφαίρεση δικαιωμάτων από άλλους. «Κατά» σημαίνει τεκμηριωμένη βλάβη — όχι απλώς ότι σε κάποιους δεν αρέσει.</p>' },
+  { q:'«Το 13ωρο είναι ευλογία — ελευθερία να δουλέψω παραπάνω.» Γιατί το βάζετε «κατά»;',
+    a:'<p>Δεν βαθμολογούμε αν οι 13 ώρες είναι ηθικά «καλές» ή «κακές» — βαθμολογούμε το τεκμηριωμένο αποτύπωμα: δύο 24ωρες γενικές απεργίες μέσα σε δύο εβδομάδες (η ισχυρότερη συνδικαλιστική αντίδραση της περιόδου), ψήφιση της κρίσιμης διάταξης με 158–110, και το καταγεγραμμένο επιχείρημα ότι η «συναίνεση» του εργαζομένου δεν είναι ελεύθερη όταν η διαπραγματευτική ισχύς είναι άνιση.</p><p>Η κάρτα καταγράφει και τη θέση της κυβέρνησης (προαιρετικό, έως 37 ημέρες/έτος, προσαύξηση 40%). Και αν αύριο τα τεκμήρια αλλάξουν — δικαστική επικύρωση, μετρήσιμα οφέλη χωρίς καταγγελίες κατάχρησης — ο βαθμός θα αλλάξει. Η ζυγαριά ακολουθεί τεκμήρια, όχι ιδεολογία.</p>' },
+  { q:'«Ο γάμος των ομόφυλων βλάπτει την κοινωνία.» Γιατί τον βάζετε «υπέρ»;',
+    a:'<p>Στη μεθοδολογία μας, «υπέρ πολιτών» σημαίνει: διευρύνθηκαν δικαιώματα πολιτών χωρίς να αφαιρεθεί κανένα δικαίωμα από κανέναν άλλον — ο νόμος αυτός δεν υποχρεώνει κανέναν σε τίποτα. Τεκμηριωμένα: ψηφίστηκε 176–76 με διακομματική στήριξη, εφαρμόζεται χωρίς καμία δικαστική ανατροπή, 400+ ζευγάρια στον πρώτο χρόνο.</p><p>Η ηθική ή θρησκευτική διαφωνία είναι απολύτως σεβαστή — και καταγράφεται στην κάρτα (οι αντιδράσεις της Εκκλησίας αναφέρονται ρητά). Αλλά «κατά των πολιτών» στη δική μας κλίμακα θα σήμαινε τεκμηριωμένη βλάβη σε δικαιώματα ή στη ζωή πολιτών — και τέτοια δεν έχει καταγραφεί από κανέναν θεσμό, ελληνικό ή διεθνή.</p>' },
+  { q:'Πώς ξέρετε ότι ένας «καλός» νόμος δεν είναι παγίδα;',
+    a:'<p>Δεν το ξέρουμε πάντα από την αρχή — γι΄ αυτό η ζυγαριά βαθμολογεί εκβάσεις, όχι εξαγγελίες, και επανεξετάζεται. Ένας νόμος που φαίνεται αθώος αλλά εφαρμόζεται εις βάρος των πολιτών θα το δείξει: ακυρώσεις στα δικαστήρια, πορίσματα ανεξάρτητων αρχών, καταγγελίες με στοιχεία — και τότε ο βαθμός αλλάζει.</p><p>Και για τα σημεία όπου υπάρχει υποψία αλλά όχι ακόμη απόδειξη, υπάρχει «Το Ραντάρ»: καταγράφει τον ισχυρισμό, τι τεκμηριώνεται, τι όχι, ποιος ρωτά «ποιος ωφελείται» — και τι να προσέξεις στη συνέχεια. Παράδειγμα: το ΠΔ των οικισμών, όπου το «τι να προσέξεις» δείχνει ακριβώς τα σημεία που θα αποκαλύψουν αν η υποψία ευσταθεί.</p>' },
+  { q:'Είστε με την αριστερά ή με τη δεξιά;',
+    a:'<p>Με τα τεκμήρια. Στη σελίδα θα βρεις σκάνδαλα και νόμους από κυβερνήσεις όλων των περιόδων — από τα εξοπλιστικά της δεκαετίας του ΄90 και το Βατοπέδι ώς τις υποθέσεις της τελευταίας επταετίας — και δίπλα τους, βαθμολογημένους «υπέρ», νόμους της σημερινής κυβέρνησης: gov.gr, κατώτατος μισθός, φορολογικές ελαφρύνσεις, ισότητα γάμου.</p><p>Αν η ζυγαριά γέρνει, δεν είναι επειδή διαλέξαμε πλευρά — είναι επειδή έτσι ζυγίζουν τα τεκμήρια. Όποιος κυβερνήσει με σεβασμό στους θεσμούς, θα τη δει να ισιώνει. Αυτό είναι και το ζητούμενο.</p>' },
+  { q:'Γιατί υποθέσεις που τελείωσαν με αθώωση μετρούν αρνητικά;',
+    a:'<p>Ο βαθμός εκεί δεν αφορά τα πρόσωπα — η αθωότητά τους είναι δικαστικά δεδομένη και το γράφουμε ρητά σε κάθε τέτοια κάρτα. Μετρά το θεσμικό αποτύπωμα της υπόθεσης: τα χρόνια δικαστικής εκκρεμότητας, το δημόσιο χρήμα, τον κλονισμό της εμπιστοσύνης — το κόστος που πλήρωσε η κοινωνία μέχρι να υπάρξει κρίση. Η σχετική ρήτρα υπάρχει γραμμένη στη «Μέθοδο».</p>' },
+  { q:'Οι ψηφοφορίες της σελίδας μετρούν στη ζυγαριά;',
+    a:'<p>Όχι. Είναι δοκιμαστικές, αποθηκεύονται μόνο στη δική σου συσκευή και δεν τις βλέπουμε καν. Η ζυγαριά κινείται αποκλειστικά από τεκμήρια.</p><p>Όταν έρθουν οι πραγματικές ψηφοφορίες στο nomosio.gr, θα εμφανίζονται δίπλα στα τεκμήρια — ποτέ στη θέση τους. Η γνώμη των πολιτών είναι πολύτιμη· αλλά η γνώμη δεν είναι απόδειξη, και το Νομόσιο δεν θα τα μπερδέψει ποτέ.</p>' },
+  { q:'Μπορεί να κάνετε λάθος;',
+    a:'<p>Ναι — και το σύστημα είναι στημένο ώστε το λάθος να μη ζει πολύ. Κάθε αριθμός δείχνει την πηγή του, ώστε να ελέγχεται από οποιονδήποτε. Κάθε δημοσίευση περνά πρώτα από διπλό αντίπαλο έλεγχο: έναν ελεγκτή γεγονότων που προσπαθεί να διαψεύσει τα στοιχεία μας και έναν «εχθρικό δικηγόρο» που ψάχνει άδικες διατυπώσεις. Ό,τι διορθώνεται, διορθώνεται δημόσια, με νέα ημερομηνία ενημέρωσης.</p><p>Αν βρεις λάθος, τεκμηρίωσέ το και θα διορθωθεί. Αυτό είναι το Νομόσιο — ελεγχόμαστε με τους ίδιους κανόνες που ελέγχουμε.</p>' },
+  { q:'Το περιεχόμενο το γράφει τεχνητή νοημοσύνη;',
+    a:'<p>Η έρευνα και η σύνταξη γίνονται με τη βοήθεια τεχνητής νοημοσύνης — γι΄ αυτό μπορούμε να διαβάζουμε χιλιάδες σελίδες πηγών, αποφάσεων και εκθέσεων. Τίποτα όμως δεν δημοσιεύεται χωρίς διασταύρωση με πρωτογενείς πηγές, αντίπαλο έλεγχο γεγονότων, νομικό έλεγχο των διατυπώσεων και ανθρώπινη τελική έγκριση.</p><p>Το εργαλείο είναι καινούργιο. Οι κανόνες είναι αρχαίοι: τεκμηρίωνε — μην εικάζεις.</p>' },
+  { q:'Εσείς τι κερδίζετε από αυτό;',
+    a:'<p>Η ζυγαριά και όλα τα τεκμήρια είναι — και θα μείνουν — δωρεάν και ανοιχτά, με άδεια ελεύθερης αναδημοσίευσης (CC BY). Η προαιρετική συνδρομή Νομόσιο+ (όταν ανοίξει) θα χρηματοδοτεί τη λειτουργία και την έρευνα.</p><p>Δεν πουλάμε διαφημίσεις. Δεν παίρνουμε κρατική διαφήμιση. Δεν χρωστάμε σε τράπεζες.</p>' },
+];
+document.getElementById('faqList').innerHTML = FAQ.map(f=>`
+  <details><summary>${f.q}</summary><div class="a">${f.a}</div></details>`).join('');
+
+/* ---------- ΟΠΤΙΚΕΣ ΣΥΝΟΨΕΙΣ ---------- */
+function stripHTML(title, parts, note){
+  const total = parts.reduce((a,p)=>a+p.v,0) || 1;
+  return `<div class="strip reveal"><div class="s-k">${title}</div>
+    <div class="strip-bar" role="img" aria-label="${title}: ${parts.map(p=>p.n+' '+p.v).join(', ')}">${parts.filter(p=>p.v>0).map(p=>`<span style="width:${(p.v/total*100).toFixed(1)}%;background:${p.c}"></span>`).join('')}</div>
+    <div class="strip-legend">${parts.map(p=>`<span><i style="background:${p.c}"></i>${p.n} <b class="num">${p.v}</b></span>`).join('')}${note?`<span style="color:var(--ink3)">${note}</span>`:''}</div>
+  </div>`;
+}
+function insertStrip(beforeId, html){
+  const el = document.getElementById(beforeId);
+  if(el) el.insertAdjacentHTML('beforebegin', html);
+}
+const C_PRO='var(--pro)', C_KATA='var(--kata)', C_MIX='var(--mixed)', C_BRZ='var(--bronze)';
+const cnt=(arr,imp)=>arr.filter(x=>x.impact===imp).length;
+insertStrip('lawGrid', stripHTML('Οι '+LAWS.length+' νόμοι με μια ματιά',[
+  {n:'Υπέρ πολιτών',v:cnt(LAWS,'pro'),c:C_PRO},
+  {n:'Μικτοί',v:cnt(LAWS,'mixed'),c:C_MIX},
+  {n:'Κατά πολιτών',v:cnt(LAWS,'kata'),c:C_KATA},
+]));
+insertStrip('scandalTimeline', stripHTML('Πώς κατέληξαν οι '+CASES.length+' υποθέσεις',[
+  {n:'Καταδίκες',v:CASES.filter(c=>c.st==='conviction').length,c:C_BRZ},
+  {n:'Αθωώσεις / απαλλαγές',v:CASES.filter(c=>c.st==='acquittal').length,c:C_PRO},
+  {n:'Σε δικαστική εξέλιξη',v:CASES.filter(c=>c.st==='ongoing').length,c:C_KATA},
+  {n:'Χωρίς τελική ποινή ή δίωξη',v:CASES.filter(c=>c.st==='none').length,c:C_MIX},
+]));
+Object.entries(SEC_GRIDS).forEach(([sec,gridId])=>{
+  const items=POLICIES.filter(p=>p.sec===sec);
+  const scored=items.filter(p=>p.impact!==null);
+  insertStrip(gridId, stripHTML('Με μια ματιά',[
+    {n:'Υπέρ πολιτών',v:cnt(scored,'pro'),c:C_PRO},
+    {n:'Μικτά',v:cnt(scored,'mixed'),c:C_MIX},
+    {n:'Κατά πολιτών',v:cnt(scored,'kata'),c:C_KATA},
+  ], (items.length-scored.length)?`+ ${items.length-scored.length} καταγραφές χωρίς βαθμό`:''));
+});
+insertStrip('komGrid', stripHTML('Με μια ματιά',[
+  {n:'Υπέρ πολιτών',v:cnt(PARTIES,'pro'),c:C_PRO},
+  {n:'Μικτά',v:cnt(PARTIES,'mixed'),c:C_MIX},
+  {n:'Κατά πολιτών',v:cnt(PARTIES,'kata'),c:C_KATA},
+]));
+insertStrip('radarGrid', stripHTML('Οι '+RADAR.length+' φάκελοι του Ραντάρ',[
+  {n:'Τεκμηριωμένο μοτίβο',v:RADAR.filter(r=>r.status==='pattern').length,c:C_BRZ},
+  {n:'Εν μέρει τεκμηριωμένο',v:RADAR.filter(r=>r.status==='partial').length,c:C_MIX},
+  {n:'Ανοιχτό ερώτημα',v:RADAR.filter(r=>r.status==='open').length,c:C_PRO},
+]));
+insertStrip('moneyGrid', `<div class="strip reveal"><div class="s-k">Η εκτόξευση των ερευνών της Ευρωπαϊκής Εισαγγελίας (2023 → 2025)</div>
+  <div class="mini-pair">
+    <div class="bars" style="margin-top:6px" role="img" aria-label="Ενεργές υποθέσεις: 53 το 2023, 175 το 2025">
+      <div class="bar-row"><span>Υποθέσεις 2023</span><div class="bar-track"><div class="bar-fill bronze" style="width:30%"></div></div><span class="bar-val num">53</span></div>
+      <div class="bar-row"><span>Υποθέσεις 2025</span><div class="bar-track"><div class="bar-fill bronze" style="width:100%"></div></div><span class="bar-val num">175</span></div>
+    </div>
+    <div class="bars" style="margin-top:6px" role="img" aria-label="Εκτιμώμενη ζημία: 0,7 δισεκατομμύρια ευρώ το 2023, 2,68 το 2025">
+      <div class="bar-row"><span>Ζημία 2023</span><div class="bar-track"><div class="bar-fill" style="width:26%"></div></div><span class="bar-val num">0,7 δισ.</span></div>
+      <div class="bar-row"><span>Ζημία 2025</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><span class="bar-val num">2,68 δισ.</span></div>
+    </div>
+  </div>
+  <div class="strip-legend"><span style="color:var(--ink3)">Εκτιμώμενες ζημίες υπό διερεύνηση — όχι τελεσίδικες (EPPO, Ετήσια Έκθεση 2025)</span></div>
+</div>`);
+
+/* ---------- ΣΥΜΠΤΥΞΗ ΜΕΓΑΛΩΝ ΕΝΟΤΗΤΩΝ ---------- */
+function makeCollapsible(id, visible){
+  const box=document.getElementById(id);
+  if(!box) return;
+  const kids=[...box.children];
+  if(kids.length<=visible+1) return;
+  kids.slice(visible).forEach(k=>k.classList.add('collapsed-item'));
+  const btn=document.createElement('button');
+  btn.className='show-more';
+  const hidden=kids.length-visible;
+  btn.textContent=`Δείξε και τα υπόλοιπα ${hidden}`;
+  btn.setAttribute('aria-expanded','false');
+  btn.addEventListener('click',()=>{
+    const open=btn.getAttribute('aria-expanded')==='true';
+    kids.slice(visible).forEach(k=>k.classList.toggle('collapsed-item',open));
+    btn.setAttribute('aria-expanded',String(!open));
+    btn.textContent=open?`Δείξε και τα υπόλοιπα ${hidden}`:'Σύμπτυξη';
+    if(open) box.scrollIntoView({block:'start'});
+  });
+  box.after(btn);
+}
+makeCollapsible('scandalTimeline',5);
+makeCollapsible('lawGrid',6);
+makeCollapsible('stGrid',4);
+makeCollapsible('zGrid',4);
+makeCollapsible('hGrid',4);
+makeCollapsible('thGrid',4);
+makeCollapsible('komGrid',4);
+makeCollapsible('radarGrid',3);
+makeCollapsible('councilGrid',4);
+
+/* ---------- ΕΠΙΣΤΡΟΦΗ ΠΑΝΩ ---------- */
+(function(){
+  const b=document.getElementById('toTop');
+  if(!b) return;
+  window.addEventListener('scroll',()=>{ b.classList.toggle('show', scrollY>900); },{passive:true});
+  b.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
 })();
 
 /* ---------- ΨΗΦΟΙ (τοπική αποθήκευση, δοκιμαστικά) ---------- */

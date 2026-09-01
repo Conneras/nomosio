@@ -24,6 +24,7 @@
   --mixed-soft:rgba(142,150,160,.13);
   --shadow:0 18px 50px rgba(0,0,0,.45);
   --focus:#D9B662;
+  --lamp-a:rgba(217,182,98,.17);
 }
 @media (prefers-color-scheme: light){
   :root:not([data-theme="dark"]){
@@ -46,6 +47,7 @@
     --mixed-soft:rgba(107,112,118,.12);
     --shadow:0 18px 44px rgba(60,50,20,.12);
     --focus:#7A5D1E;
+    --lamp-a:rgba(138,107,37,.12);
   }
 }
 :root[data-theme="light"]{
@@ -68,6 +70,7 @@
   --mixed-soft:rgba(107,112,118,.12);
   --shadow:0 18px 44px rgba(60,50,20,.12);
   --focus:#7A5D1E;
+  --lamp-a:rgba(138,107,37,.12);
 }
 
 /* ============ BASE ============ */
@@ -418,6 +421,45 @@ footer{font-size:.95rem}
   .section-head{flex-wrap:wrap}
 }
 
+/* ============ ΔΙΑΔΡΑΣΤΙΚΗ ΖΥΓΑΡΙΑ ============ */
+.pan-btns{display:flex;gap:12px;justify-content:center;margin-top:16px;flex-wrap:wrap}
+.pan-btns .vbtn{font-size:.92rem;padding:9px 20px}
+.pan-btns .vbtn[data-side="pro"]{border-color:var(--pro);color:var(--pro)}
+.pan-btns .vbtn[data-side="pro"]:hover{background:var(--pro-soft)}
+.pan-btns .vbtn[data-side="kata"]{border-color:var(--kata);color:var(--kata)}
+.pan-btns .vbtn[data-side="kata"]:hover{background:var(--kata-soft)}
+.pan-panel{margin:18px auto 0;max-width:620px;background:var(--surface);border:1px solid var(--line);border-left-width:4px;border-radius:8px;padding:16px 18px;text-align:left;box-shadow:var(--shadow)}
+.pan-panel.pro{border-left-color:var(--pro)}
+.pan-panel.kata{border-left-color:var(--kata)}
+.pp-head{display:flex;justify-content:space-between;align-items:center;font-family:'Source Sans 3',sans-serif;font-weight:700;font-size:.95rem;color:var(--ink2);margin-bottom:6px;letter-spacing:.04em}
+.pp-close{background:none;border:none;color:var(--ink3);font-size:1.5rem;cursor:pointer;line-height:1;padding:2px 8px}
+.pp-close:hover{color:var(--ink)}
+.pp-item{display:grid;grid-template-columns:1fr auto 90px;gap:12px;align-items:center;width:100%;text-align:left;background:none;border:none;border-top:1px dashed var(--line-soft);padding:11px 4px;cursor:pointer;font-family:'Source Sans 3',sans-serif;font-size:.95rem;color:var(--ink)}
+.pp-item:hover{background:var(--bronze-soft)}
+.pp-score{font-weight:700}
+.pan-panel.pro .pp-score{color:var(--pro)}
+.pan-panel.kata .pp-score{color:var(--kata)}
+.pp-bar{height:8px;background:var(--line-soft);border-radius:3px;overflow:hidden}
+.pp-bar i{display:block;height:100%;border-radius:3px}
+.pan-panel.pro .pp-bar i{background:var(--pro)}
+.pan-panel.kata .pp-bar i{background:var(--kata)}
+.pp-foot{font-family:'Source Sans 3',sans-serif;font-size:.78rem;color:var(--ink3);padding-top:8px;border-top:1px dashed var(--line-soft)}
+@media(max-width:640px){.pp-item{grid-template-columns:1fr auto}.pp-bar{display:none}}
+.flash{animation:cardFlash 1.7s ease}
+@keyframes cardFlash{0%{box-shadow:0 0 0 3px var(--bronze),0 0 36px var(--bronze-soft)}100%{box-shadow:0 0 0 0 transparent}}
+
+/* ============ ΧΑΡΑΞΗ ΧΡΟΝΟΛΟΓΙΟΥ ============ */
+.timeline .t-progress{position:absolute;left:9px;top:6px;width:2px;margin-left:-0.5px;background:var(--bronze);height:0;z-index:1;border-radius:1px}
+.t-item.in::before{animation:stamp 1s ease .25s}
+@keyframes stamp{0%{transform:scale(1.55);box-shadow:0 0 0 10px var(--bronze-soft)}100%{transform:scale(1);box-shadow:0 0 0 0 transparent}}
+
+/* ============ ΤΟ ΦΩΣ ΤΟΥ ΔΙΟΓΕΝΗ ============ */
+#lampLight{position:fixed;left:0;top:0;width:380px;height:380px;margin:-190px 0 0 -190px;border-radius:50%;pointer-events:none;z-index:40;opacity:0;transition:opacity .4s;background:radial-gradient(closest-side,var(--lamp-a),transparent 72%)}
+#lampLight.on{opacity:1}
+.lamp-ripple{position:fixed;width:44px;height:44px;margin:-22px 0 0 -22px;border-radius:50%;pointer-events:none;z-index:40;background:radial-gradient(closest-side,var(--lamp-a),transparent 70%);animation:rip .9s ease-out forwards}
+@keyframes rip{from{transform:scale(.4);opacity:1}to{transform:scale(7);opacity:0}}
+@media (prefers-reduced-motion: reduce){.t-item.in::before,.lamp-ripple{animation:none}.flash{animation:none;box-shadow:0 0 0 3px var(--bronze)}}
+
 /* ============ EMAIL CAPTURE ============ */
 .email-cap{margin-top:26px;background:var(--ground);border:1px solid var(--bronze);border-radius:8px;padding:26px 28px;max-width:600px}
 .ec-head{font-family:'GFS Didot',serif;font-size:1.35rem;margin-bottom:4px;color:var(--ink)}
@@ -513,6 +555,16 @@ footer{font-size:.95rem}
         <!-- beam + pans drawn by JS -->
         <g id="beamGroup"></g>
       </svg>
+    </div>
+
+    <div class="pan-btns reveal">
+      <button class="vbtn" data-side="pro">Τι ζυγίζει υπέρ;</button>
+      <button class="vbtn" data-side="kata">Τι ζυγίζει κατά;</button>
+    </div>
+    <div class="pan-panel" id="panPanel" hidden>
+      <div class="pp-head"><span id="ppTitle"></span><button class="pp-close" id="ppClose" aria-label="Κλείσιμο">×</button></div>
+      <div id="ppList"></div>
+      <div class="pp-foot">Πάτησε ένα τεκμήριο για να πας στην κάρτα του — με το σκεπτικό και τις πηγές.</div>
     </div>
 
     <div class="verdict reveal">
@@ -1558,6 +1610,9 @@ const BALANCE = Math.round((pIdx.raw+pLaw.raw+pAcc.raw+pPol.raw)/(pIdx.max+pLaw.
   const kataCount = INDICES.filter(i=>i.score<0).length + LAWS.filter(l=>l.score<0).length + CASES.filter(c=>c.score<0).length + MONEY.filter(m=>m.counted&&m.score<0).length + PARTIES.filter(p=>p.score<0).length + SCORED_POL.filter(p=>p.score<0).length;
   buildPan(panL,'var(--pro)','ΥΠΕΡ ΤΩΝ ΠΟΛΙΤΩΝ', proCount+' τεκμήρια');
   buildPan(panR_,'var(--kata)','ΚΑΤΑ ΤΩΝ ΠΟΛΙΤΩΝ', kataCount+' τεκμήρια');
+  panL.style.cursor='pointer'; panR_.style.cursor='pointer';
+  panL.addEventListener('click',()=>{ if(window.__panShow) window.__panShow('pro'); });
+  panR_.addEventListener('click',()=>{ if(window.__panShow) window.__panShow('kata'); });
 
   function setAngle(deg){
     const rad = deg*Math.PI/180;
@@ -1615,7 +1670,7 @@ const BALANCE = Math.round((pIdx.raw+pLaw.raw+pAcc.raw+pPol.raw)/(pIdx.max+pLaw.
 
 /* ---------- ΔΕΙΚΤΕΣ TILES ---------- */
 document.getElementById('indexTiles').innerHTML = INDICES.map(i=>`
-  <div class="tile ${i.cls} reveal">
+  <div class="tile ${i.cls} reveal" id="idx-${i.id}">
     <div class="t-k">${i.name}</div>
     <div class="t-v num">${i.value}</div>
     <div class="t-d"><strong>${i.rank}.</strong> ${i.d}</div>
@@ -1625,7 +1680,7 @@ document.getElementById('indexTiles').innerHTML = INDICES.map(i=>`
 /* ---------- ΣΚΑΝΔΑΛΑ ---------- */
 const STATUS_CLS={conviction:'conviction',ongoing:'ongoing',acquittal:'acquittal',none:'none'};
 document.getElementById('scandalTimeline').innerHTML = CASES.map((c,i)=>`
-  <div class="t-item ${c.tone==='done'?'done':c.tone==='cleared'?'cleared':''} reveal">
+  <div class="t-item ${c.tone==='done'?'done':c.tone==='cleared'?'cleared':''} reveal" id="case-${i}">
     <div class="card">
       <div class="meta"><span class="num">${c.years}</span><span class="chip ${STATUS_CLS[c.st]}">${c.stTxt}</span><span class="wchip">βαθμός <b class="num">${c.score}</b></span></div>
       <h3>${c.name}</h3>
@@ -1646,7 +1701,7 @@ document.getElementById('scandalTimeline').innerHTML = CASES.map((c,i)=>`
 /* ---------- ΝΟΜΟΙ ---------- */
 const IMPACT_TXT={pro:'ΥΠΕΡ ΠΟΛΙΤΩΝ',kata:'ΚΑΤΑ ΠΟΛΙΤΩΝ',mixed:'ΜΙΚΤΟ'};
 document.getElementById('lawGrid').innerHTML = LAWS.map((l,i)=>`
-  <div class="card reveal">
+  <div class="card reveal" id="law-${i}">
     <div class="meta"><span class="num">${l.num}</span><span class="impact ${l.impact}">${IMPACT_TXT[l.impact]}</span><span class="wchip">βαθμός <b class="num">${l.score>0?'+':''}${l.score}</b></span></div>
     <h3>${l.name}</h3>
     <p class="sum">${l.sum}</p>
@@ -1659,8 +1714,8 @@ document.getElementById('lawGrid').innerHTML = LAWS.map((l,i)=>`
   </div>`).join('');
 
 /* ---------- ΧΡΗΜΑ ---------- */
-document.getElementById('moneyGrid').innerHTML = MONEY.map(m=>`
-  <div class="card reveal">
+document.getElementById('moneyGrid').innerHTML = MONEY.map((m,i)=>`
+  <div class="card reveal" id="money-${i}">
     <div class="meta"><span class="chip ${m.tone}">${m.st}</span><span class="wchip">${m.counted?`βαθμός <b class="num">${m.score>0?'+':''}${m.score}</b>`:`εκτός υπολογισμού — ${m.dup}`}</span></div>
     <h3>${m.name}</h3>
     <div class="amount num">${m.amount}</div>
@@ -1671,7 +1726,7 @@ document.getElementById('moneyGrid').innerHTML = MONEY.map(m=>`
 /* ---------- ΠΟΛΙΤΙΚΕΣ & ΔΙΚΑΙΩΜΑΤΑ (ΣΤ΄–Θ΄) ---------- */
 function policyCard(p, i){
   const scored = p.impact !== null;
-  return `<div class="card reveal">
+  return `<div class="card reveal" id="pol-${i}">
     <div class="meta">${p.num?`<span class="num">${p.num}</span>`:''}<span class="num">${p.year}</span>${scored?`<span class="impact ${p.impact}">${IMPACT_TXT[p.impact]}</span><span class="wchip">βαθμός <b class="num">${p.score>0?'+':''}${p.score}</b></span>`:`<span class="info-chip">καταγραφή — χωρίς βαθμό</span>`}</div>
     <h3>${p.name}</h3>
     ${p.amount?`<div class="amount num">${p.amount}</div>`:''}
@@ -1693,8 +1748,8 @@ Object.entries(SEC_GRIDS).forEach(([sec,gridId])=>{
 });
 
 /* ---------- ΟΙΚΟΝΟΜΙΚΑ ΚΟΜΜΑΤΩΝ ---------- */
-document.getElementById('komGrid').innerHTML = PARTIES.map(p=>`
-  <div class="card reveal">
+document.getElementById('komGrid').innerHTML = PARTIES.map((p,i)=>`
+  <div class="card reveal" id="party-${i}">
     <div class="meta">${p.num?`<span class="num">${p.num}</span>`:''}<span class="num">${p.year}</span><span class="impact ${p.impact}">${IMPACT_TXT[p.impact]}</span><span class="wchip">βαθμός <b class="num">${p.score>0?'+':''}${p.score}</b></span></div>
     <h3>${p.name}</h3>
     ${p.amount?`<div class="amount num">${p.amount}</div>`:''}
@@ -2040,6 +2095,89 @@ makeCollapsible('thGrid',4);
 makeCollapsible('komGrid',4);
 makeCollapsible('radarGrid',3);
 makeCollapsible('councilGrid',4);
+
+/* ---------- ΔΙΑΔΡΑΣΤΙΚΗ ΖΥΓΑΡΙΑ: τα βαρύτερα τεκμήρια ---------- */
+(function(){
+  const EV=[];
+  INDICES.forEach(x=>EV.push({n:x.name,s:x.score,t:'idx-'+x.id}));
+  LAWS.forEach((x,i)=>EV.push({n:x.name,s:x.score,t:'law-'+i}));
+  CASES.forEach((x,i)=>EV.push({n:x.name,s:x.score,t:'case-'+i}));
+  MONEY.forEach((x,i)=>{ if(x.counted) EV.push({n:x.name,s:x.score,t:'money-'+i}); });
+  PARTIES.forEach((x,i)=>EV.push({n:x.name,s:x.score,t:'party-'+i}));
+  POLICIES.forEach((x,i)=>{ if(x.impact!==null) EV.push({n:x.name,s:x.score,t:'pol-'+i}); });
+
+  const panel=document.getElementById('panPanel'), list=document.getElementById('ppList'), title=document.getElementById('ppTitle');
+  function gotoEvidence(tid){
+    const el=document.getElementById(tid); if(!el) return;
+    if(el.classList.contains('collapsed-item')){
+      const btn=el.parentElement.nextElementSibling;
+      if(btn&&btn.classList.contains('show-more')&&btn.getAttribute('aria-expanded')==='false') btn.click();
+    }
+    el.classList.add('in');
+    el.scrollIntoView({block:'center',behavior:'smooth'});
+    const box=el.querySelector('.card')||el;
+    box.classList.remove('flash'); void box.offsetWidth; box.classList.add('flash');
+    setTimeout(()=>box.classList.remove('flash'),1900);
+  }
+  window.__panShow=function(side){
+    const items=EV.filter(e=>side==='pro'?e.s>0:e.s<0).sort((a,b)=>Math.abs(b.s)-Math.abs(a.s)).slice(0,5);
+    title.textContent= side==='pro' ? 'Τα 5 βαρύτερα τεκμήρια ΥΠΕΡ των πολιτών' : 'Τα 5 βαρύτερα τεκμήρια ΚΑΤΑ των πολιτών';
+    panel.className='pan-panel '+side;
+    panel.hidden=false;
+    list.innerHTML=items.map(e=>`<button class="pp-item" data-t="${e.t}"><span class="pp-name">${e.n}</span><span class="pp-score num">${e.s>0?'+':''}${e.s}</span><span class="pp-bar"><i style="width:${Math.abs(e.s)*10}%"></i></span></button>`).join('');
+    list.querySelectorAll('.pp-item').forEach(b=>b.addEventListener('click',()=>{ panel.hidden=true; gotoEvidence(b.dataset.t); }));
+    panel.scrollIntoView({block:'nearest',behavior:'smooth'});
+  };
+  document.querySelectorAll('.pan-btns .vbtn').forEach(b=>b.addEventListener('click',()=>window.__panShow(b.dataset.side)));
+  document.getElementById('ppClose').addEventListener('click',()=>{ panel.hidden=true; });
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape') panel.hidden=true; });
+})();
+
+/* ---------- ΧΑΡΑΞΗ ΧΡΟΝΟΛΟΓΙΟΥ ---------- */
+(function(){
+  const tl=document.getElementById('scandalTimeline'); if(!tl) return;
+  const prog=document.createElement('div'); prog.className='t-progress'; tl.appendChild(prog);
+  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function upd(){
+    const r=tl.getBoundingClientRect();
+    const total=Math.max(0, r.height-12);
+    const target=reduce ? total : Math.max(0, Math.min(total, innerHeight*0.72 - r.top));
+    prog.style.height=target.toFixed(0)+'px';
+  }
+  let raf=null;
+  addEventListener('scroll',()=>{ if(!raf) raf=requestAnimationFrame(()=>{ raf=null; upd(); }); },{passive:true});
+  addEventListener('resize',upd);
+  upd();
+})();
+
+/* ---------- ΤΟ ΦΩΣ ΤΟΥ ΔΙΟΓΕΝΗ ---------- */
+(function(){
+  const radar=document.getElementById('radar'); if(!radar) return;
+  const light=document.createElement('div'); light.id='lampLight'; document.body.appendChild(light);
+  if(window.matchMedia('(pointer:fine)').matches){
+    let raf=null,x=0,y=0;
+    document.addEventListener('mousemove',e=>{
+      x=e.clientX; y=e.clientY;
+      if(raf) return;
+      raf=requestAnimationFrame(()=>{
+        raf=null;
+        const r=radar.getBoundingClientRect();
+        const inside = y>=r.top && y<=r.bottom && r.height>0;
+        light.classList.toggle('on', inside);
+        if(inside) light.style.transform=`translate(${x}px,${y}px)`;
+      });
+    },{passive:true});
+  }
+  if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    radar.addEventListener('touchstart',e=>{
+      const t=e.touches[0]; if(!t) return;
+      const d=document.createElement('div'); d.className='lamp-ripple';
+      d.style.left=t.clientX+'px'; d.style.top=t.clientY+'px';
+      document.body.appendChild(d);
+      setTimeout(()=>d.remove(),1000);
+    },{passive:true});
+  }
+})();
 
 /* ---------- ΕΠΙΣΤΡΟΦΗ ΠΑΝΩ ---------- */
 (function(){

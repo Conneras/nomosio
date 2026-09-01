@@ -418,6 +418,22 @@ footer{font-size:.95rem}
   .section-head{flex-wrap:wrap}
 }
 
+/* ============ EMAIL CAPTURE ============ */
+.email-cap{margin-top:26px;background:var(--ground);border:1px solid var(--bronze);border-radius:8px;padding:26px 28px;max-width:600px}
+.ec-head{font-family:'GFS Didot',serif;font-size:1.35rem;margin-bottom:4px;color:var(--ink)}
+.ec-sub{color:var(--ink2);font-size:.98rem;margin:0 0 14px;font-family:'Source Sans 3',sans-serif}
+.ec-row{display:flex;gap:10px;flex-wrap:wrap}
+.ec-row input{flex:1;min-width:190px;padding:12px 14px;border-radius:6px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-size:1rem}
+.ec-row input:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.ec-row input:disabled{opacity:.6}
+.ec-btn{border-color:var(--bronze);color:var(--bronze-ink);padding:12px 24px;font-size:1rem}
+.ec-note{font-family:'Source Sans 3',sans-serif;font-size:.8rem;color:var(--ink3);margin:10px 0 0}
+.ec-note a{color:var(--bronze-ink)}
+.ec-msg{font-family:'Source Sans 3',sans-serif;font-size:.95rem;font-weight:600;margin:8px 0 0;min-height:1.3em}
+.ec-msg.ok{color:var(--pro)}
+.ec-msg.err{color:var(--kata)}
+.ec-inline{margin:0;border:none;background:transparent;padding:0;max-width:440px}
+
 /* ============ VIGNETTES — ζωντανές εικονογραφήσεις ============ */
 .vignette{display:flex;justify-content:center;margin:36px 0 10px}
 .vignette svg{width:min(300px,68vw);height:auto;overflow:visible}
@@ -951,6 +967,17 @@ footer{font-size:.95rem}
       </div>
     </div>
 
+    <form class="email-cap reveal" data-source="symmetoxi" novalidate>
+      <div class="ec-head">Μείνε στη μάχη</div>
+      <p class="ec-sub">Όταν η ζυγαριά κουνηθεί — νέος νόμος, νέα απόφαση, νέα τεκμήρια — θα το μάθεις πρώτος. Σπάνια μηνύματα, μόνο ουσία.</p>
+      <div class="ec-row">
+        <input type="email" required placeholder="το email σου" aria-label="Διεύθυνση email" autocomplete="email">
+        <button type="submit" class="vbtn ec-btn">Γράψε με</button>
+      </div>
+      <p class="ec-note">Μόνο για νέα του Νομόσιου · διαγραφή με ένα κλικ σε κάθε μήνυμα · <a href="#privacy">Ιδιωτικότητα</a></p>
+      <p class="ec-msg" role="status" aria-live="polite"></p>
+    </form>
+
     <div class="roadmap">
       <div class="rm reveal">
         <div class="r-k">Φάση Α΄ — τώρα</div>
@@ -1001,13 +1028,14 @@ footer{font-size:.95rem}
         <p style="color:var(--ink2);font-size:.95rem;margin:0;max-width:54ch">Οι εγγραφές θα ανοίξουν με το επίσημο λανσάρισμα. Δήλωσε ενδιαφέρον για να κλειδώσεις θέση στη λίστα αναμονής — καμία χρέωση τώρα.</p>
         <p style="color:var(--ink3);font-size:.78rem;margin:10px 0 0;font-family:'Source Sans 3',sans-serif">Το Νομόσιο+ παρέχει ενημέρωση και καθοδήγηση — δεν αποτελεί νομική, φορολογική ή επενδυτική συμβουλή.</p>
       </div>
-      <div style="display:flex;align-items:center;gap:18px">
-        <div style="text-align:center">
-          <div class="p-num num" id="waitCount">0</div>
-          <div style="font-family:'Source Sans 3',sans-serif;font-size:.75rem;color:var(--ink3)">η δήλωσή σου (τοπικά)</div>
+      <form class="email-cap ec-inline" data-source="plus" novalidate>
+        <div class="ec-row">
+          <input type="email" required placeholder="το email σου" aria-label="Διεύθυνση email για τη λίστα αναμονής" autocomplete="email">
+          <button type="submit" class="vbtn ec-btn">Λίστα αναμονής</button>
         </div>
-        <button class="vbtn" id="waitBtn" style="font-size:1rem;padding:14px 26px;border-color:var(--bronze);color:var(--bronze-ink)">Λίστα αναμονής</button>
-      </div>
+        <p class="ec-note">Καμία χρέωση — μόνο ενημέρωση για το λανσάρισμα · <a href="#privacy">Ιδιωτικότητα</a></p>
+        <p class="ec-msg" role="status" aria-live="polite"></p>
+      </form>
     </div>
   </div>
 </section>
@@ -1021,7 +1049,7 @@ footer{font-size:.95rem}
         <h4>Διαφάνεια &amp; όροι</h4>
         <p><strong style="color:var(--ink2)">Μη κομματική πρωτοβουλία πολιτών — πρωτότυπο υπό ανάπτυξη.</strong> Όλα τα στοιχεία προέρχονται από δημόσιες, τεκμηριωμένες πηγές (EPPO, Ευρωπαϊκή Επιτροπή, Ελεγκτικό Συνέδριο, ΕΔΔΑ, Transparency International, RSF, World Justice Project, Ευρωβαρόμετρο, ΟΟΣΑ, δικαστικές αποφάσεις και διεθνή ειδησεογραφικά πρακτορεία) με αναφορά έτους. Τελευταία ενημέρωση: 31 Αυγούστου 2026.</p>
         <p><strong style="color:var(--ink2)">Τεκμήριο αθωότητας:</strong> όπου δεν υπάρχει αμετάκλητη δικαστική καταδίκη, οι αναφορές αφορούν καταγγελλόμενες ή διερευνώμενες πράξεις και κανένα πρόσωπο δεν θεωρείται ένοχο. Οι αθωώσεις και οι απαλλαγές αναφέρονται ρητά. Ο «Δείκτης Ισορροπίας» αποτιμά τη λειτουργία θεσμών και πολιτικών με δημοσιευμένη μεθοδολογία — δεν αποτελεί κρίση ενοχής προσώπων.</p>
-        <p><strong style="color:var(--ink2)">Ιδιωτικότητα:</strong> οι ψηφοφορίες αυτής της δοκιμαστικής έκδοσης αποθηκεύονται αποκλειστικά στον φυλλομετρητή σου (τοπική αποθήκευση) και δεν αποστέλλονται πουθενά. Η σελίδα φορτώνει γραμματοσειρές από το Google Fonts· κατά τη φόρτωση διαβιβάζεται η διεύθυνση IP σου στην Google, όπως σε κάθε ιστότοπο που τις χρησιμοποιεί. Καμία άλλη διαβίβαση δεδομένων δεν γίνεται.</p>
+        <p id="privacy"><strong style="color:var(--ink2)">Ιδιωτικότητα:</strong> οι ψηφοφορίες αυτής της δοκιμαστικής έκδοσης αποθηκεύονται αποκλειστικά στον φυλλομετρητή σου (τοπική αποθήκευση) και δεν αποστέλλονται πουθενά. Αν εγγραφείς στη λίστα email, η διεύθυνσή σου αποθηκεύεται σε βάση δεδομένων εντός ΕΕ, αποκλειστικά για να λαμβάνεις νέα του Νομόσιου· κάθε μήνυμα θα περιλαμβάνει σύνδεσμο διαγραφής, και μπορείς να ζητήσεις διαγραφή οποτεδήποτε απαντώντας σε οποιοδήποτε μήνυμά μας. Η σελίδα φορτώνει γραμματοσειρές από το Google Fonts· κατά τη φόρτωση διαβιβάζεται η διεύθυνση IP σου στην Google, όπως σε κάθε ιστότοπο που τις χρησιμοποιεί. Καμία άλλη διαβίβαση δεδομένων δεν γίνεται.</p>
       </div>
       <div>
         <h4>Κύριες πηγές</h4>
@@ -2048,13 +2076,28 @@ document.querySelectorAll('.vote').forEach(v=>{
   btn.addEventListener('click',()=>{ lsSet(key, lsGet(key)==='1'?'':'1'); paint(); });
   paint();
 })();
+/* ---------- EMAIL ΛΙΣΤΑ (Supabase, write-only) ---------- */
 (function(){
-  const btn=document.getElementById('waitBtn'), num=document.getElementById('waitCount');
-  if(!btn) return;
-  const key='nomosio-v1-waitlist';
-  function paint(){ const on=lsGet(key)==='1'; num.textContent=on?'1':'0'; btn.textContent=on?'Στη λίστα ✓':'Λίστα αναμονής'; btn.setAttribute('aria-pressed', String(on)); }
-  btn.addEventListener('click',()=>{ lsSet(key, lsGet(key)==='1'?'':'1'); paint(); });
-  paint();
+  const EP='https://drwlmsdaxmlriikwbkwa.supabase.co/rest/v1/nomosio_subscribers';
+  const KEY='sb_publishable_7QSjglwwLWTgSP7IrTiYMQ_78CuBAOC';
+  document.querySelectorAll('.email-cap').forEach(form=>{
+    const input=form.querySelector('input'), btn=form.querySelector('button'), msg=form.querySelector('.ec-msg');
+    const doneKey='nomosio-v1-email-'+(form.dataset.source||'site');
+    function done(text){ msg.textContent=text; msg.className='ec-msg ok'; input.disabled=true; btn.disabled=true; }
+    if(lsGet(doneKey)==='1'){ done('Είσαι στη λίστα ✓'); }
+    form.addEventListener('submit', async e=>{
+      e.preventDefault();
+      const email=(input.value||'').trim().toLowerCase();
+      if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ msg.textContent='Γράψε ένα έγκυρο email.'; msg.className='ec-msg err'; return; }
+      btn.disabled=true; msg.textContent='Μια στιγμή…'; msg.className='ec-msg';
+      try{
+        const r=await fetch(EP,{method:'POST',headers:{'apikey':KEY,'Authorization':'Bearer '+KEY,'Content-Type':'application/json','Prefer':'return=minimal'},body:JSON.stringify({email:email,source:form.dataset.source||'site'})});
+        if(r.status===201){ lsSet(doneKey,'1'); done('Καλώς ήρθες στη λίστα ✓'); }
+        else if(r.status===409){ lsSet(doneKey,'1'); done('Είσαι ήδη μαζί μας ✓'); }
+        else{ msg.textContent='Κάτι πήγε στραβά — δοκίμασε ξανά σε λίγο.'; msg.className='ec-msg err'; btn.disabled=false; }
+      }catch(_){ msg.textContent='Πρόβλημα σύνδεσης — δοκίμασε ξανά.'; msg.className='ec-msg err'; btn.disabled=false; }
+    });
+  });
 })();
 
 /* ---------- ΜΑΙΑΝΔΡΟΣ ---------- */

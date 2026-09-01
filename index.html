@@ -346,6 +346,54 @@ footer .cols{display:grid;grid-template-columns:2fr 1fr;gap:40px}
 footer p{margin:0 0 10px;line-height:1.7}
 footer .brand{font-family:'GFS Didot',serif;font-size:1.3rem;letter-spacing:.14em;color:var(--ink);margin-bottom:14px}
 
+/* ============ READABILITY — μεγαλύτερα, καθαρά γράμματα ============ */
+body{font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif;font-size:18px}
+.lead{font-size:1.18rem}
+.section-head .sub{font-size:1.02rem}
+.card .sum{font-size:1.05rem}
+.card details ul{font-size:.98rem}
+.card summary{font-size:.9rem}
+.card .srcs{font-size:.85rem}
+.tile .t-d{font-size:.98rem}
+.tile .t-k{font-size:.84rem}
+.tile .t-src{font-size:.82rem}
+.aq .gr{font-size:1.22rem}
+.aq .el{font-size:1.05rem}
+.aq .en{font-size:.92rem}
+.aq .cite{font-size:.86rem}
+.auth-chip{font-size:.74rem}
+.chip{font-size:.8rem}
+.impact{font-size:.82rem}
+.wchip,.info-chip{font-size:.82rem}
+.eyebrow{font-size:.82rem}
+.chart-note{font-size:.86rem}
+.bar-row{font-size:.95rem}
+.pillar{font-size:.95rem}
+.vote .q{font-size:.9rem}
+.vbtn{font-size:.9rem}
+.vote-note{font-size:.82rem}
+.fig-bio{font-size:1rem}
+.fig-head .f-era{font-size:.86rem}
+.inst-cell p{font-size:1rem}
+.inst-cell .i-k{font-size:.8rem}
+.dev-list li{font-size:1rem}
+.seat-legend{font-size:.9rem}
+.rm p{font-size:.98rem}
+.r-block p{font-size:1rem}
+.r-block .r-k{font-size:.78rem}
+.radar-note{font-size:1rem}
+nav .links a{font-size:.92rem}
+footer{font-size:.95rem}
+.verdict .v-text{font-size:1.05rem}
+.verdict .v-label{font-size:.82rem}
+.hero .tagline{font-size:clamp(1.1rem,2.2vw,1.28rem)}
+@media(max-width:640px){
+  .wrap{padding:0 18px}
+  section{padding:64px 0}
+  .card{padding:20px 18px}
+  .section-head{flex-wrap:wrap}
+}
+
 /* ============ MOTION ============ */
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
 .reveal.in{opacity:1;transform:none}
@@ -1401,9 +1449,9 @@ const BALANCE = Math.round((pIdx.raw+pLaw.raw+pAcc.raw+pPol.raw)/(pIdx.max+pLaw.
     // δίσκος
     el('path',{d:`M ${-panR} ${panDrop-14} A ${panR} ${panR*.42} 0 0 0 ${panR} ${panDrop-14} Z`,fill:'var(--surface2)',stroke:color,'stroke-width':2},g);
     el('ellipse',{cx:0,cy:panDrop-14,rx:panR,ry:10,fill:'var(--surface)',stroke:color,'stroke-width':2},g);
-    const t1 = el('text',{x:0,y:panDrop+48,'text-anchor':'middle',fill:color,style:"font:700 .8rem 'Source Sans 3',sans-serif;letter-spacing:.14em"},g);
+    const t1 = el('text',{x:0,y:panDrop+50,'text-anchor':'middle',fill:color,style:"font:700 20px 'Source Sans 3',sans-serif;letter-spacing:.12em"},g);
     t1.textContent = label;
-    const t2 = el('text',{x:0,y:panDrop+68,'text-anchor':'middle',fill:'var(--ink3)',style:"font:600 .74rem 'Source Sans 3',sans-serif"},g);
+    const t2 = el('text',{x:0,y:panDrop+72,'text-anchor':'middle',fill:'var(--ink3)',style:"font:600 17px 'Source Sans 3',sans-serif"},g);
     t2.textContent = count;
     return g;
   }

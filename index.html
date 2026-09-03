@@ -76,6 +76,7 @@
 /* ============ BASE ============ */
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
+section,header,footer,[id]{scroll-margin-top:74px}
 body{
   margin:0;
   background:var(--ground);
@@ -130,6 +131,29 @@ nav .links a{
   text-decoration:none;white-space:nowrap;padding:6px 10px;border-radius:4px;
 }
 nav .links a:hover{color:var(--ink);background:var(--surface)}
+nav .links .nl-head{display:none}
+@media(max-width:900px){nav .links .nl-head{display:block}}
+/* ---- Μενού κινητού ---- */
+nav{position:sticky}
+.nav-toggle{display:none;margin-left:auto;align-items:center;gap:9px;background:var(--surface);border:1px solid var(--bronze);border-radius:6px;color:var(--bronze-ink);font:700 .95rem 'Source Sans 3','Segoe UI',sans-serif;padding:9px 14px;cursor:pointer;white-space:nowrap}
+.nt-icon{position:relative;width:18px;height:12px;display:inline-block}
+.nt-icon::before,.nt-icon::after,.nt-icon i{content:'';position:absolute;left:0;right:0;height:2px;border-radius:2px;background:currentColor;transition:transform .25s,opacity .2s}
+.nt-icon::before{top:0}.nt-icon i{top:5px}.nt-icon::after{bottom:0}
+nav.open .nt-icon::before{transform:translateY(5px) rotate(45deg)}
+nav.open .nt-icon i{opacity:0}
+nav.open .nt-icon::after{transform:translateY(-5px) rotate(-45deg)}
+@media(max-width:900px){
+  .nav-inner{overflow:visible}
+  .nav-toggle{display:inline-flex}
+  nav .links{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;margin:0;padding:8px 14px 28px;background:var(--ground);border-bottom:1px solid var(--line);box-shadow:var(--shadow);max-height:calc(100dvh - 62px);overflow-y:auto}
+  nav.open .links{display:flex}
+  nav .links a{font-size:1.12rem;padding:14px 10px;border-radius:0;border-bottom:1px solid var(--line-soft);color:var(--ink)}
+  nav .links a:last-child{border-bottom:none}
+  nav .links a::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--bronze);margin-right:12px;vertical-align:middle;opacity:.8}
+  nav .links .nl-head{font:700 .74rem 'Source Sans 3',sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--ink3);padding:16px 10px 6px}
+  body.nav-lock{overflow:hidden}
+  body.nav-lock #toTop{opacity:0;pointer-events:none}
+}
 
 /* ============ HERO ============ */
 .hero{padding:64px 0 72px;text-align:center;position:relative}
@@ -2180,6 +2204,49 @@ makeCollapsible('councilGrid',4);
   addEventListener('scroll',()=>{ if(!raf) raf=requestAnimationFrame(()=>{ raf=null; upd(); }); },{passive:true});
   addEventListener('resize',upd);
   upd();
+})();
+
+/* ---------- ΜΕΝΟΥ ΚΙΝΗΤΟΥ ---------- */
+(function(){
+  const nav=document.querySelector('nav'), inner=nav&&nav.querySelector('.nav-inner'), links=nav&&nav.querySelector('.links');
+  if(!nav||!inner||!links) return;
+  links.id='navLinks';
+  const btn=document.createElement('button');
+  btn.type='button'; btn.className='nav-toggle';
+  btn.setAttribute('aria-expanded','false'); btn.setAttribute('aria-controls','navLinks');
+  btn.innerHTML='<span class="nt-icon" aria-hidden="true"><i></i></span><span class="nt-txt">Μενού</span>';
+  inner.insertBefore(btn, links);
+  /* Επικεφαλίδες ομάδων — μόνο στο κατακόρυφο μενού (κρύβονται σε desktop) */
+  const heads={ '#methodos':'Πώς δουλεύει', '#deiktes':'Τα Τεκμήρια Α΄–Ι΄', '#radar':'Εκτός ζυγαριάς', '#synedrio':'Οι Αρχαίοι', '#symmetoxi':'Εσύ' };
+  links.querySelectorAll('a').forEach(a=>{
+    const h=heads[a.getAttribute('href')];
+    if(h){ const d=document.createElement('div'); d.className='nl-head'; d.textContent=h; links.insertBefore(d,a); }
+  });
+  function set(open){
+    nav.classList.toggle('open',open);
+    btn.setAttribute('aria-expanded',String(open));
+    btn.querySelector('.nt-txt').textContent=open?'Κλείσιμο':'Μενού';
+    document.body.classList.toggle('nav-lock',open);
+    if(open && typeof track==='function') track('nav','menu','open');
+  }
+  btn.addEventListener('click',()=>set(!nav.classList.contains('open')));
+  links.addEventListener('click',e=>{
+    const a=e.target.closest('a'); if(!a) return;
+    const href=a.getAttribute('href')||'';
+    if(!href.startsWith('#')) { set(false); return; }
+    const target=document.querySelector(href);
+    if(!target) { set(false); return; }
+    e.preventDefault();
+    set(false);
+    setTimeout(()=>{
+      target.scrollIntoView({block:'start',behavior:'instant'});
+      try{ history.pushState(null,'',href); }catch(_){}
+    },0);
+  });
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&nav.classList.contains('open')) set(false); });
+  document.addEventListener('click',e=>{ if(nav.classList.contains('open')&&!nav.contains(e.target)) set(false); });
+  const mq=window.matchMedia('(min-width:901px)');
+  (mq.addEventListener?mq.addEventListener('change',e=>{ if(e.matches) set(false); }):mq.addListener(e=>{ if(e.matches) set(false); }));
 })();
 
 /* ---------- ΤΟ ΦΩΣ ΤΟΥ ΔΙΟΓΕΝΗ ---------- */

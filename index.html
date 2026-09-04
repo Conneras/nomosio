@@ -1175,6 +1175,19 @@ footer{font-size:.95rem}
    το κρυμμένο .reveal περιεχόμενο γίνεται αμέσως ορατό. */
 window.addEventListener('error',()=>{ document.querySelectorAll('.reveal').forEach(e=>e.classList.add('in')); });
 
+/* =====================================================================
+   ΒΑΣΗ ΔΕΔΟΜΕΝΩΝ — ΤΟ ΜΟΝΟ ΣΗΜΕΙΟ ΠΟΥ ΑΛΛΑΖΕΙ ΑΝ ΜΕΤΑΚΟΜΙΣΕΙ ΤΟ PROJECT
+   Το κλειδί είναι publishable: προορίζεται να είναι δημόσιο. Η ασφάλεια
+   στηρίζεται στο RLS — η σελίδα μόνο ΓΡΑΦΕΙ, και διαβάζει μόνο τα δύο
+   συγκεντρωτικά views. Σχήμα: supabase/schema.sql
+   ===================================================================== */
+const DB = {
+  url: 'https://drwlmsdaxmlriikwbkwa.supabase.co',
+  key: 'sb_publishable_7QSjglwwLWTgSP7IrTiYMQ_78CuBAOC'
+};
+const REST = DB.url + '/rest/v1/';
+const DB_HEADERS = { 'apikey': DB.key, 'Authorization': 'Bearer ' + DB.key };
+
 /* ---------- ΔΕΔΟΜΕΝΑ ---------- */
 const INDICES = [
   { id:'cpi', name:'Διαφάνεια — CPI 2025', value:'50/100', rank:'56η σε 182 χώρες',
@@ -2289,8 +2302,8 @@ makeCollapsible('councilGrid',4);
 /* ---------- ΑΝΩΝΥΜΗ ΚΑΤΑΓΡΑΦΗ ΕΠΙΛΟΓΩΝ (write-only) ---------- */
 function lsGet(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
 function lsSet(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
-const TRACK_EP='https://drwlmsdaxmlriikwbkwa.supabase.co/rest/v1/nomosio_events';
-const TRACK_KEY='sb_publishable_7QSjglwwLWTgSP7IrTiYMQ_78CuBAOC';
+const TRACK_EP=REST+'nomosio_events';
+const TRACK_KEY=DB.key;
 const VID=(function(){
   let v=lsGet('nomosio-vid');
   if(!v){
@@ -2360,8 +2373,8 @@ document.querySelectorAll('.vote').forEach(v=>{
     t.innerHTML='Ναι <b class="num">0</b> · Όχι <b class="num">0</b>';
     v.appendChild(t);
   });
-  const H={'apikey':TRACK_KEY,'Authorization':'Bearer '+TRACK_KEY};
-  fetch('https://drwlmsdaxmlriikwbkwa.supabase.co/rest/v1/nomosio_vote_tallies?select=key,yes,no',{headers:H})
+  const H=DB_HEADERS;
+  fetch(REST+'nomosio_vote_tallies?select=key,yes,no',{headers:H})
     .then(r=>r.ok?r.json():[])
     .then(rows=>{
       rows.forEach(row=>{
@@ -2373,15 +2386,15 @@ document.querySelectorAll('.vote').forEach(v=>{
         t.innerHTML=`Ναι <b class="num">${y}</b> · Όχι <b class="num">${n}</b>`;
       });
     }).catch(()=>{});
-  fetch('https://drwlmsdaxmlriikwbkwa.supabase.co/rest/v1/nomosio_pledge_count?select=paron',{headers:H})
+  fetch(REST+'nomosio_pledge_count?select=paron',{headers:H})
     .then(r=>r.ok?r.json():null)
     .then(rows=>{ if(rows&&rows[0]&&window.__setPledgeBase) window.__setPledgeBase(rows[0].paron); })
     .catch(()=>{});
 })();
 /* ---------- EMAIL ΛΙΣΤΑ (Supabase, write-only) ---------- */
 (function(){
-  const EP='https://drwlmsdaxmlriikwbkwa.supabase.co/rest/v1/nomosio_subscribers';
-  const KEY='sb_publishable_7QSjglwwLWTgSP7IrTiYMQ_78CuBAOC';
+  const EP=REST+'nomosio_subscribers';
+  const KEY=DB.key;
   document.querySelectorAll('.email-cap').forEach(form=>{
     const input=form.querySelector('input'), btn=form.querySelector('button'), msg=form.querySelector('.ec-msg');
     const doneKey='nomosio-v1-email-'+(form.dataset.source||'site');

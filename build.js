@@ -68,9 +68,6 @@ const PAGES = [
   { slug: 'radar',      sections: ['radar'],                 nav: 'Ραντάρ',
     title: 'Το Ραντάρ — Νομόσιο',
     desc: 'Όσα ακούγονται και δεν ξέρουμε αν ισχύουν. Τι αποδεικνύεται, τι όχι, και ποιος κερδίζει. Τίποτα από εδώ δεν μετράει στη ζυγαριά.' },
-  { slug: 'paixnidia',  sections: ['paixnidia'],             nav: 'Παιχνίδια',
-    title: 'Τα Παιχνίδια — Νομόσιο',
-    desc: 'Τρία γρήγορα παιχνίδια με τα ίδια αληθινά στοιχεία. Δες πόσο κοντά πέφτεις.' },
   { slug: 'methodos',   sections: ['methodos'],              nav: 'Η Μέθοδος',
     title: 'Η Μέθοδος — Νομόσιο',
     desc: 'Πώς βγαίνει ο αριθμός της ζυγαριάς, βήμα βήμα — και τι δεν μετράμε ποτέ.' },
@@ -136,7 +133,6 @@ function homeHub() {
   const cards = [
     { href: '/tekmiria', t: 'Τα Τεκμήρια', d: 'Όλα όσα ζυγίζουμε, σε δέκα θέματα: σκάνδαλα, νόμοι, χρήμα, υγεία, σύνορα και άλλα.', i: '📚' },
     { href: '/methodos', t: 'Η Μέθοδος', d: 'Πώς βγαίνει ο αριθμός της ζυγαριάς, βήμα βήμα. Και τι δεν μετράμε ποτέ.', i: '⚖️' },
-    { href: '/paixnidia', t: 'Τα Παιχνίδια', d: 'Τρία γρήγορα παιχνίδια με τα ίδια αληθινά στοιχεία. Δες πόσο κοντά πέφτεις.', i: '🎲' },
     { href: '/radar', t: 'Το Ραντάρ', d: 'Όσα ακούγονται και δεν ξέρουμε αν ισχύουν. Τι αποδεικνύεται, τι όχι, ποιος κερδίζει.', i: '🔦' },
     { href: '/erotiseis', t: 'Ερωτήσεις', d: 'Ποιος αποφασίζει τι είναι καλό και τι κακό; Κάνετε λάθη; Οι απαντήσεις μας.', i: '❓' },
     { href: '/arxaioi', t: 'Οι Αρχαίοι', d: 'Δέκα αρχαίοι που δεν αγοράζονται. Τι έλεγαν, και πώς έλεγχαν τους άρχοντες.', i: '🏛️' },
@@ -146,9 +142,9 @@ function homeHub() {
   <div class="wrap">
     <div class="eyebrow">Από πού να αρχίσεις</div>
     <div class="section-head"><h2>Διάλεξε τι θέλεις να δεις</h2></div>
-    <div class="games" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
-      ${cards.map(c => `<a class="gcard" href="${c.href}">
-        <span class="g-ico" aria-hidden="true">${c.i}</span>
+    <div class="hub-grid">
+      ${cards.map(c => `<a class="hub-card" href="${c.href}">
+        <span class="hub-ico" aria-hidden="true">${c.i}</span>
         <h3>${c.t}</h3>
         <p>${c.d}</p>
       </a>`).join('\n      ')}
@@ -164,9 +160,9 @@ function exhibitHub() {
     <div class="eyebrow">Τα Τεκμήρια</div>
     <div class="section-head"><h2>Δέκα θέματα — και για καθένα, από πού το ξέρουμε</h2></div>
     <p class="lead">Κάθε στοιχείο παίρνει βαθμό από −10 έως +10. Τον βαθμό δεν τον βάζουμε με το μάτι: βγαίνει από δικαστικές αποφάσεις, εκθέσεις και μετρήσεις που έκαναν άλλοι. Διάλεξε θέμα — ή δες πρώτα <a href="/methodos">πώς ζυγίζουμε</a>.</p>
-    <div class="games" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
-      ${EXHIBITS.map(ex => `<a class="gcard" href="/tekmiria/${ex.slug}">
-        <span class="g-ico" style="font-family:'GFS Didot',serif;color:var(--bronze)" aria-hidden="true">${ex.letter}</span>
+    <div class="hub-grid">
+      ${EXHIBITS.map(ex => `<a class="hub-card" href="/tekmiria/${ex.slug}">
+        <span class="hub-ico" style="font-family:'GFS Didot',serif;color:var(--bronze)" aria-hidden="true">${ex.letter}</span>
         <h3>${ex.title}</h3>
         <p>${ex.blurb}</p>
       </a>`).join('\n      ')}

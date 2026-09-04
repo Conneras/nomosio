@@ -1055,9 +1055,9 @@ footer{font-size:.95rem}
   <div class="wrap">
     <div class="eyebrow">Μάθε παίζοντας</div>
     <div class="section-head">
-      <h2>Τα Παιχνίδια — δοκίμασε τη δική σου ζυγαριά</h2>
+      <h2>Παίξε με τα ίδια στοιχεία</h2>
     </div>
-    <p class="lead">Τρία σύντομα παιχνίδια, φτιαγμένα αποκλειστικά από τα τεκμήρια αυτής της σελίδας. Κανένα δεν αλλάζει τη ζυγαριά· υπάρχουν για να δεις πόσο μοιάζει η δική σου κρίση με ό,τι δείχνουν τα στοιχεία — και για να μάθεις κάτι στην πορεία.</p>
+    <p class="lead">Τρία γρήγορα παιχνίδια. Παίζουν με τα ίδια αληθινά στοιχεία που βλέπεις σε όλη τη σελίδα — τίποτα δεν το βγάλαμε από το μυαλό μας. Δεν αλλάζουν τη ζυγαριά· είναι για να περάσεις καλά και να μάθεις κάτι.</p>
     <div class="games" id="gamesHub"></div>
     <div id="gameStage"></div>
   </div>
@@ -2519,7 +2519,7 @@ try{
 
   const esc = t => String(t).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   const shuffle = a => a.map(v=>[Math.random(),v]).sort((x,y)=>x[0]-y[0]).map(x=>x[1]);
-  const IMP = { pro:'ΥΠΕΡ των πολιτών', kata:'ΚΑΤΑ των πολιτών', mixed:'ΜΙΚΤΟ' };
+  const IMP = { pro:'βοηθάει τον κόσμο', kata:'βλάπτει τον κόσμο', mixed:'είναι και τα δύο' };
 
   /* Όλα τα βαθμολογημένα τεκμήρια, με το σκεπτικό και την πηγή τους */
   function evidencePool(){
@@ -2542,8 +2542,8 @@ try{
     /* ---- 1. Ζύγισε εσύ ---- */
     zygise: {
       icon:'⚖️', title:'Ζύγισε εσύ',
-      blurb:'Οκτώ αληθινά τεκμήρια, κρυμμένος ο βαθμός τους. Πες αν το καθένα είναι υπέρ, κατά ή μικτό — και δες πόσο μοιάζει η κρίση σου με τα στοιχεία.',
-      meta:'8 ερωτήσεις · ~3 λεπτά',
+      blurb:'Σου δείχνουμε οκτώ αληθινά πράγματα που έγιναν, χωρίς τον βαθμό τους. Εσύ λες αν βοηθάνε ή βλάπτουν τον κόσμο. Μετά βλέπεις τι λένε τα στοιχεία.',
+      meta:'8 ερωτήσεις · 3 λεπτά',
       start(){
         const items = shuffle(evidencePool()).slice(0,8);
         let i = 0, right = 0;
@@ -2554,9 +2554,9 @@ try{
             <p class="gq">${esc(it.name)}</p>
             <p class="gsub">${esc((it.extra||'').slice(0,240))}</p>
             <div class="gopts">
-              <button class="gopt" data-a="pro">Υπέρ των πολιτών</button>
-              <button class="gopt" data-a="mixed">Μικτό</button>
-              <button class="gopt" data-a="kata">Κατά των πολιτών</button>
+              <button class="gopt" data-a="pro">Βοηθάει τον κόσμο</button>
+              <button class="gopt" data-a="mixed">Και τα δύο</button>
+              <button class="gopt" data-a="kata">Βλάπτει τον κόσμο</button>
             </div>
             <div class="gfeed" hidden></div>`, i+1, items.length);
           stage.querySelectorAll('.gopt').forEach(b => b.addEventListener('click', () => answer(b.dataset.a)));
@@ -2573,7 +2573,7 @@ try{
           const f = stage.querySelector('.gfeed');
           f.hidden = false;
           f.innerHTML = `<div class="g-verdict" style="color:var(--${truth === 'mixed' ? 'mixed' : truth})">
-              ${ok ? 'Συμφωνείς με τη ζυγαριά' : 'Η ζυγαριά το κρίνει αλλιώς'} — ${IMP[truth]}, βαθμός ${it.score > 0 ? '+' : ''}${it.score}</div>
+              ${ok ? 'Σωστά' : 'Όχι ακριβώς'} — ${IMP[truth]}. Βαθμός ${it.score > 0 ? '+' : ''}${it.score}</div>
             <p class="g-why">${esc(it.why)}</p>
             <div class="g-src">Πηγή: ${esc(it.src)}</div>
             <button class="gnext">${i + 1 < items.length ? 'Επόμενο' : 'Το αποτέλεσμα'}</button>`;
@@ -2581,15 +2581,15 @@ try{
         }
         function finish(){
           track('game','zygise','end');
-          const msg = right >= 7 ? 'Διαβάζεις τα τεκμήρια όπως ακριβώς τα ζυγίζει η μεθοδολογία.'
-                    : right >= 5 ? 'Κοντά στη ζυγαριά. Οι διαφορές είναι συνήθως στα «μικτά» — εκεί που κάτι ωφελεί κάποιους και βλάπτει άλλους.'
-                    : right >= 3 ? 'Αρκετές διαφωνίες. Δες το «Γιατί αυτή η κατάταξη» σε κάθε κάρτα — και αν έχεις στοιχεία, αμφισβήτησέ το.'
-                    : 'Κρίνεις πολύ διαφορετικά από τα τεκμήρια. Αυτό δεν είναι κακό: σημαίνει ότι αξίζει να δεις τις πηγές.';
+          const msg = right >= 7 ? 'Τα βλέπεις όπως ακριβώς τα δείχνουν τα στοιχεία.'
+                    : right >= 5 ? 'Πολύ κοντά. Οι διαφορές είναι συνήθως εκεί που κάτι ωφελεί άλλους και βλάπτει άλλους.'
+                    : right >= 3 ? 'Διαφωνείς αρκετά. Σε κάθε κάρτα γράφουμε γιατί της βάλαμε αυτόν τον βαθμό — δες το.'
+                    : 'Τα βλέπεις πολύ διαφορετικά. Δεν είναι κακό. Δες σε κάθε κάρτα από πού βγήκε ο βαθμός.';
           render(`<div class="gscore">
               <div class="s-num num">${right}/8</div>
               <p class="s-txt">${msg}</p>
-              <p class="s-txt" style="font-size:.9rem;color:var(--ink3)">Η βαθμολογία μετρά συμφωνία με τη <em>δημοσιευμένη μεθοδολογία</em> — όχι ποιος έχει δίκιο. Η ζυγαριά μπορεί να κάνει λάθος, και το λέει.</p>
-              <button class="gnext" data-again="zygise">Ξαναπαίξε με άλλα τεκμήρια</button>
+              <p class="s-txt" style="font-size:.9rem;color:var(--ink3)">Αυτό δεν δείχνει ποιος έχει δίκιο. Δείχνει πόσο κοντά είσαι σε ό,τι δείχνουν τα στοιχεία. Μπορεί και εμείς να κάνουμε λάθος — το λέμε καθαρά.</p>
+              <button class="gnext" data-again="zygise">Ξαναπαίξε με άλλα</button>
             </div>`, items.length, items.length);
         }
         question();
@@ -2599,8 +2599,8 @@ try{
     /* ---- 2. Ποιος σοφός το είπε; ---- */
     sofoi: {
       icon:'🏛️', title:'Ποιος το είπε;',
-      blurb:'Ένα απόφθεγμα, τέσσερα ονόματα. Όλα τα λόγια είναι ελεγμένα, με παραπομπή σε πρωτογενή ή αρχαία πηγή — τίποτα κατασκευασμένο.',
-      meta:'6 ερωτήσεις · ~2 λεπτά',
+      blurb:'Μια φράση, τέσσερα ονόματα. Μάντεψε ποιος αρχαίος την είπε. Όλες οι φράσεις είναι αληθινές και σου λέμε από ποιο βιβλίο τις πήραμε.',
+      meta:'6 ερωτήσεις · 2 λεπτά',
       start(){
         const rounds = shuffle(COUNCIL.filter(c => c.q && c.q.el)).slice(0,6);
         let i = 0, right = 0;
@@ -2632,7 +2632,7 @@ try{
           f.hidden = false;
           f.innerHTML = `<div class="g-verdict">${r.n} · ${esc(r.era)}</div>
             <p class="g-why">${esc(r.bio)}</p>
-            <div class="g-src">${esc(r.q.cite)} — ${r.q.auth === 'verified' ? 'πρωτότυπο κείμενο' : 'αποδιδόμενο'}</div>
+            <div class="g-src">Το βρίσκουμε στο: ${esc(r.q.cite)} · ${r.q.auth === 'verified' ? 'σώζεται αυτούσιο' : 'του το αποδίδουν οι αρχαίοι'}</div>
             <button class="gnext">${i + 1 < rounds.length ? 'Επόμενο' : 'Το αποτέλεσμα'}</button>`;
           f.querySelector('.gnext').addEventListener('click', () => { i++; question(); });
         }
@@ -2640,7 +2640,7 @@ try{
           track('game','sofoi','end');
           render(`<div class="gscore">
               <div class="s-num num">${right}/6</div>
-              <p class="s-txt">${right >= 5 ? 'Τους ξέρεις. Οι δέκα τους κρατούν όλη τη μεθοδολογία αυτής της σελίδας.' : 'Οι δέκα κριτές του Συνεδρίου είναι εδώ — με βιογραφικό και πηγή για κάθε λέξη τους.'}</p>
+              <p class="s-txt">${right >= 5 ? 'Τους ξέρεις καλά.' : 'Και οι δέκα είναι στη σελίδα «Οι Αρχαίοι» — με δυο λόγια για τον καθένα και τη φράση του.'}</p>
               <button class="gnext" data-again="sofoi">Ξαναπαίξε</button>
             </div>`, rounds.length, rounds.length);
         }
@@ -2651,18 +2651,18 @@ try{
     /* ---- 3. Πόσο είναι στ' αλήθεια; ---- */
     poso: {
       icon:'💶', title:"Πόσο είναι στ' αλήθεια;",
-      blurb:'Τα εκατομμύρια δεν λένε τίποτα στο μυαλό. Μάντεψε σε πόσους ετήσιους κατώτατους μισθούς αντιστοιχεί ένα τεκμηριωμένο ποσό — και δες το σε ανθρώπινο μέγεθος.',
-      meta:'5 ποσά · ~2 λεπτά',
+      blurb:'Τα εκατομμύρια δεν λένε τίποτα όταν τα ακούς. Μάντεψε πόσοι άνθρωποι θα ζούσαν έναν ολόκληρο χρόνο με κάθε ποσό. Εκεί καταλαβαίνεις.',
+      meta:'5 ποσά · 2 λεπτά',
       start(){
         /* Ο κατώτατος μισθός (920 €, 4.2026) είναι ήδη δημοσιευμένος στη σελίδα με πηγή.
            Ετήσιος = 14 μισθοί, όπως ισχύει στην Ελλάδα. */
         const YEAR = 920 * 14;
         const AMOUNTS = [
-          { n:'Οι σωρευτικές αγροτικές διορθώσεις της ΕΕ σε βάρος της Ελλάδας από το 1998', v:3e9, src:'Αποφάσεις Κομισιόν · To Vima' },
-          { n:'Η διόρθωση-ρεκόρ της Κομισιόν για τον ΟΠΕΚΕΠΕ (2025)', v:415e6, src:'Απόφαση (ΕΕ) 2025/1147' },
-          { n:'Η κρατική καμπάνια «Μένουμε Σπίτι» σε 1.232 ΜΜΕ (λίστα Πέτσα, 2020)', v:19.8e6, src:'IPI (2020–22)' },
-          { n:'Οι απευθείας αναθέσεις πανδημικών προμηθειών υγείας (2020–21)', v:441.7e6, src:'Ελεγκτικό Συνέδριο/ECA' },
-          { n:'Η πρόσθετη δημόσια στήριξη που χρειάστηκε ο αυτοκινητόδρομος Ε65', v:656e6, src:'Κομισιόν IP/21/144' }
+          { n:'Τα πρόστιμα που πλήρωσε η Ελλάδα στην ΕΕ για τις αγροτικές επιδοτήσεις, από το 1998', v:3e9, src:'Αποφάσεις Κομισιόν · To Vima' },
+          { n:'Το πρόστιμο-ρεκόρ της ΕΕ για τον ΟΠΕΚΕΠΕ (2025)', v:415e6, src:'Απόφαση (ΕΕ) 2025/1147' },
+          { n:'Η κρατική διαφήμιση «Μένουμε Σπίτι» σε 1.232 μέσα ενημέρωσης (2020)', v:19.8e6, src:'IPI (2020–22)' },
+          { n:'Οι αγορές υλικού για την πανδημία χωρίς διαγωνισμό (2020–21)', v:441.7e6, src:'Ελεγκτικό Συνέδριο/ECA' },
+          { n:'Τα επιπλέον δημόσια λεφτά που χρειάστηκε ο αυτοκινητόδρομος Ε65', v:656e6, src:'Κομισιόν IP/21/144' }
         ];
         const items = shuffle(AMOUNTS);
         let i = 0, close = 0;
@@ -2673,9 +2673,9 @@ try{
           const max = Math.round(truth * 4);
           render(`
             <p class="gq">${esc(it.n)}</p>
-            <p class="gsub">Σε πόσους <strong>ετήσιους κατώτατους μισθούς</strong> αντιστοιχεί; (κατώτατος 920 € × 14 = ${fmt(YEAR)} € τον χρόνο)</p>
+            <p class="gsub">Πόσοι <strong>άνθρωποι</strong> θα ζούσαν έναν ολόκληρο χρόνο με αυτά τα λεφτά; Μετράμε με τον κατώτατο μισθό: 920 € × 14 = ${fmt(YEAR)} € τον χρόνο.</p>
             <div class="gval num" id="gvOut">${fmt(Math.round(max/2))}</div>
-            <input class="gslider" type="range" min="1" max="${max}" value="${Math.round(max/2)}" id="gvIn" aria-label="Μάντεψε πόσοι ετήσιοι μισθοί">
+            <input class="gslider" type="range" min="1" max="${max}" value="${Math.round(max/2)}" id="gvIn" aria-label="Μάντεψε πόσοι άνθρωποι">
             <div class="gopts"><button class="gopt" id="gvGo">Αυτό λέω</button></div>
             <div class="gfeed" hidden></div>`, i+1, items.length);
           const inp = stage.querySelector('#gvIn'), out = stage.querySelector('#gvOut');
@@ -2690,9 +2690,8 @@ try{
           const f = stage.querySelector('.gfeed');
           f.hidden = false;
           f.innerHTML = `<div class="g-verdict" style="color:var(--${ok ? 'pro' : 'kata'})">
-              ${ok ? 'Πολύ κοντά' : 'Μακριά'} — η απάντηση είναι <b class="num">${fmt(truth)}</b> ετήσιοι μισθοί</div>
-            <p class="g-why">${fmt(Math.round(it.v))} € ÷ ${fmt(YEAR)} € = ${fmt(truth)}. Εσύ είπες ${fmt(guess)}.
-            Δηλαδή τόσοι άνθρωποι θα ζούσαν έναν ολόκληρο χρόνο με αυτά τα χρήματα.</p>
+              ${ok ? 'Πολύ κοντά' : 'Μακριά'} — η απάντηση είναι <b class="num">${fmt(truth)}</b> άνθρωποι</div>
+            <p class="g-why">${fmt(Math.round(it.v))} € ÷ ${fmt(YEAR)} € = ${fmt(truth)} άνθρωποι για έναν χρόνο. Εσύ είπες ${fmt(guess)}.</p>
             <div class="g-src">Πηγή ποσού: ${esc(it.src)} · κατώτατος μισθός 920 € (4.2026), Ν. 5163/2024</div>
             <button class="gnext">${i + 1 < items.length ? 'Επόμενο ποσό' : 'Το αποτέλεσμα'}</button>`;
           stage.querySelector('#gvGo').disabled = true;
@@ -2703,7 +2702,7 @@ try{
           track('game','poso','end');
           render(`<div class="gscore">
               <div class="s-num num">${close}/5</div>
-              <p class="s-txt">${close >= 3 ? 'Έχεις καλή αίσθηση του μεγέθους — οι περισσότεροι την υποτιμούν κατά πολύ.' : 'Σχεδόν όλοι πέφτουν έξω. Γι΄ αυτό τα ποσά στην πολιτική περνούν τόσο εύκολα: κανείς δεν τα νιώθει.'}</p>
+              <p class="s-txt">${close >= 3 ? 'Πιάνεις καλά τα μεγέθη. Οι περισσότεροι πέφτουν πολύ χαμηλά.' : 'Σχεδόν όλοι πέφτουν έξω. Γι΄ αυτό τα μεγάλα ποσά περνάνε τόσο εύκολα: κανείς δεν τα νιώθει.'}</p>
               <button class="gnext" data-again="poso">Ξαναπαίξε</button>
             </div>`, items.length, items.length);
         }

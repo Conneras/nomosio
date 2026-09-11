@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Nomosio">
+  <!-- The header lockup is a white box with a navy rule around it. At 16 px
+       that border and the wordmark under it turn to grey mush, so the icon
+       inverts instead: the navy becomes the field and the colonnade is cut out
+       of it in the site's parchment. Same three columns and lintel as
+       components/Logo.jsx, centred and scaled to 22 of the 32 units. -->
+  <rect width="32" height="32" rx="7" fill="#0d1a2e"/>
+  <g transform="translate(4.3125 10.5) scale(0.6875)" fill="#fdf6ea">
+    <rect x="1" y="0" width="32" height="2.6" rx="1"/>
+    <rect x="4" y="4.6" width="4.4" height="11.4" rx="1"/>
+    <rect x="14.8" y="4.6" width="4.4" height="11.4" rx="1"/>
+    <rect x="25.6" y="4.6" width="4.4" height="11.4" rx="1"/>
+  </g>
+</svg>

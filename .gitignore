@@ -1,3 +1,4 @@
 .qa/
 public/
 node_modules/
+.claude/

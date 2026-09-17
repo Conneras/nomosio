@@ -23,9 +23,10 @@ if (TODO.length && process.env.NOMOSIO_ALLOW_TODO !== '1') {
   throw new Error('Λείπουν στοιχεία πριν τη δημοσίευση:\n  ' + TODO.join('\n  '));
 }
 
-/* Η βιβλιοθήκη σύνδεσης της Supabase σερβίρεται από το δικό μας /assets, όχι από CDN,
-   ώστε η διεύθυνση IP του επισκέπτη να μη φτάνει σε τρίτο. Φορτώνει μόνο στη σελίδα /kiniseis. */
-const SUPABASE_JS = 'supabase-js-2.116.0.js';
+/* Οι Έξυπνες Κινήσεις γράφονται μέσα στη σελίδα /kiniseis από το data/moves.json.
+   Έλεγχος μορφής και συνδέσμων πριν τη δημοσίευση: node tools/check-moves.js --check */
+const MOVES = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'moves.json'), 'utf8'))
+  .slice().sort((a, b) => (a.sort ?? 0) - (b.sort ?? 0));
 
 /* ── 1. Κόψιμο της πηγής στα μέρη της ─────────────────────────────────── */
 
@@ -88,15 +89,12 @@ const PAGES = [
   { slug: 'arxaioi',    sections: ['synedrio', 'thesmoi'],   nav: 'Οι Αρχαίοι',
     title: 'Το Συνέδριο των Αρχαίων — Νομόσιο',
     desc: 'Δέκα αρχαίοι που δεν αγοράζονται. Τι έλεγαν, από ποιο βιβλίο το ξέρουμε, και πώς έλεγχαν τους άρχοντες τότε.' },
-  { slug: 'symmetoxi',  sections: ['symmetoxi', 'plus'],     nav: 'Συμμετοχή',
+  { slug: 'symmetoxi',  sections: ['symmetoxi', 'stirixi'],  nav: 'Συμμετοχή',
     title: 'Συμμετοχή — Νομόσιο',
-    desc: 'Δήλωσε ΠΑΡΩΝ, μπες στη λίστα, μάθε πρώτος τι αλλάζει.' },
+    desc: 'Δήλωσε ΠΑΡΩΝ, μάθε πρώτος τι αλλάζει, στήριξε το Νομόσιο.' },
   { slug: 'kiniseis',   sections: ['kiniseis'],              nav: 'Κινήσεις',
-    title: 'Έξυπνες Κινήσεις — Νομόσιο+',
-    desc: 'Τι μπορείς να κάνεις εσύ, νόμιμα, με βάση όσα ζυγίζει το Νομόσιο: βήματα, επίσημοι σύνδεσμοι, προθεσμίες. Μία κίνηση τον μήνα ανοιχτή για όλους.' },
-  { slug: 'oroi',       sections: ['oroi'],                  nav: 'Όροι', hidden: true,
-    title: 'Οι όροι της συνδρομής Νομόσιο+ — Νομόσιο',
-    desc: 'Ποιος πουλάει τη συνδρομή, τιμή, ανανέωση, ακύρωση, υπαναχώρηση και τα δεδομένα της συνδρομής Νομόσιο+.' }
+    title: 'Έξυπνες Κινήσεις — Νομόσιο',
+    desc: 'Τι μπορείς να κάνεις εσύ, νόμιμα, με βάση όσα ζυγίζει το Νομόσιο: βήματα, επίσημοι σύνδεσμοι, προθεσμίες. Όλες ανοιχτές για όλους.' }
 ];
 
 EXHIBITS.forEach(ex => {
@@ -153,7 +151,7 @@ function homeHub() {
     { href: '/radar', t: 'Το Ραντάρ', d: 'Όσα ακούγονται και δεν ξέρουμε αν ισχύουν. Τι αποδεικνύεται, τι όχι, ποιος κερδίζει.', i: '🔦' },
     { href: '/erotiseis', t: 'Ερωτήσεις', d: 'Ποιος αποφασίζει τι είναι καλό και τι κακό; Κάνετε λάθη; Οι απαντήσεις μας.', i: '❓' },
     { href: '/arxaioi', t: 'Οι Αρχαίοι', d: 'Δέκα αρχαίοι που δεν αγοράζονται. Τι έλεγαν, και πώς έλεγχαν τους άρχοντες.', i: '🏛️' },
-    { href: '/kiniseis', t: 'Έξυπνες Κινήσεις', d: 'Τι μπορείς να κάνεις εσύ με τον νόμο: βήματα και επίσημοι σύνδεσμοι. Μία κίνηση τον μήνα ανοιχτή για όλους.', i: 'Ν+', s: "font-family:'GFS Didot',serif;color:var(--bronze)" },
+    { href: '/kiniseis', t: 'Έξυπνες Κινήσεις', d: 'Τι μπορείς να κάνεις εσύ με τον νόμο: βήματα και επίσημοι σύνδεσμοι. Όλες ανοιχτές για όλους.', i: '🧭' },
     { href: '/symmetoxi', t: 'Συμμετοχή', d: 'Δήλωσε ΠΑΡΩΝ και μάθε πρώτος τι αλλάζει. Χωρίς εσένα δεν κουνιέται τίποτα.', i: '✊' }
   ];
   return `<section id="hub">
@@ -201,6 +199,33 @@ function exhibitPager(slug) {
 </div>`;
 }
 
+/* Οι Έξυπνες Κινήσεις ως κάρτες. Το φίλτρο «ποιον αφορά» διαβάζει το data-who. */
+const THEMES = { work: 'Δουλειά και εισόδημα', home: 'Σπίτι και χαρτιά', health: 'Υγεία και πρόστιμα', rights: 'Ψήφος και δικαιώματα' };
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const httpsOnly = u => /^https:\/\/[^\s"'<>]+$/.test(u || '') ? u : '';
+const localOnly = u => /^\/[a-z0-9\/#-]*$/.test(u || '') ? u : '';
+const day = d => d ? new Date(d).toLocaleDateString('el-GR', { day: 'numeric', month: 'long', year: 'numeric' }) : '';
+
+function moveCard(m) {
+  const act = httpsOnly(m.actionUrl), dl = httpsOnly(m.deadline && m.deadline.sourceUrl), ref = localOnly(m.ref);
+  const who = m.who || [];
+  return `<article class="card mv-card" id="mv-${esc(m.id)}" data-who="${esc(who.join('|'))}">
+        <div class="meta"><span class="chip">${esc(THEMES[m.theme] || '')}</span></div>
+        <h3>${esc(m.title)}</h3>
+        <p class="mv-who">Αφορά: ${who.map(esc).join(', ')}</p>
+        <p class="sum">${esc(m.benefit)}</p>
+        <ol class="mv-steps">${(m.steps || []).map(s => `<li>${esc(s)}</li>`).join('')}</ol>
+        ${m.watchOut ? `<p class="mv-watch"><b>Πρόσεξε:</b> ${esc(m.watchOut)}</p>` : ''}
+        ${m.deadline && m.deadline.text ? `<p class="mv-deadline"><b>Προθεσμία:</b> ${esc(m.deadline.text)}${dl ? ` <a href="${esc(dl)}" target="_blank" rel="noopener">(πηγή)</a>` : ''}</p>` : ''}
+        ${act ? `<a class="vbtn mv-go" href="${esc(act)}" target="_blank" rel="noopener">Κάνε το στην επίσημη σελίδα</a>` : ''}
+        <details><summary>Από πού το ξέρουμε</summary><ul>${(m.sources || []).map(s => {
+          const u = httpsOnly(s.url);
+          return `<li>${u ? `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(s.title)}</a>` : esc(s.title)}: ${esc(s.confirms)}</li>`;
+        }).join('')}</ul></details>
+        <div class="srcs">Βασίζεται σε: ${esc(m.law || '')}${ref ? ` · <a href="${esc(ref)}">δες το στο Νομόσιο</a>` : ''} · Πηγές ελεγμένες στις ${esc(day(m.checkedOn))}</div>
+      </article>`;
+}
+
 /* ── 4. Παραγωγή ──────────────────────────────────────────────────────── */
 
 /* Οι εσωτερικοί σύνδεσμοι #ενότητα δείχνουν σε άλλη σελίδα όταν χρειάζεται */
@@ -218,6 +243,7 @@ function page(p) {
     if (sec === 'hero') return HERO;
     if (sec === 'hub') return homeHub();
     if (sec === 'exhibitHub') return exhibitHub();
+    if (sec === 'kiniseis') return (SECTIONS[sec] || '').replace(/<!-- ΚΙΝΗΣΕΙΣ:[^>]*-->/, () => MOVES.map(moveCard).join('\n      '));
     return SECTIONS[sec] || '';
   }).filter(Boolean).join('\n\n' + MEANDER + '\n\n');
 
@@ -256,7 +282,7 @@ ${pager}
 ${fixLinks(FOOTER, onPage)}
 
 <script>window.__EV_PAGE=${JSON.stringify(EV_PAGE)};</script>
-${p.slug === 'kiniseis' ? `<script src="/assets/${SUPABASE_JS}" defer></script>\n` : ''}<script src="/assets/app.js?v=${JS_V}" defer></script>
+<script src="/assets/app.js?v=${JS_V}" defer></script>
 </body>
 </html>
 `;
@@ -266,7 +292,16 @@ fs.rmSync(OUT, { recursive: true, force: true });
 fs.mkdirSync(path.join(OUT, 'assets'), { recursive: true });
 fs.writeFileSync(path.join(OUT, 'assets', 'app.css'), CSS);
 fs.writeFileSync(path.join(OUT, 'assets', 'app.js'), JS);
-fs.copyFileSync(path.join(__dirname, 'vendor', SUPABASE_JS), path.join(OUT, 'assets', SUPABASE_JS));
+
+/* Το GitHub Pages δεν κάνει ανακατευθύνσεις από ρυθμίσεις· τις φτιάχνουμε ως σελίδες.
+   Οι παλιές σελίδες της συνδρομής δείχνουν πλέον στις ανοιχτές κινήσεις. */
+const REDIRECTS = { paixnidia: '/', oroi: '/kiniseis' };
+Object.entries(REDIRECTS).forEach(([from, to]) => {
+  fs.mkdirSync(path.join(OUT, from), { recursive: true });
+  fs.writeFileSync(path.join(OUT, from, 'index.html'),
+    `<!doctype html><meta charset="utf-8"><title>Νομόσιο</title><link rel="canonical" href="https://nomosio.gr${to}"><meta http-equiv="refresh" content="0; url=${to}"><a href="${to}">nomosio.gr${to}</a>\n`);
+});
+fs.writeFileSync(path.join(OUT, '.nojekyll'), '');
 
 let n = 0;
 PAGES.forEach(p => {

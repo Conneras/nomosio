@@ -558,6 +558,7 @@ footer{font-size:.95rem}
 .mv-count{font-family:'Source Sans 3',sans-serif;font-size:.95rem;color:var(--ink3);margin:6px 0 16px}
 .mv-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
 @media(max-width:900px){.mv-grid{grid-template-columns:1fr}}
+.mv-sep{grid-column:1/-1;margin:12px 0 -4px;padding-top:18px;border-top:1px solid var(--line);font:700 1.05rem 'Source Sans 3','Segoe UI',sans-serif;color:var(--ink2)}
 .mv-card h3{font-size:1.28rem}
 .mv-who{font-family:'Source Sans 3',sans-serif;font-size:.95rem;color:var(--ink3);margin:0}
 .mv-steps{margin:2px 0 0;padding-left:24px;color:var(--ink);font-size:1.02rem;display:grid;gap:8px}
@@ -2417,15 +2418,29 @@ const NEWSLETTER_URL='';
   const whoOf=c=>(c.dataset.who||'').split('|').filter(Boolean);
   const tags=[...new Set(cards.flatMap(whoOf))].filter(t=>t!=='όλοι').sort((a,b)=>a.localeCompare(b,'el'));
   let filter=lsGet('nomosio-mv-filter')||'';
+  // Με φίλτρο: πρώτα οι κινήσεις της ομάδας, μετά «Για όλους» και οι κοινές (απόφαση ιδιοκτήτη 17.9.2026).
+  const sep=document.createElement('h3'); sep.className='mv-sep'; sep.textContent='Για όλους';
+  const many=k=>k===1?'1 κίνηση':k+' κινήσεις';
   function render(){
     if(filter&&!tags.includes(filter)) filter='';
     filters.innerHTML = tags.length
       ? '<span class="mv-f-label">Δείξε μου κινήσεις για:</span>'+['',...tags].map(t=>
           `<button type="button" class="mv-f${filter===t?' on':''}" data-f="${esc(t)}" aria-pressed="${filter===t}">${t?esc(t):'όλους'}</button>`).join('')
       : '';
-    let shown=0;
-    cards.forEach(c=>{ const w=whoOf(c); c.hidden=!(!filter||w.includes(filter)||w.includes('όλοι')); if(!c.hidden) shown++; });
-    countEl.textContent = shown===1 ? '1 κίνηση' : shown+' κινήσεις';
+    if(!filter){
+      sep.remove();
+      cards.forEach(c=>{ c.hidden=false; grid.appendChild(c); });
+      countEl.textContent=many(cards.length);
+      return;
+    }
+    const own=cards.filter(c=>whoOf(c).includes(filter));
+    const forAll=cards.filter(c=>!own.includes(c)&&whoOf(c).includes('όλοι'));
+    cards.forEach(c=>{ c.hidden=!own.includes(c)&&!forAll.includes(c); });
+    own.forEach(c=>grid.appendChild(c));
+    if(forAll.length) grid.appendChild(sep); else sep.remove();
+    forAll.forEach(c=>grid.appendChild(c));
+    cards.filter(c=>c.hidden).forEach(c=>grid.appendChild(c));
+    countEl.textContent = many(own.length)+' για «'+filter+'»'+(forAll.length?' και '+forAll.length+' για όλους':'');
   }
   filters.addEventListener('click',e=>{
     const b=e.target.closest('[data-f]'); if(!b) return;

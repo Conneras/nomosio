@@ -16,6 +16,17 @@ const crypto = require('crypto');
 const SRC = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
 const OUT = path.join(__dirname, 'public');
 
+/* Κανένα «{{ΣΥΜΠΛΗΡΩΣΗ: …}}» δεν φτάνει ποτέ στο κοινό: το build σταματά.
+   Μόνο για τοπικό έλεγχο: NOMOSIO_ALLOW_TODO=1 node build.js */
+const TODO = [...new Set(SRC.match(/\{\{ΣΥΜΠΛΗΡΩΣΗ:[^}]*\}\}/g) || [])];
+if (TODO.length && process.env.NOMOSIO_ALLOW_TODO !== '1') {
+  throw new Error('Λείπουν στοιχεία πριν τη δημοσίευση:\n  ' + TODO.join('\n  '));
+}
+
+/* Η βιβλιοθήκη σύνδεσης της Supabase σερβίρεται από το δικό μας /assets, όχι από CDN,
+   ώστε η διεύθυνση IP του επισκέπτη να μη φτάνει σε τρίτο. Φορτώνει μόνο στη σελίδα /kiniseis. */
+const SUPABASE_JS = 'supabase-js-2.116.0.js';
+
 /* ── 1. Κόψιμο της πηγής στα μέρη της ─────────────────────────────────── */
 
 const styleM = SRC.match(/<style>([\s\S]*?)<\/style>/);
@@ -79,7 +90,13 @@ const PAGES = [
     desc: 'Δέκα αρχαίοι που δεν αγοράζονται. Τι έλεγαν, από ποιο βιβλίο το ξέρουμε, και πώς έλεγχαν τους άρχοντες τότε.' },
   { slug: 'symmetoxi',  sections: ['symmetoxi', 'plus'],     nav: 'Συμμετοχή',
     title: 'Συμμετοχή — Νομόσιο',
-    desc: 'Δήλωσε ΠΑΡΩΝ, μπες στη λίστα, μάθε πρώτος τι αλλάζει.' }
+    desc: 'Δήλωσε ΠΑΡΩΝ, μπες στη λίστα, μάθε πρώτος τι αλλάζει.' },
+  { slug: 'kiniseis',   sections: ['kiniseis'],              nav: 'Κινήσεις',
+    title: 'Έξυπνες Κινήσεις — Νομόσιο+',
+    desc: 'Τι μπορείς να κάνεις εσύ, νόμιμα, με βάση όσα ζυγίζει το Νομόσιο: βήματα, επίσημοι σύνδεσμοι, προθεσμίες. Μία κίνηση τον μήνα ανοιχτή για όλους.' },
+  { slug: 'oroi',       sections: ['oroi'],                  nav: 'Όροι', hidden: true,
+    title: 'Οι όροι της συνδρομής Νομόσιο+ — Νομόσιο',
+    desc: 'Ποιος πουλάει τη συνδρομή, τιμή, ανανέωση, ακύρωση, υπαναχώρηση και τα δεδομένα της συνδρομής Νομόσιο+.' }
 ];
 
 EXHIBITS.forEach(ex => {
@@ -136,6 +153,7 @@ function homeHub() {
     { href: '/radar', t: 'Το Ραντάρ', d: 'Όσα ακούγονται και δεν ξέρουμε αν ισχύουν. Τι αποδεικνύεται, τι όχι, ποιος κερδίζει.', i: '🔦' },
     { href: '/erotiseis', t: 'Ερωτήσεις', d: 'Ποιος αποφασίζει τι είναι καλό και τι κακό; Κάνετε λάθη; Οι απαντήσεις μας.', i: '❓' },
     { href: '/arxaioi', t: 'Οι Αρχαίοι', d: 'Δέκα αρχαίοι που δεν αγοράζονται. Τι έλεγαν, και πώς έλεγχαν τους άρχοντες.', i: '🏛️' },
+    { href: '/kiniseis', t: 'Έξυπνες Κινήσεις', d: 'Τι μπορείς να κάνεις εσύ με τον νόμο: βήματα και επίσημοι σύνδεσμοι. Μία κίνηση τον μήνα ανοιχτή για όλους.', i: 'Ν+', s: "font-family:'GFS Didot',serif;color:var(--bronze)" },
     { href: '/symmetoxi', t: 'Συμμετοχή', d: 'Δήλωσε ΠΑΡΩΝ και μάθε πρώτος τι αλλάζει. Χωρίς εσένα δεν κουνιέται τίποτα.', i: '✊' }
   ];
   return `<section id="hub">
@@ -144,7 +162,7 @@ function homeHub() {
     <div class="section-head"><h2>Διάλεξε τι θέλεις να δεις</h2></div>
     <div class="hub-grid">
       ${cards.map(c => `<a class="hub-card" href="${c.href}">
-        <span class="hub-ico" aria-hidden="true">${c.i}</span>
+        <span class="hub-ico"${c.s ? ` style="${c.s}"` : ''} aria-hidden="true">${c.i}</span>
         <h3>${c.t}</h3>
         <p>${c.d}</p>
       </a>`).join('\n      ')}
@@ -238,7 +256,7 @@ ${pager}
 ${fixLinks(FOOTER, onPage)}
 
 <script>window.__EV_PAGE=${JSON.stringify(EV_PAGE)};</script>
-<script src="/assets/app.js?v=${JS_V}" defer></script>
+${p.slug === 'kiniseis' ? `<script src="/assets/${SUPABASE_JS}" defer></script>\n` : ''}<script src="/assets/app.js?v=${JS_V}" defer></script>
 </body>
 </html>
 `;
@@ -248,6 +266,7 @@ fs.rmSync(OUT, { recursive: true, force: true });
 fs.mkdirSync(path.join(OUT, 'assets'), { recursive: true });
 fs.writeFileSync(path.join(OUT, 'assets', 'app.css'), CSS);
 fs.writeFileSync(path.join(OUT, 'assets', 'app.js'), JS);
+fs.copyFileSync(path.join(__dirname, 'vendor', SUPABASE_JS), path.join(OUT, 'assets', SUPABASE_JS));
 
 let n = 0;
 PAGES.forEach(p => {

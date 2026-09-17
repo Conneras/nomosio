@@ -549,6 +549,62 @@ footer{font-size:.95rem}
 .hub-card,.hub-card *{text-decoration:none}
 
 
+/* ============ ΝΟΜΟΣΙΟ+ · ΕΞΥΠΝΕΣ ΚΙΝΗΣΕΙΣ ============ */
+/* Το hidden πρέπει να κρύβει ακόμη κι όταν η κλάση ορίζει display (π.χ. .ec-row{display:flex}). */
+[hidden]{display:none!important}
+.mv-disclaimer{font-family:'Source Sans 3',sans-serif;font-size:.98rem;color:var(--ink3);max-width:66ch;margin:0}
+.mv-account{margin-top:28px;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--bronze);border-radius:8px;padding:20px 22px}
+.mv-acct-row{display:flex;flex-wrap:wrap;gap:14px 24px;align-items:center;justify-content:space-between}
+.mv-acct-row p{margin:4px 0 0;color:var(--ink2)}
+.mv-acct-k{font-family:'Source Sans 3',sans-serif;font-weight:700;font-size:1.05rem;color:var(--ink);overflow-wrap:anywhere}
+.mv-acct-btns{display:flex;gap:10px;flex-wrap:wrap}
+.mv-note{font-family:'Source Sans 3',sans-serif;font-size:.95rem;color:var(--ink3);margin:6px 0 12px;max-width:66ch}
+.mv-filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:34px 0 6px}
+.mv-f-label{font-family:'Source Sans 3',sans-serif;font-weight:700;font-size:.95rem;color:var(--ink2);margin-right:4px}
+.mv-f{font:600 .95rem 'Source Sans 3','Segoe UI',sans-serif;border:1px solid var(--line);background:var(--ground);color:var(--ink2);border-radius:22px;padding:9px 15px;min-height:44px;cursor:pointer}
+.mv-f:hover{border-color:var(--bronze);color:var(--ink)}
+.mv-f.on{background:var(--bronze-soft);border-color:var(--bronze);color:var(--bronze-ink)}
+.mv-status{font-family:'Source Sans 3',sans-serif;color:var(--ink2);margin:12px 0 0}
+.mv-status p{margin:0 0 10px}
+.mv-status .mv-ok{color:var(--pro);font-weight:600}
+.mv-status .mv-err{color:var(--kata);font-weight:600}
+.mv-status .mv-wait{color:var(--bronze-ink);font-weight:600}
+.mv-count{font-family:'Source Sans 3',sans-serif;font-size:.95rem;color:var(--ink3);margin:6px 0 16px}
+.mv-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+@media(max-width:900px){.mv-grid{grid-template-columns:1fr}}
+.mv-card h3{font-size:1.28rem}
+.mv-card.mv-free{border-color:var(--bronze);box-shadow:0 0 0 1px var(--bronze)}
+.mv-who{font-family:'Source Sans 3',sans-serif;font-size:.95rem;color:var(--ink3);margin:0}
+.mv-steps{margin:2px 0 0;padding-left:24px;color:var(--ink);font-size:1.02rem;display:grid;gap:8px}
+.mv-watch,.mv-deadline{font-size:1rem;color:var(--ink2);margin:0}
+.mv-watch b,.mv-deadline b{color:var(--ink)}
+.mv-go{align-self:flex-start;text-decoration:none;border-color:var(--bronze);color:var(--bronze-ink);min-height:44px;display:inline-flex;align-items:center}
+.mv-locked{display:flex;gap:10px;align-items:flex-start;font-family:'Source Sans 3',sans-serif;font-size:.98rem;color:var(--ink2);background:var(--ground);border:1px dashed var(--line);border-radius:6px;padding:12px 14px;margin:0}
+.mv-locked svg{flex:none;margin-top:3px;color:var(--bronze)}
+.mv-card .srcs a{color:var(--bronze-ink)}
+.mv-pay{margin-top:44px;background:var(--ground);border:1px solid var(--bronze);border-radius:8px;padding:28px}
+.mv-pay h3{font-size:1.55rem;margin-bottom:10px}
+.mv-plans{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:10px 0 18px;max-width:560px}
+@media(max-width:520px){.mv-plans{grid-template-columns:1fr}}
+.mv-plan{position:relative;display:flex;flex-direction:column;gap:2px;border:1px solid var(--line);border-radius:8px;padding:14px 16px;cursor:pointer;background:var(--surface)}
+.mv-plan input{position:absolute;opacity:0;width:1px;height:1px}
+.mv-plan:has(input:checked){border-color:var(--bronze);box-shadow:0 0 0 1px var(--bronze)}
+.mv-plan:focus-within{outline:2px solid var(--focus);outline-offset:3px}
+.mv-plan-name{font:700 .95rem 'Source Sans 3',sans-serif;color:var(--ink2)}
+.mv-plan-price{font-family:'GFS Didot',serif;font-size:2.1rem;line-height:1.1;color:var(--ink)}
+.mv-plan-per{font:.92rem 'Source Sans 3',sans-serif;color:var(--ink3)}
+.mv-renew{font-size:1.02rem;color:var(--ink);max-width:62ch}
+.mv-check{display:flex;gap:12px;align-items:flex-start;font-size:1.02rem;color:var(--ink2);margin:12px 0;max-width:62ch;cursor:pointer}
+.mv-check input{width:22px;height:22px;margin-top:2px;flex:none;accent-color:var(--bronze)}
+#mvBuy{margin-top:8px}
+.mv-danger{margin-top:16px;border-top:1px dashed var(--line);padding-top:10px}
+.mv-danger summary{cursor:pointer;font:600 .92rem 'Source Sans 3',sans-serif;color:var(--ink3)}
+.mv-del.armed{border-color:var(--kata);color:var(--kata);background:var(--kata-soft)}
+.oroi h3{font-size:1.22rem;margin:30px 0 8px}
+.oroi p,.oroi li{color:var(--ink2);max-width:70ch}
+.oroi ul{padding-left:22px}
+.oroi li{margin-bottom:8px}
+
 /* ============ MOTION ============ */
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
 .reveal.in{opacity:1;transform:none}
@@ -579,6 +635,7 @@ footer{font-size:.95rem}
       <a href="#synedrio">Το Συνέδριο</a>
       <a href="#symmetoxi">Συμμετοχή</a>
       <a href="#plus">Νομόσιο+</a>
+      <a href="#kiniseis">Κινήσεις</a>
     </div>
   </div>
 </nav>
@@ -840,7 +897,7 @@ footer{font-size:.95rem}
           <span class="q">Εσύ εμπιστεύεσαι σήμερα την κυβέρνηση;</span>
           <button class="vbtn" data-v="yes">Ναι</button>
           <button class="vbtn" data-v="no">Όχι</button>
-          <span class="vote-note">Η ψήφος σου καταγράφεται ανώνυμα — χωρίς όνομα ή στοιχεία. Το Ευρωβαρόμετρο (άνοιξη 2026) μετρά 77% «τείνω να μην εμπιστεύομαι».</span>
+          <span class="vote-note">Η ψήφος σου καταγράφεται χωρίς όνομα ή email, με ένα τυχαίο αναγνωριστικό της συσκευής σου. Το Ευρωβαρόμετρο (άνοιξη 2026) μετρά 77% «τείνω να μην εμπιστεύομαι».</span>
         </div>
       </div>
       <div class="tile reveal">
@@ -1092,8 +1149,8 @@ footer{font-size:.95rem}
     <div class="roadmap">
       <div class="rm reveal">
         <div class="r-k">Φάση Α΄ — τώρα</div>
-        <h3>Το πρωτότυπο που βλέπεις</h3>
-        <p>Η ζυγαριά, τα τεκμήρια με πηγές, το συνέδριο των αρχαίων. Οι ψήφοι καταγράφονται ανώνυμα για να μετράμε τη γνώμη των επισκεπτών — και δεν αγγίζουν ποτέ τη ζυγαριά.</p>
+        <h3>Η ζυγαριά που βλέπεις</h3>
+        <p>Η ζυγαριά, τα τεκμήρια με πηγές, το συνέδριο των αρχαίων. Οι ψήφοι καταγράφονται χωρίς όνομα, με ένα τυχαίο αναγνωριστικό της συσκευής, για να μετράμε τη γνώμη των επισκεπτών — και δεν αγγίζουν ποτέ τη ζυγαριά.</p>
       </div>
       <div class="rm reveal">
         <div class="r-k">Φάση Β΄ — nomosio.gr</div>
@@ -1112,42 +1169,129 @@ footer{font-size:.95rem}
 <!-- ============ ΝΟΜΟΣΙΟ+ ============ -->
 <section id="plus">
   <div class="wrap">
-    <div class="eyebrow">Νομόσιο+ · σύντομα</div>
+    <div class="eyebrow">Νομόσιο+</div>
     <div class="section-head">
-      <h2>Ο Νόμος στα χέρια σου</h2>
+      <h2>Ο νόμος στα χέρια σου</h2>
     </div>
-    <p class="lead">Κάθε νόμος που ψηφίζεται σε αφορά — στη δουλειά, στη φορολογία, στο σπίτι, στα δικαιώματά σου. Το Νομόσιο+ θα τον μεταφράζει σε απλά ελληνικά και θα σου δείχνει τι μπορείς να κάνεις, νόμιμα, με τον νόμο ως εργαλείο — καθοδήγηση που ώς τώρα προϋπέθετε πρόσβαση σε ειδικούς. Με τη δύναμη του AI, για το κόστος ενός καφέ.</p>
+    <p class="lead">Κάθε νόμος που ψηφίζεται σε αφορά: στη δουλειά, στην εφορία, στο σπίτι, στην υγεία σου. Στις Έξυπνες Κινήσεις σου λέμε τι μπορείς να κάνεις εσύ, νόμιμα, με βάση όσα ήδη ζυγίζουμε: ποιον αφορά κάθε κίνηση, τα βήματα ένα ένα, και την επίσημη σελίδα του κράτους όπου γίνεται.</p>
 
     <div class="tiles">
       <div class="tile reveal">
-        <div class="t-k">Προσωπικές ειδοποιήσεις</div>
-        <div class="t-d" style="margin-top:8px">Μόλις ψηφιστεί ή τροποποιηθεί νόμος που αγγίζει το προφίλ σου (μισθωτός, ελεύθερος επαγγελματίας, γονιός, αγρότης, ενοικιαστής…), το μαθαίνεις έγκαιρα — με εξήγηση, όχι ΦΕΚ.</div>
+        <div class="t-k">Βήματα, όχι ΦΕΚ</div>
+        <div class="t-d" style="margin-top:8px">Κάθε κίνηση γράφει τι κάνεις πρώτα, τι μετά και τι να προσέξεις. Σε απλά ελληνικά.</div>
       </div>
       <div class="tile reveal">
-        <div class="t-k">«Τι κερδίζεις — τι χάνεις»</div>
-        <div class="t-d" style="margin-top:8px">Κάθε αλλαγή αναλυμένη στα μέτρα σου: προθεσμίες, ποσά, δικαιολογητικά, σημεία προσοχής — ώστε να πηγαίνεις προετοιμασμένος στον λογιστή ή τον δικηγόρο σου, όταν τον χρειαστείς.</div>
+        <div class="t-k">Επίσημοι σύνδεσμοι</div>
+        <div class="t-d" style="margin-top:8px">Σε στέλνουμε κατευθείαν στη σελίδα του κράτους όπου γίνεται η δουλειά. Κάθε σύνδεσμο τον ανοίξαμε, και γράφουμε πότε.</div>
       </div>
       <div class="tile reveal">
-        <div class="t-k">Οδηγοί αξιοποίησης</div>
-        <div class="t-d" style="margin-top:8px">Επιδοτήσεις και φοροελαφρύνσεις που ενδέχεται να δικαιούσαι, ενστάσεις που μπορεί να έχεις δικαίωμα να καταθέσεις. Ο πολίτης που ξέρει τον νόμο δεν φοβάται τον νόμο.</div>
+        <div class="t-k">Από πού το ξέρουμε</div>
+        <div class="t-d" style="margin-top:8px">Κάθε κίνηση ξεκινά από έναν νόμο ή μια απόφαση που ήδη ζυγίζουμε, με τις πηγές της δίπλα.</div>
       </div>
     </div>
 
     <div class="pledge reveal" style="margin-top:26px">
       <div>
-        <h3 style="font-size:1.35rem;margin-bottom:6px">Ενδεικτική τιμή: 5 € τον μήνα — θα επιβεβαιωθεί στο λανσάρισμα</h3>
-        <p style="color:var(--ink2);font-size:.95rem;margin:0;max-width:54ch">Οι εγγραφές θα ανοίξουν με το επίσημο λανσάρισμα. Δήλωσε ενδιαφέρον για να κλειδώσεις θέση στη λίστα αναμονής — καμία χρέωση τώρα.</p>
-        <p style="color:var(--ink3);font-size:.78rem;margin:10px 0 0;font-family:'Source Sans 3',sans-serif">Το Νομόσιο+ παρέχει ενημέρωση και καθοδήγηση — δεν αποτελεί νομική, φορολογική ή επενδυτική συμβουλή.</p>
+        <h3 style="font-size:1.35rem;margin-bottom:6px">5 € τον μήνα ή 49 € τον χρόνο</h3>
+        <p style="color:var(--ink2);font-size:.95rem;margin:0;max-width:54ch">Όλες οι κινήσεις ανοιχτές, μαζί με όσες προσθέτουμε. Μία κίνηση τον μήνα είναι ανοιχτή για όλους, δωρεάν. Οι τιμές περιλαμβάνουν ΦΠΑ. Ακυρώνεις όποτε θέλεις· η ακύρωση ισχύει στο τέλος της περιόδου που έχεις πληρώσει.</p>
+        <p style="color:var(--ink3);font-size:.78rem;margin:10px 0 0;font-family:'Source Sans 3',sans-serif">Οι Έξυπνες Κινήσεις είναι ενημέρωση. Δεν αποτελούν νομική, φορολογική ή ιατρική συμβουλή.</p>
       </div>
-      <form class="email-cap ec-inline" data-source="plus" novalidate>
-        <div class="ec-row">
-          <input type="email" required placeholder="το email σου" aria-label="Διεύθυνση email για τη λίστα αναμονής" autocomplete="email">
-          <button type="submit" class="vbtn ec-btn">Λίστα αναμονής</button>
-        </div>
-        <p class="ec-note">Καμία χρέωση — μόνο ενημέρωση για το λανσάρισμα · <a href="#privacy">Ιδιωτικότητα</a></p>
-        <p class="ec-msg" role="status" aria-live="polite"></p>
-      </form>
+      <a class="vbtn ec-btn" style="text-decoration:none" href="#kiniseis">Δες τις Έξυπνες Κινήσεις</a>
     </div>
+  </div>
+</section>
+
+<!-- ============ ΝΟΜΟΣΙΟ+ · ΕΞΥΠΝΕΣ ΚΙΝΗΣΕΙΣ ============ -->
+<section id="kiniseis">
+  <div class="wrap" data-contact="info@tradevessel.com">
+    <div class="eyebrow">Νομόσιο+ · Έξυπνες Κινήσεις</div>
+    <div class="section-head">
+      <h2>Τι μπορείς να κάνεις εσύ, με τον νόμο στο χέρι</h2>
+    </div>
+    <p class="lead">Κάθε κίνηση ξεκινά από κάτι που ήδη ζυγίζουμε στο Νομόσιο: έναν νόμο ή μια απόφαση. Σου λέμε ποιον αφορά, τι κάνεις βήμα βήμα, και σε ποια επίσημη σελίδα του κράτους γίνεται. Κάθε σύνδεσμο τον ανοίξαμε, και γράφουμε δίπλα πότε.</p>
+    <p class="mv-disclaimer">Είναι γενική ενημέρωση για όλους, όχι νομική, φορολογική ή ιατρική συμβουλή. Για τη δική σου περίπτωση, ρώτα τον λογιστή, τον δικηγόρο ή τον γιατρό σου.</p>
+
+    <div class="mv-account" id="mvAccount" aria-live="polite"></div>
+
+    <div class="mv-filters" id="mvFilters" role="group" aria-label="Ποιον αφορά"></div>
+    <div class="mv-status" id="mvStatus" role="status" aria-live="polite"></div>
+    <p class="mv-count" id="mvCount"></p>
+    <div class="mv-grid" id="mvGrid"></div>
+
+    <div class="mv-pay" id="mvPay">
+      <h3>Άνοιξε όλες τις κινήσεις</h3>
+      <p class="mv-note" style="margin-top:0">Μία κίνηση τον μήνα είναι ανοιχτή για όλους. Με τη συνδρομή ανοίγουν όλες: τα βήματα, οι επίσημοι σύνδεσμοι και οι προθεσμίες, μαζί με όσες προσθέτουμε όσο είσαι συνδρομητής.</p>
+      <div class="mv-plans" role="radiogroup" aria-label="Διάλεξε συνδρομή">
+        <label class="mv-plan"><input type="radio" name="mvPlan" value="month" checked><span class="mv-plan-name">Μηνιαία</span><span class="mv-plan-price num">5 €</span><span class="mv-plan-per">τον μήνα</span></label>
+        <label class="mv-plan"><input type="radio" name="mvPlan" value="year"><span class="mv-plan-name">Ετήσια</span><span class="mv-plan-price num">49 €</span><span class="mv-plan-per">τον χρόνο</span></label>
+      </div>
+      <p class="mv-renew" id="mvRenew">Η συνδρομή ανανεώνεται αυτόματα κάθε μήνα στα 5 €, με ΦΠΑ, μέχρι να την ακυρώσεις. Την ακυρώνεις όποτε θέλεις από αυτή τη σελίδα, με το κουμπί «Διαχείριση συνδρομής»· κρατάς την πρόσβαση ως το τέλος της περιόδου που πλήρωσες.</p>
+      <p class="mv-note">Αν αλλάξεις γνώμη μέσα σε 14 ημέρες από την πρώτη πληρωμή, γράψε μας και σου επιστρέφουμε όλα τα χρήματα, χωρίς ερωτήσεις. Για να αγοράσεις πρέπει να είσαι τουλάχιστον 18 ετών.</p>
+      <label class="mv-check"><input type="checkbox" id="mvWaiver"><span>Θέλω να ανοίξουν οι κινήσεις αμέσως μόλις πληρώσω, μέσα στις 14 ημέρες υπαναχώρησης.</span></label>
+      <label class="mv-check"><input type="checkbox" id="mvTerms"><span>Δέχομαι τους <a href="#oroi">όρους της συνδρομής</a>.</span></label>
+      <button type="button" class="vbtn ec-btn" id="mvBuy">Συνέχεια στην πληρωμή</button>
+      <p class="ec-msg" id="mvPayMsg" role="status" aria-live="polite"></p>
+      <p class="ec-note">Η πληρωμή γίνεται στη σελίδα της Stripe. Το Νομόσιο δεν βλέπει και δεν κρατά τα στοιχεία της κάρτας σου. Πωλητής: {{ΣΥΜΠΛΗΡΩΣΗ: επωνυμία στα ελληνικά}} (TRADE VESSEL P.C.), {{ΣΥΜΠΛΗΡΩΣΗ: διεύθυνση}}, Σαντορίνη · ΑΦΜ 800720400 · info@tradevessel.com.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ΟΡΟΙ ΣΥΝΔΡΟΜΗΣ ============ -->
+<section class="oroi" id="oroi">
+  <div class="wrap prose">
+    <div class="eyebrow">Νομόσιο+ · Όροι</div>
+    <div class="section-head">
+      <h2>Οι όροι της συνδρομής Νομόσιο+</h2>
+    </div>
+    <p class="lead">Ισχύουν από τις 15 Σεπτεμβρίου 2026 (έκδοση oroi-2026-09-15). Τους γράψαμε όσο πιο απλά γίνεται. Τα δικαιώματα που σου δίνει ο νόμος ως καταναλωτή ισχύουν πάντα, ό,τι κι αν γράφει εδώ.</p>
+
+    <h3>1. Ποιος σου πουλάει</h3>
+    <p>Η συνδρομή πωλείται από την εταιρεία {{ΣΥΜΠΛΗΡΩΣΗ: επωνυμία στα ελληνικά}} (TRADE VESSEL P.C.), με έδρα {{ΣΥΜΠΛΗΡΩΣΗ: διεύθυνση}}, Σαντορίνη, ΑΦΜ 800720400. Επικοινωνία: info@tradevessel.com. Η ίδια εταιρεία εκδίδει το nomosio.gr.</p>
+
+    <h3>2. Τι αγοράζεις</h3>
+    <p>Πρόσβαση σε όλες τις Έξυπνες Κινήσεις του nomosio.gr, όσο η συνδρομή σου είναι ενεργή: τα βήματα, τους επίσημους συνδέσμους και τις προθεσμίες κάθε κίνησης, και όσες κινήσεις προσθέτουμε όσο διαρκεί η συνδρομή. Μία κίνηση τον μήνα είναι ανοιχτή για όλους, δωρεάν.</p>
+    <p>Οι κινήσεις είναι γενική ενημέρωση για όλους και δεν εξετάζουν τη δική σου περίπτωση. Δεν είναι νομική, φορολογική ή ιατρική συμβουλή και δεν υπόσχονται αποτέλεσμα. Η συνδρομή δεν σε κάνει πελάτη δικηγόρου, λογιστή ή γιατρού. Όπου υπάρχει προθεσμία, μέτρα την με τον πιο αυστηρό τρόπο και, αν έχεις αμφιβολία, ρώτα επαγγελματία πριν λήξει.</p>
+    <p>Κάθε κίνηση γράφει την ημέρα που ελέγξαμε τις πηγές της. Όταν αλλάζει ο νόμος ή μια κρατική σελίδα, ενημερώνουμε την κίνηση, ή την αποσύρουμε αν δεν ισχύει πια. Αν βρεις λάθος, γράψε μας στο info@tradevessel.com: το ελέγχουμε και το διορθώνουμε το συντομότερο.</p>
+    <p>Για να δεις τις κινήσεις χρειάζεσαι σύνδεση στο ίντερνετ, έναν σύγχρονο browser και ένα email για τη σύνδεση.</p>
+
+    <h3>3. Τιμή και πληρωμή</h3>
+    <p>5 € τον μήνα ή 49 € τον χρόνο. Οι τιμές περιλαμβάνουν ΦΠΑ. Πληρώνεις από πριν για κάθε περίοδο, με κάρτα ή με άλλον τρόπο που δέχεται η Stripe, στη σελίδα πληρωμής της Stripe. Το Νομόσιο δεν βλέπει και δεν κρατά τα στοιχεία της κάρτας σου. Μετά την αγορά σου στέλνουμε email με την επιβεβαίωση και αυτούς τους όρους, και η απόδειξη κάθε πληρωμής έρχεται στο email σου. Για να αγοράσεις συνδρομή πρέπει να είσαι τουλάχιστον 18 ετών.</p>
+
+    <h3>4. Ανανέωση και ακύρωση</h3>
+    <p>Η συνδρομή ανανεώνεται αυτόματα στο τέλος κάθε περιόδου, μήνα ή χρόνου, στην ίδια τιμή, μέχρι να την ακυρώσεις. Για την ετήσια συνδρομή σού στέλνουμε υπενθύμιση με email τουλάχιστον 7 ημέρες πριν την ανανέωση, με την τιμή και τον τρόπο ακύρωσης.</p>
+    <p>Την ακυρώνεις όποτε θέλεις από τη σελίδα Έξυπνες Κινήσεις, με το κουμπί «Διαχείριση συνδρομής», ή με email στο info@tradevessel.com. Μετά την ακύρωση δεν χρεώνεσαι ξανά, και κρατάς την πρόσβαση ως το τέλος της περιόδου που έχεις ήδη πληρώσει.</p>
+    <p>Μπορεί να αλλάξουμε την τιμή μόνο για σοβαρό λόγο, όπως αλλαγή του ΦΠΑ ή σημαντική αύξηση του κόστους λειτουργίας. Θα σου το πούμε με email τουλάχιστον 30 ημέρες πριν ισχύσει. Η νέα τιμή ισχύει μόνο από την πρώτη ανανέωση μετά από αυτές τις 30 ημέρες, και μπορείς να ακυρώσεις πριν, χωρίς καμία χρέωση.</p>
+
+    <h3>5. Αν αλλάξεις γνώμη: 14 ημέρες</h3>
+    <p>Αν αλλάξεις γνώμη μέσα σε 14 ημέρες από την πρώτη σου πληρωμή, γράψε μας στο info@tradevessel.com από το email του λογαριασμού σου, με τη φράση «Υπαναχωρώ από τη συνδρομή Νομόσιο+». Δεν χρειάζεται εξήγηση. Σου επιστρέφουμε όλα τα χρήματα μέσα σε 14 ημέρες, στον ίδιο τρόπο πληρωμής, και η πρόσβαση κλείνει. Αυτό δεν ισχύει για τις ανανεώσεις.</p>
+    <p>Πριν πληρώσεις σου ζητάμε να επιβεβαιώσεις ότι θέλεις να ανοίξουν οι κινήσεις αμέσως. Κρατάμε την ημέρα και την ώρα που το επιβεβαίωσες και σου τη στέλνουμε στο email της αγοράς. Η επιστροφή των 14 ημερών ισχύει κανονικά.</p>
+
+    <h3>6. Όταν κάτι δεν δουλεύει</h3>
+    <p>Αν η υπηρεσία δεν είναι όπως την περιγράφουμε, για παράδειγμα δεν ανοίγει ή μια κίνηση έχει λάθος, γράψε μας στο info@tradevessel.com. Θα το διορθώσουμε μέσα σε εύλογο χρόνο και χωρίς κόστος για σένα. Αν δεν το διορθώσουμε, ή αν το πρόβλημα είναι σοβαρό, μπορείς να ζητήσεις μείωση της τιμής ή να λύσεις τη σύμβαση και να πάρεις πίσω τα χρήματα για το διάστημα που η υπηρεσία δεν λειτουργούσε σωστά. Όταν επιστρέφουμε ολόκληρη μια πληρωμή, η συνδρομή σταματά, η πρόσβαση κλείνει και δεν χρεώνεσαι ξανά.</p>
+
+    <h3>7. Ο λογαριασμός σου</h3>
+    <p>Συνδέεσαι με το email σου και έναν κωδικό μίας χρήσης που σου στέλνουμε κάθε φορά. Η σύνδεσή σου αποθηκεύεται στη συσκευή σου, για να μη χρειάζεται κωδικός σε κάθε επίσκεψη. Κρατάμε τον λογαριασμό σου μέχρι να τον διαγράψεις.</p>
+    <p>Τον διαγράφεις όποτε θέλεις από τη σελίδα Έξυπνες Κινήσεις, ή με email στο info@tradevessel.com. Η διαγραφή σταματά αμέσως κάθε χρέωση και κλείνει την πρόσβαση. Αν έχεις ενεργή συνδρομή, σου επιστρέφουμε αναλογικά το ποσό για τον χρόνο που δεν χρησιμοποίησες· μέσα στις 14 πρώτες ημέρες από την πρώτη πληρωμή, ολόκληρο το ποσό. Η επιστροφή γίνεται στον ίδιο τρόπο πληρωμής.</p>
+
+    <h3 id="aporrito">8. Τα δεδομένα της συνδρομής</h3>
+    <p>Υπεύθυνος για τα δεδομένα σου είναι η {{ΣΥΜΠΛΗΡΩΣΗ: επωνυμία στα ελληνικά}} (TRADE VESSEL P.C.), {{ΣΥΜΠΛΗΡΩΣΗ: διεύθυνση}}, Σαντορίνη, info@tradevessel.com.</p>
+    <ul>
+      <li><b>Το email σου:</b> για να σε συνδέουμε και να σου στέλνουμε τον κωδικό σύνδεσης και τα απαραίτητα μηνύματα της συνδρομής: επιβεβαίωση αγοράς, υπενθύμιση ανανέωσης, αλλαγές τιμής ή όρων. Φυλάσσεται στη Supabase, σε διακομιστή εντός ΕΕ. Τα email στέλνονται μέσω της Resend.</li>
+      <li><b>Η ασφάλεια της σύνδεσης:</b> η Supabase κρατά αρχείο των συνδέσεων στον λογαριασμό σου, με ημερομηνία και διεύθυνση IP, για να τον προστατεύει από κακή χρήση.</li>
+      <li><b>Η συνδρομή σου:</b> ποιο πλάνο έχεις, αν είναι ενεργή και ως πότε. Κανένα στοιχείο κάρτας.</li>
+      <li><b>Η πληρωμή:</b> την επεξεργάζεται η Stripe (Stripe Payments Europe Ltd, Ιρλανδία). Βλέπει το όνομα, το email, τα στοιχεία της κάρτας και στοιχεία της συσκευής σου για την πρόληψη απάτης· για αυτό το τελευταίο αποφασίζει και η ίδια, με τη δική της πολιτική απορρήτου. Εμείς κρατάμε τα στοιχεία κάθε πληρωμής που χρειάζονται για τα φορολογικά βιβλία, όσο ορίζει ο νόμος, και μετά τη διαγραφή του λογαριασμού σου.</li>
+      <li><b>Η επιβεβαίωση πριν την πληρωμή:</b> η ώρα που την έδωσες, η έκδοση των όρων και ο κωδικός πελάτη σου στη Stripe. Την κρατάμε και μετά τη διαγραφή του λογαριασμού, χωρίς το email σου, ως απόδειξη.</li>
+      <li><b>Η φιλοξενία:</b> η σελίδα φιλοξενείται στη Vercel, που κρατά τη διεύθυνση IP των επισκεπτών σε αρχεία καταγραφής.</li>
+    </ul>
+    <p>Κάποιοι από αυτούς τους παρόχους είναι εταιρείες των ΗΠΑ ή έχουν συνεργάτες εκεί. Η διαβίβαση γίνεται με τις διασφαλίσεις του ΓΚΠΔ, όπως το Πλαίσιο Προστασίας Δεδομένων ΕΕ-ΗΠΑ ή τυποποιημένες συμβατικές ρήτρες.</p>
+    <p>Τα επεξεργαζόμαστε για να εκτελέσουμε τη συνδρομή που αγόρασες, για να τηρήσουμε τον νόμο (τα φορολογικά στοιχεία των πληρωμών) και για το έννομο συμφέρον μας να προστατεύουμε τους λογαριασμούς και να αποδεικνύουμε τις επιβεβαιώσεις. Χωρίς email δεν μπορούμε να σου δώσουμε συνδρομή. Έχεις δικαίωμα πρόσβασης, διόρθωσης, διαγραφής, περιορισμού, φορητότητας και εναντίωσης: γράψε μας στο info@tradevessel.com και απαντάμε μέσα σε έναν μήνα. Μπορείς επίσης να κάνεις καταγγελία στην Αρχή Προστασίας Δεδομένων Προσωπικού Χαρακτήρα (www.dpa.gr).</p>
+    <p>Δεν συνδέουμε τη συνδρομή σου με τις ψήφους και τις επιλογές σου στη σελίδα, και δεν σε γράφουμε στη λίστα ενημερώσεων αν δεν το ζητήσεις εσύ.</p>
+
+    <h3>9. Δίκαιο και παράπονα</h3>
+    <p>Ισχύει το ελληνικό δίκαιο, χωρίς να χάνεις την προστασία που σου δίνουν οι υποχρεωτικοί κανόνες για τους καταναλωτές της χώρας όπου μένεις. Για κάθε παράπονο γράψε μας πρώτα στο info@tradevessel.com· απαντάμε μέσα σε 14 ημέρες. Αν δεν μείνεις ικανοποιημένος, μπορείς να απευθυνθείς στον Συνήγορο του Καταναλωτή (www.synigoroskatanaloti.gr), που είναι φορέας εξωδικαστικής επίλυσης διαφορών, ή στη Γενική Γραμματεία Εμπορίου και Προστασίας Καταναλωτή. Μπορείς επίσης να προσφύγεις στα δικαστήρια του τόπου όπου μένεις.</p>
+
+    <h3>10. Αλλαγές στους όρους</h3>
+    <p>Μπορεί να αλλάξουμε αυτούς τους όρους μόνο για σοβαρό λόγο, όπως αλλαγή του νόμου, απόφαση αρχής ή αλλαγή στον τρόπο που λειτουργεί η υπηρεσία. Θα σου πούμε με email τι αλλάζει τουλάχιστον 30 ημέρες πριν ισχύσει. Η αλλαγή ισχύει από την πρώτη ανανέωση μετά από αυτές τις 30 ημέρες. Αν η αλλαγή είναι σε βάρος σου, μπορείς να ακυρώσεις χωρίς χρέωση και να πάρεις πίσω αναλογικά ό,τι έχεις πληρώσει για τον χρόνο που μένει.</p>
   </div>
 </section>
 
@@ -1158,9 +1302,10 @@ footer{font-size:.95rem}
       <div>
         <div class="brand">ΝΟΜΟΣΙΟ</div>
         <h4>Διαφάνεια &amp; όροι</h4>
-        <p><strong style="color:var(--ink2)">Μη κομματική πρωτοβουλία πολιτών — πρωτότυπο υπό ανάπτυξη.</strong> Όλα τα στοιχεία προέρχονται από δημόσιες, τεκμηριωμένες πηγές (EPPO, Ευρωπαϊκή Επιτροπή, Ελεγκτικό Συνέδριο, ΕΔΔΑ, Transparency International, RSF, World Justice Project, Ευρωβαρόμετρο, ΟΟΣΑ, δικαστικές αποφάσεις και διεθνή ειδησεογραφικά πρακτορεία) με αναφορά έτους. Τελευταία ενημέρωση: 12 Σεπτεμβρίου 2026.</p>
+        <p><strong style="color:var(--ink2)">Ανεξάρτητος, μη κομματικός ιστότοπος.</strong> Δεν ανήκει σε κόμμα και δεν χρηματοδοτείται από κόμμα. Εκδότης: {{ΣΥΜΠΛΗΡΩΣΗ: επωνυμία στα ελληνικά}} (TRADE VESSEL P.C.), {{ΣΥΜΠΛΗΡΩΣΗ: διεύθυνση}}, Σαντορίνη, ΑΦΜ 800720400, info@tradevessel.com. Όλα τα στοιχεία προέρχονται από δημόσιες, τεκμηριωμένες πηγές (EPPO, Ευρωπαϊκή Επιτροπή, Ελεγκτικό Συνέδριο, ΕΔΔΑ, Transparency International, RSF, World Justice Project, Ευρωβαρόμετρο, ΟΟΣΑ, δικαστικές αποφάσεις και διεθνή ειδησεογραφικά πρακτορεία) με αναφορά έτους. Τελευταία ενημέρωση: 12 Σεπτεμβρίου 2026.</p>
         <p><strong style="color:var(--ink2)">Τεκμήριο αθωότητας:</strong> όπου δεν υπάρχει αμετάκλητη δικαστική καταδίκη, οι αναφορές αφορούν καταγγελλόμενες ή διερευνώμενες πράξεις και κανένα πρόσωπο δεν θεωρείται ένοχο. Οι αθωώσεις και οι απαλλαγές αναφέρονται ρητά. Ο «Δείκτης Ισορροπίας» αποτιμά τη λειτουργία θεσμών και πολιτικών με δημοσιευμένη μεθοδολογία — δεν αποτελεί κρίση ενοχής προσώπων.</p>
-        <p id="privacy"><strong style="color:var(--ink2)">Ιδιωτικότητα:</strong> οι ψήφοι και οι επιλογές σου στη σελίδα καταγράφονται ανώνυμα σε βάση δεδομένων εντός ΕΕ — μόνο με ένα τυχαίο αναγνωριστικό συσκευής, χωρίς όνομα, email ή διεύθυνση IP στη βάση μας — αποκλειστικά για συγκεντρωτικά στατιστικά γνώμης και χρήσης, και δεν συνδέονται με τη λίστα email. Αν εγγραφείς στη λίστα email, η διεύθυνσή σου αποθηκεύεται σε βάση δεδομένων εντός ΕΕ, αποκλειστικά για να λαμβάνεις νέα του Νομόσιου· κάθε μήνυμα θα περιλαμβάνει σύνδεσμο διαγραφής, και μπορείς να ζητήσεις διαγραφή οποτεδήποτε απαντώντας σε οποιοδήποτε μήνυμά μας. Η σελίδα φορτώνει γραμματοσειρές από το Google Fonts· κατά τη φόρτωση διαβιβάζεται η διεύθυνση IP σου στην Google, όπως σε κάθε ιστότοπο που τις χρησιμοποιεί. Καμία άλλη διαβίβαση δεδομένων δεν γίνεται.</p>
+        <p><strong style="color:var(--ink2)">Νομόσιο+:</strong> τη συνδρομή την πουλά ο εκδότης. Όποιος κι αν πληρώνει, η ζυγαριά, τα τεκμήρια και το Ραντάρ μένουν ίδια για όλους και δωρεάν. <a href="#oroi">Οι όροι της συνδρομής</a></p>
+        <p id="privacy"><strong style="color:var(--ink2)">Ιδιωτικότητα:</strong> υπεύθυνος για τα δεδομένα είναι ο εκδότης (στοιχεία πιο πάνω). Οι ψήφοι και οι επιλογές σου στη σελίδα καταγράφονται σε βάση δεδομένων εντός ΕΕ με ένα τυχαίο αναγνωριστικό που αποθηκεύεται στη συσκευή σου, χωρίς όνομα ή email. Δεν είναι πλήρως ανώνυμα δεδομένα, αλλά δεν τα συνδέουμε με εσένα, με τη λίστα email ή με λογαριασμό συνδρομής, και τα χρησιμοποιούμε μόνο για συγκεντρωτικά στατιστικά. Σβήνεις το αναγνωριστικό όποτε θέλεις, καθαρίζοντας τα δεδομένα του ιστότοπου στον browser σου. Αν εγγραφείς στη λίστα email, η διεύθυνσή σου αποθηκεύεται σε βάση δεδομένων εντός ΕΕ, αποκλειστικά για να λαμβάνεις νέα του Νομόσιου· κάθε μήνυμα θα περιλαμβάνει σύνδεσμο διαγραφής, και μπορείς να ζητήσεις διαγραφή οποτεδήποτε απαντώντας σε οποιοδήποτε μήνυμά μας. Για να λειτουργεί ο ιστότοπος, δεδομένα περνούν σε παρόχους που δουλεύουν για λογαριασμό μας: Vercel (φιλοξενία, κρατά τη διεύθυνση IP σε αρχεία καταγραφής), Supabase (βάση δεδομένων και σύνδεση, διακομιστές εντός ΕΕ), Resend (αποστολή των email της συνδρομής) και Stripe (πληρωμές). Η σελίδα φορτώνει επίσης γραμματοσειρές από το Google Fonts, οπότε η διεύθυνση IP σου φτάνει στην Google. Κάποιοι από αυτούς τους παρόχους είναι εταιρείες των ΗΠΑ· η διαβίβαση γίνεται με τις διασφαλίσεις του ΓΚΠΔ. Τα δικαιώματά σου και αναλυτικά για τη συνδρομή: <a href="#oroi">όροι της συνδρομής</a>.</p>
       </div>
       <div>
         <h4>Κύριες πηγές</h4>
@@ -1924,7 +2069,7 @@ const FAQ = [
   { q:'Γιατί υποθέσεις που τελείωσαν με αθώωση μετρούν αρνητικά;',
     a:'<p>Ο βαθμός εκεί δεν αφορά τα πρόσωπα — η αθωότητά τους είναι δικαστικά δεδομένη και το γράφουμε ρητά σε κάθε τέτοια κάρτα. Μετρά το θεσμικό αποτύπωμα της υπόθεσης: τα χρόνια δικαστικής εκκρεμότητας, το δημόσιο χρήμα, τον κλονισμό της εμπιστοσύνης — το κόστος που πλήρωσε η κοινωνία μέχρι να υπάρξει κρίση. Η σχετική ρήτρα υπάρχει γραμμένη στη «Μέθοδο».</p>' },
   { q:'Οι ψηφοφορίες της σελίδας μετρούν στη ζυγαριά;',
-    a:'<p>Όχι — και δεν θα μετρήσουν ποτέ. Η ζυγαριά κινείται αποκλειστικά από τεκμήρια. Οι ψήφοι σου καταγράφονται ανώνυμα — με ένα τυχαίο αναγνωριστικό συσκευής, χωρίς όνομα, email ή οτιδήποτε προσωπικό — ώστε να βλέπουμε συγκεντρωτικά τι πιστεύουν οι επισκέπτες. Μετράνε τη φωνή· δεν αποδεικνύουν την αλήθεια. Τα συγκεντρωτικά αποτελέσματα φαίνονται δημόσια δίπλα σε κάθε ερώτημα (μετρά η τελευταία επιλογή κάθε συσκευής).</p><p>Όταν έρθουν οι επίσημες ψηφοφορίες στο nomosio.gr με λογαριασμούς (μία ψήφος ανά άνθρωπο), τα αποτελέσματα θα δημοσιεύονται δίπλα στα τεκμήρια — ποτέ στη θέση τους.</p>' },
+    a:'<p>Όχι — και δεν θα μετρήσουν ποτέ. Η ζυγαριά κινείται αποκλειστικά από τεκμήρια. Οι ψήφοι σου καταγράφονται χωρίς όνομα ή email, με ένα τυχαίο αναγνωριστικό που αποθηκεύεται στη συσκευή σου, ώστε να βλέπουμε συγκεντρωτικά τι πιστεύουν οι επισκέπτες. Μετράνε τη φωνή· δεν αποδεικνύουν την αλήθεια. Τα συγκεντρωτικά αποτελέσματα φαίνονται δημόσια δίπλα σε κάθε ερώτημα (μετρά η τελευταία επιλογή κάθε συσκευής).</p><p>Όταν έρθουν οι επίσημες ψηφοφορίες στο nomosio.gr με λογαριασμούς (μία ψήφος ανά άνθρωπο), τα αποτελέσματα θα δημοσιεύονται δίπλα στα τεκμήρια — ποτέ στη θέση τους.</p>' },
   { q:'Μπορεί να κάνετε λάθος;',
     a:'<p>Ναι — και το σύστημα είναι στημένο ώστε το λάθος να μη ζει πολύ. Κάθε αριθμός δείχνει την πηγή του, ώστε να ελέγχεται από οποιονδήποτε. Κάθε δημοσίευση περνά πρώτα από διπλό αντίπαλο έλεγχο: έναν ελεγκτή γεγονότων που προσπαθεί να διαψεύσει τα στοιχεία μας και έναν «εχθρικό δικηγόρο» που ψάχνει άδικες διατυπώσεις. Ό,τι διορθώνεται, διορθώνεται δημόσια, με νέα ημερομηνία ενημέρωσης.</p><p>Αν βρεις λάθος, τεκμηρίωσέ το και θα διορθωθεί. Αυτό είναι το Νομόσιο — ελεγχόμαστε με τους ίδιους κανόνες που ελέγχουμε.</p>' },
   { q:'Το περιεχόμενο το γράφει τεχνητή νοημοσύνη;',
@@ -1932,7 +2077,7 @@ const FAQ = [
   { q:'Δεν εξοπλιζόμαστε για να προστατευτούμε; Γιατί τα εξοπλιστικά δεν μετρούν στα θετικά;',
     a:'<p>Γιατί η ζυγαριά βαθμολογεί μόνο ό,τι τεκμηριώνεται από τρίτους — και η άμυνα είναι η δυσκολότερη περίπτωση: το όφελός της (η αποτροπή) είναι υπαρκτό, αλλά δεν το μετράει εκ των προτέρων κανένας ανεξάρτητος δείκτης· το κόστος της όμως μετριέται (25+ δισ. €, εν μέρει με δανεισμό). Αν βάζαμε «υπέρ» επειδή θεωρούμε σωστή τη στρατηγική, θα κάναμε αυτό που υποσχεθήκαμε να μην κάνουμε ποτέ: γνώμη ντυμένη τεκμήριο. Και ο επόμενος θα απαιτούσε «κατά» επειδή εκείνος πιστεύει ότι τα χρήματα έπρεπε να πάνε αλλού.</p><p>Γι΄ αυτό τα εξοπλιστικά είναι «καταγραφή — χωρίς βαθμό»: δεν ρίχνουν τη ζυγαριά ούτε προς τα εκεί ούτε προς τα εδώ. Σου δίνουμε τα ποσά, τις παραδόσεις και τα επιχειρήματα και των δύο πλευρών (η ελληνογαλλική συμφωνία πέρασε 191–109 — σοβαρή πλειοψηφία, όχι όμως συναίνεση), και η στάθμιση ασφάλειας-κόστους ανήκει σε σένα. Αν αύριο υπάρξουν τεκμηριωμένες εκβάσεις — ανεξάρτητες αναλύσεις που αποδίδουν στην αποτρεπτική ισχύ μετρήσιμη αποκλιμάκωση, ή ευρεία διακομματική συναίνεση — ο βαθμός θα ανέβει. Η ζυγαριά δεν είναι φιλειρηνική ούτε φιλοπόλεμη· είναι φιλο-τεκμηριωμένη.</p>' },
   { q:'Εσείς τι κερδίζετε από αυτό;',
-    a:'<p>Η ζυγαριά και όλα τα τεκμήρια είναι — και θα μείνουν — δωρεάν και ανοιχτά, με άδεια ελεύθερης αναδημοσίευσης (CC BY). Η προαιρετική συνδρομή Νομόσιο+ (όταν ανοίξει) θα χρηματοδοτεί τη λειτουργία και την έρευνα.</p><p>Δεν πουλάμε διαφημίσεις. Δεν παίρνουμε κρατική διαφήμιση. Δεν χρωστάμε σε τράπεζες.</p>' },
+    a:'<p>Η ζυγαριά και όλα τα τεκμήρια είναι — και θα μείνουν — δωρεάν και ανοιχτά, με άδεια ελεύθερης αναδημοσίευσης (CC BY). Η προαιρετική συνδρομή Νομόσιο+ χρηματοδοτεί τη λειτουργία και την έρευνα, και δεν αγγίζει ποτέ τη ζυγαριά.</p><p>Δεν πουλάμε διαφημίσεις. Δεν παίρνουμε κρατική διαφήμιση. Δεν χρωστάμε σε τράπεζες.</p>' },
 ];
 setHTML('faqList', FAQ.map(f=>`
   <details><summary>${f.q}</summary><div class="a">${f.a}</div></details>`).join(''));
@@ -2461,6 +2606,336 @@ document.querySelectorAll('.vote').forEach(v=>{
       }catch(_){ msg.textContent='Πρόβλημα σύνδεσης — δοκίμασε ξανά.'; msg.className='ec-msg err'; btn.disabled=false; }
     });
   });
+})();
+
+/* ---------- ΝΟΜΟΣΙΟ+ · ΕΞΥΠΝΕΣ ΚΙΝΗΣΕΙΣ ---------- */
+/* Τι ανοίγει σε ποιον το αποφασίζει ΜΟΝΟ η βάση (συνάρτηση nomosio_moves).
+   Η σελίδα δεν γράφει ποτέ «πληρώθηκε» πριν το επιβεβαιώσει το webhook της Stripe.
+   Οι τιμές εδώ πρέπει να ταιριάζουν με το PLANS στο supabase/functions/_shared/plus.ts. */
+(function(){
+  const root=document.getElementById('kiniseis');
+  if(!root) return;
+  const $=id=>document.getElementById(id);
+  const acct=$('mvAccount'), filters=$('mvFilters'), statusEl=$('mvStatus'), countEl=$('mvCount'), grid=$('mvGrid'), pay=$('mvPay');
+  if(!acct||!filters||!statusEl||!countEl||!grid||!pay) return;
+
+  const FN=DB.url+'/functions/v1/';
+  const contactEl=root.querySelector('[data-contact]');
+  const CONTACT=contactEl?contactEl.dataset.contact:'';
+  const PRICES={month:{label:'κάθε μήνα',price:'5 €'},year:{label:'κάθε χρόνο',price:'49 €'}};
+  const THEMES={work:'Δουλειά και εισόδημα',home:'Σπίτι και χαρτιά',health:'Υγεία και πρόστιμα',rights:'Ψήφος και δικαιώματα'};
+  const LOCK='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>';
+  const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const httpsOnly=u=>/^https:\/\/[^\s"'<>]+$/.test(u||'')?u:'';
+  const localOnly=u=>/^\/[a-z0-9\/#-]*$/.test(u||'')?u:'';
+  const day=d=>{ try{ return d?new Date(d).toLocaleDateString('el-GR',{day:'numeric',month:'long',year:'numeric'}):''; }catch(e){ return ''; } };
+  const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+  const onOurSite=/(^|\.)nomosio\.gr$|^localhost$/.test(location.hostname);
+
+  let sb=null;
+  try{
+    if(window.supabase&&window.supabase.createClient)
+      sb=window.supabase.createClient(DB.url,DB.key,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:false,storageKey:'nomosio-auth'}});
+  }catch(e){ sb=null; }
+
+  const st={session:null,data:null,filter:lsGet('nomosio-mv-filter')||'',otpEmail:'',armed:null,waiting:false};
+
+  function say(el,text,kind){ if(!el) return; el.textContent=text; el.className='ec-msg'+(kind?' '+kind:''); }
+
+  async function currentToken(){
+    if(!sb) return null;
+    try{ const {data}=await sb.auth.getSession(); st.session=data.session||null; }catch(e){ st.session=null; }
+    return st.session?st.session.access_token:null;
+  }
+
+  async function load(){
+    const t=await currentToken();
+    const r=await fetch(REST+'rpc/nomosio_moves',{method:'POST',
+      headers:{'apikey':DB.key,'Authorization':'Bearer '+(t||DB.key),'Content-Type':'application/json'},body:'{}'});
+    if(!r.ok) throw new Error('moves '+r.status);
+    st.data=await r.json();
+    render();
+  }
+
+  async function callFn(name,body){
+    const t=await currentToken();
+    if(!t) return {status:401,data:{}};
+    try{
+      const r=await fetch(FN+name,{method:'POST',
+        headers:{'Content-Type':'application/json','Authorization':'Bearer '+t,'apikey':DB.key},body:JSON.stringify(body||{})});
+      let data={}; try{ data=await r.json(); }catch(e){}
+      return {status:r.status,data};
+    }catch(e){ return {status:0,data:{}}; }
+  }
+
+  const PAY_ERR={
+    0:'Δεν υπάρχει σύνδεση με τον διακομιστή. Έλεγξε το ίντερνετ σου και ξαναδοκίμασε. Δεν έγινε καμία χρέωση.',
+    401:'Η σύνδεσή σου έληξε. Συνδέσου ξανά με το email σου, στο πλαίσιο πιο πάνω.',
+    409:'Έχεις ήδη ενεργή συνδρομή. Ανανέωσε τη σελίδα για να δεις τις κινήσεις σου.',
+    502:'Η Stripe δεν απάντησε. Δεν έγινε καμία χρέωση. Δοκίμασε ξανά σε λίγο.',
+    503:'Οι πληρωμές δεν έχουν ενεργοποιηθεί ακόμη. Δεν έγινε καμία χρέωση.'
+  };
+  const payErr=s=>PAY_ERR[s]||'Κάτι πήγε στραβά στον διακομιστή μας. Δεν έγινε καμία χρέωση. Δοκίμασε ξανά σε λίγο.';
+
+  function authErr(err){
+    const s=err&&err.status, txt=((err&&err.code)||'')+' '+((err&&err.message)||'');
+    if(s===429||/rate|too many|security purposes/i.test(txt)) return 'Ζήτησες κωδικό πριν από λίγο. Περίμενε ένα λεπτό και ξαναδοκίμασε.';
+    if(/expired|invalid|otp|token/i.test(txt)) return 'Ο κωδικός δεν ταιριάζει ή έληξε. Πάτα «Άλλο email» και ζήτα καινούριο.';
+    if((err&&err.name)==='AuthRetryableFetchError'||s===0) return 'Δεν υπάρχει σύνδεση με τον διακομιστή. Έλεγξε το ίντερνετ σου και ξαναδοκίμασε.';
+    return 'Η σύνδεση δεν έγινε. Δοκίμασε ξανά σε λίγο.';
+  }
+
+  /* ── Λογαριασμός ── */
+  function dangerZone(){
+    return `<details class="mv-danger"><summary>Διαγραφή λογαριασμού</summary>
+      <p class="mv-note">Σβήνει τον λογαριασμό σου, σταματά αμέσως κάθε χρέωση και κλείνει την πρόσβαση. Αν έχεις ενεργή συνδρομή, σου επιστρέφουμε αναλογικά το ποσό για τον χρόνο που δεν χρησιμοποίησες, στον ίδιο τρόπο πληρωμής· μέσα στις 14 πρώτες ημέρες από την πρώτη πληρωμή, ολόκληρο το ποσό.</p>
+      <button type="button" class="vbtn mv-del" data-act="delete">Διαγραφή λογαριασμού</button></details>`;
+  }
+
+  function renderAccount(){
+    const d=st.data||{}, m=d.member, s=st.session;
+    if(!sb){
+      acct.innerHTML='<p class="mv-note" style="margin:0">Η σύνδεση συνδρομητών λειτουργεί στο <a href="https://nomosio.gr/kiniseis">nomosio.gr/kiniseis</a>.</p>';
+      return;
+    }
+    if(!s){
+      acct.innerHTML=`<form class="mv-signin" id="mvSignin" novalidate>
+        <div class="mv-acct-k">Σύνδεση με email</div>
+        <p class="mv-note">Για όσους έχουν συνδρομή ή θέλουν να κάνουν. Σου στέλνουμε έναν κωδικό μίας χρήσης στο email. Δεν χρειάζεσαι κωδικό πρόσβασης.</p>
+        <div class="ec-row" id="mvStepEmail"><input type="email" id="mvEmail" placeholder="το email σου" aria-label="Το email σου" autocomplete="email"><button type="submit" class="vbtn ec-btn">Στείλε μου κωδικό</button></div>
+        <div class="ec-row" id="mvStepCode" hidden><input type="text" id="mvCode" inputmode="numeric" autocomplete="one-time-code" maxlength="10" placeholder="ο κωδικός από το email" aria-label="Ο κωδικός από το email"><button type="submit" class="vbtn ec-btn">Σύνδεση</button><button type="button" class="vbtn" id="mvOther">Άλλο email</button></div>
+        <p class="ec-msg" id="mvSigninMsg" role="status" aria-live="polite"></p>
+        <p class="ec-note">Κρατάμε μόνο το email σου, για να σε συνδέουμε. Δεν σε γράφουμε σε καμία λίστα. <a href="#oroi">Όροι και απόρρητο</a></p>
+      </form>`;
+      bindSignin();
+      return;
+    }
+    const email=esc(s.user&&s.user.email);
+    const msgRow='<p class="ec-msg" id="mvAcctMsg" role="status" aria-live="polite"></p>';
+    if(m&&m.active){
+      const when=day(m.period_end);
+      const line = m.status==='past_due'
+        ? 'Η τελευταία πληρωμή δεν πέρασε. Άλλαξε κάρτα από τη «Διαχείριση συνδρομής» για να μη χάσεις την πρόσβαση.'
+        : m.cancel_at_period_end
+          ? `Την ακύρωσες. Κρατάς την πρόσβαση ως τις ${esc(when)} και δεν θα χρεωθείς ξανά.`
+          : `Ανανεώνεται στις ${esc(when)}, στα ${m.plan==='year'?PRICES.year.price:PRICES.month.price}.`;
+      acct.innerHTML=`<div class="mv-acct-row"><div>
+          <div class="mv-acct-k">Νομόσιο+ ενεργό · ${m.plan==='year'?'ετήσια':'μηνιαία'} συνδρομή</div>
+          <p>${line}</p><p class="mv-note" style="margin-bottom:0">Λογαριασμός: ${email}</p></div>
+        <div class="mv-acct-btns"><button type="button" class="vbtn ec-btn" data-act="portal">Διαχείριση συνδρομής</button><button type="button" class="vbtn" data-act="signout">Αποσύνδεση</button></div>
+      </div>${msgRow}${dangerZone()}`;
+    }else{
+      const ended = m&&['canceled','unpaid','incomplete_expired'].includes(m.status) ? ' Η προηγούμενη συνδρομή σου έχει λήξει.' : '';
+      acct.innerHTML=`<div class="mv-acct-row"><div>
+          <div class="mv-acct-k">Λογαριασμός: ${email}</div>
+          <p>Δεν έχεις ενεργή συνδρομή.${ended}</p></div>
+        <div class="mv-acct-btns"><a class="vbtn ec-btn" style="text-decoration:none" href="#mvPay">Δες τη συνδρομή</a><button type="button" class="vbtn" data-act="signout">Αποσύνδεση</button></div>
+      </div>${msgRow}${dangerZone()}`;
+    }
+  }
+
+  function bindSignin(){
+    const form=$('mvSignin'); if(!form) return;
+    const msg=$('mvSigninMsg'), stepEmail=$('mvStepEmail'), stepCode=$('mvStepCode');
+    $('mvOther').addEventListener('click',()=>{ st.otpEmail=''; stepCode.hidden=true; stepEmail.hidden=false; say(msg,''); $('mvEmail').focus(); });
+    form.addEventListener('submit',async e=>{
+      e.preventDefault();
+      const btn=(st.otpEmail?stepCode:stepEmail).querySelector('button[type="submit"]');
+      if(!st.otpEmail){
+        const email=($('mvEmail').value||'').trim().toLowerCase();
+        if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ say(msg,'Γράψε ένα έγκυρο email.','err'); return; }
+        btn.disabled=true; say(msg,'Στέλνουμε τον κωδικό…');
+        let error=null;
+        try{ ({error}=await sb.auth.signInWithOtp({email,options:{shouldCreateUser:true}})); }catch(x){ error=x; }
+        btn.disabled=false;
+        if(error){ say(msg,authErr(error),'err'); return; }
+        st.otpEmail=email; stepEmail.hidden=true; stepCode.hidden=false;
+        say(msg,`Στείλαμε κωδικό στο ${email}. Αν δεν τον δεις σε ένα λεπτό, κοίτα και στα ανεπιθύμητα.`,'ok');
+        $('mvCode').focus();
+      }else{
+        const token=($('mvCode').value||'').replace(/\D/g,'');
+        if(token.length<6){ say(msg,'Γράψε τον κωδικό που σου στείλαμε.','err'); return; }
+        btn.disabled=true; say(msg,'Σε συνδέουμε…');
+        let error=null;
+        try{ ({error}=await sb.auth.verifyOtp({email:st.otpEmail,token,type:'email'})); }catch(x){ error=x; }
+        btn.disabled=false;
+        if(error){ say(msg,authErr(error),'err'); return; }
+        st.otpEmail='';
+        await refresh();
+      }
+    });
+  }
+
+  acct.addEventListener('click',async e=>{
+    const b=e.target.closest('[data-act]'); if(!b||!sb) return;
+    const act=b.dataset.act, msg=$('mvAcctMsg');
+    if(act==='signout'){
+      b.disabled=true;
+      try{ await sb.auth.signOut(); }catch(_){}
+      st.session=null; await refresh(); return;
+    }
+    if(act==='portal'){
+      b.disabled=true; say(msg,'Σε πηγαίνουμε στη σελίδα διαχείρισης της Stripe…');
+      const {status,data}=await callFn('plus-portal');
+      if(status===200&&data.url){ location.href=data.url; return; }
+      b.disabled=false;
+      say(msg, status===404?'Δεν βρήκαμε συνδρομή σε αυτόν τον λογαριασμό.'
+        : status===0?'Δεν υπάρχει σύνδεση με τον διακομιστή. Έλεγξε το ίντερνετ σου.'
+        : status===401?'Η σύνδεσή σου έληξε. Συνδέσου ξανά.'
+        : 'Η σελίδα διαχείρισης δεν άνοιξε. Δοκίμασε ξανά σε λίγο.','err');
+      return;
+    }
+    if(act==='delete'){
+      if(!st.armed){
+        b.textContent='Πάτα ξανά για οριστική διαγραφή'; b.classList.add('armed');
+        st.armed=setTimeout(()=>{ st.armed=null; b.textContent='Διαγραφή λογαριασμού'; b.classList.remove('armed'); },5000);
+        return;
+      }
+      clearTimeout(st.armed); st.armed=null; b.disabled=true; say(msg,'Διαγράφουμε τον λογαριασμό…');
+      const {status,data}=await callFn('plus-delete',{confirm:'delete'});
+      if(status===200){
+        try{ await sb.auth.signOut(); }catch(_){}
+        st.session=null; await refresh();
+        statusEl.innerHTML='<p class="mv-ok">Ο λογαριασμός σου διαγράφηκε. Δεν θα χρεωθείς ξανά.'+(data&&data.refunded_cents>0?' Σου επιστρέφουμε '+(data.refunded_cents/100).toLocaleString('el-GR',{minimumFractionDigits:2})+' € στον τρόπο πληρωμής σου· η τράπεζα μπορεί να θέλει λίγες ημέρες για να φανεί.':'')+'</p>';
+        return;
+      }
+      b.disabled=false; b.textContent='Διαγραφή λογαριασμού'; b.classList.remove('armed');
+      say(msg, status===0?'Δεν υπάρχει σύνδεση με τον διακομιστή. Έλεγξε το ίντερνετ σου.'
+        : status===401?'Η σύνδεσή σου έληξε. Συνδέσου ξανά και ξαναδοκίμασε.'
+        : 'Η διαγραφή δεν έγινε. Ο λογαριασμός και η συνδρομή σου δεν άλλαξαν. Δοκίμασε ξανά σε λίγο.','err');
+    }
+  });
+
+  /* ── Κινήσεις ── */
+  function renderMoves(){
+    const d=st.data||{}, all=d.moves||[], member=!!(d.member&&d.member.active);
+    const tags=[...new Set(all.flatMap(m=>m.who||[]))].filter(t=>t!=='όλοι').sort((a,b)=>a.localeCompare(b,'el'));
+    if(st.filter&&!tags.includes(st.filter)) st.filter='';
+    filters.innerHTML = tags.length
+      ? '<span class="mv-f-label">Δείξε μου κινήσεις για:</span>'+['',...tags].map(t=>
+          `<button type="button" class="mv-f${st.filter===t?' on':''}" data-f="${esc(t)}" aria-pressed="${st.filter===t}">${t?esc(t):'όλους'}</button>`).join('')
+      : '';
+    const shown=all
+      .filter(m=>!st.filter||(m.who||[]).includes(st.filter)||(m.who||[]).includes('όλοι'))
+      .sort((a,b)=>member?0:(b.free?1:0)-(a.free?1:0));
+    const open=shown.filter(m=>m.open).length;
+    countEl.textContent = !all.length ? ''
+      : `${shown.length===1?'1 κίνηση':shown.length+' κινήσεις'}${member?', όλες ανοιχτές για σένα.':`, ανοιχτές για σένα: ${open}.`}`;
+
+    grid.innerHTML=shown.map(m=>{
+      const freeNow=m.free&&!member;
+      let body;
+      if(m.open){
+        const act=httpsOnly(m.action_url), dl=httpsOnly(m.deadline_url);
+        body=`<ol class="mv-steps">${(m.steps||[]).map(s=>`<li>${esc(s)}</li>`).join('')}</ol>`
+          +(m.watch_out?`<p class="mv-watch"><b>Πρόσεξε:</b> ${esc(m.watch_out)}</p>`:'')
+          +(m.deadline_text?`<p class="mv-deadline"><b>Προθεσμία:</b> ${esc(m.deadline_text)}${dl?` <a href="${esc(dl)}" target="_blank" rel="noopener">(πηγή)</a>`:''}</p>`:'')
+          +(act?`<a class="vbtn mv-go" href="${esc(act)}" target="_blank" rel="noopener">Κάνε το στην επίσημη σελίδα</a>`:'')
+          +`<details><summary>Από πού το ξέρουμε</summary><ul>${(m.sources||[]).map(s=>{
+              const u=httpsOnly(s.url);
+              return `<li>${u?`<a href="${esc(u)}" target="_blank" rel="noopener">${esc(s.title)}</a>`:esc(s.title)}: ${esc(s.confirms)}</li>`;
+            }).join('')}</ul></details>`;
+      }else{
+        body=`<p class="mv-locked">${LOCK}<span>${m.steps_count?`Τα ${m.steps_count} βήματα, `:''}ο επίσημος σύνδεσμος και οι προθεσμίες είναι για συνδρομητές. <a href="#mvPay">Δες τη συνδρομή</a></span></p>`;
+      }
+      const ref=localOnly(m.ref);
+      return `<article class="card mv-card${freeNow?' mv-free':''}" id="mv-${esc(m.id)}">
+        <div class="meta"><span class="chip">${esc(THEMES[m.theme]||'')}</span>${freeNow?'<span class="chip conviction">Ανοιχτή για όλους αυτόν τον μήνα</span>':''}</div>
+        <h3>${esc(m.title)}</h3>
+        <p class="mv-who">Αφορά: ${(m.who||[]).map(esc).join(', ')}</p>
+        <p class="sum">${esc(m.benefit)}</p>
+        ${body}
+        <div class="srcs">Βασίζεται σε: ${esc(m.law||'')}${ref?` · <a href="${esc(ref)}">δες το στο Νομόσιο</a>`:''} · Πηγές ελεγμένες στις ${esc(day(m.checked_on))}</div>
+      </article>`;
+    }).join('');
+  }
+
+  filters.addEventListener('click',e=>{
+    const b=e.target.closest('[data-f]'); if(!b) return;
+    st.filter=b.dataset.f; lsSet('nomosio-mv-filter',st.filter);
+    renderMoves();
+  });
+
+  function render(){
+    renderAccount();
+    renderMoves();
+    pay.hidden=!!(st.data&&st.data.member&&st.data.member.active);
+  }
+
+  async function refresh(){
+    try{ await load(); }
+    catch(e){
+      statusEl.innerHTML = !onOurSite
+        ? '<p class="mv-err">Οι κινήσεις φορτώνουν στο <a href="https://nomosio.gr/kiniseis">nomosio.gr/kiniseis</a>.</p>'
+        : navigator.onLine===false
+          ? '<p class="mv-err">Δεν έχεις σύνδεση στο ίντερνετ. Οι κινήσεις θα φορτώσουν μόλις συνδεθείς ξανά.</p>'
+          : '<p class="mv-err">Οι κινήσεις δεν φόρτωσαν, γιατί ο διακομιστής μας δεν απάντησε. <button type="button" class="vbtn" id="mvRetry">Ξαναδοκίμασε</button></p>';
+      const r=$('mvRetry');
+      if(r) r.addEventListener('click',()=>{ statusEl.innerHTML='<p>Φορτώνουν οι κινήσεις…</p>'; refresh().then(()=>{ if(statusEl.textContent.indexOf('Φορτώνουν')===0) statusEl.innerHTML=''; }); });
+      renderAccount();
+    }
+  }
+
+  /* ── Πληρωμή ── */
+  const renew=$('mvRenew'), buy=$('mvBuy'), payMsg=$('mvPayMsg');
+  const chosenPlan=()=>(root.querySelector('input[name="mvPlan"]:checked')||{}).value==='year'?'year':'month';
+  function paintRenew(){
+    const p=PRICES[chosenPlan()];
+    if(renew) renew.textContent=`Η συνδρομή ανανεώνεται αυτόματα ${p.label} στα ${p.price}, με ΦΠΑ, μέχρι να την ακυρώσεις. Την ακυρώνεις όποτε θέλεις από αυτή τη σελίδα, με το κουμπί «Διαχείριση συνδρομής»· κρατάς την πρόσβαση ως το τέλος της περιόδου που πλήρωσες.`;
+  }
+  root.querySelectorAll('input[name="mvPlan"]').forEach(r=>r.addEventListener('change',paintRenew));
+  paintRenew();
+
+  if(buy) buy.addEventListener('click',async()=>{
+    const plan=chosenPlan();
+    if(!sb){ say(payMsg,'Οι πληρωμές γίνονται στο nomosio.gr/kiniseis.','err'); return; }
+    if(!$('mvWaiver').checked||!$('mvTerms').checked){ say(payMsg,'Για να συνεχίσεις, τσέκαρε και τα δύο κουτάκια πιο πάνω.','err'); return; }
+    await currentToken();
+    if(!st.session){
+      say(payMsg,'Πρώτα συνδέσου με το email σου, στο πλαίσιο πιο πάνω. Έτσι η συνδρομή μένει στον δικό σου λογαριασμό.','err');
+      acct.scrollIntoView({block:'center'});
+      const em=$('mvEmail'); if(em) em.focus({preventScroll:true});
+      return;
+    }
+    buy.disabled=true; say(payMsg,'Σε πηγαίνουμε στη σελίδα πληρωμής της Stripe…');
+    const {status,data}=await callFn('plus-checkout',{plan,waiver:true,terms:true});
+    if(status===200&&data.url){ location.href=data.url; return; }
+    buy.disabled=false; say(payMsg,payErr(status),'err');
+  });
+
+  /* Επιστροφή από τη Stripe: η πρόσβαση ανοίγει μόνο όταν τη δει η βάση. */
+  async function afterCheckout(){
+    const q=new URLSearchParams(location.search).get('plus');
+    if(!q) return false;
+    history.replaceState(null,'',location.pathname+location.hash);
+    if(q==='cancel'){ statusEl.innerHTML='<p>Η πληρωμή δεν ολοκληρώθηκε. Δεν έγινε καμία χρέωση.</p>'; return false; }
+    if(q!=='ok') return false;
+    st.waiting=true;
+    statusEl.innerHTML='<p class="mv-wait">Περιμένουμε από τη Stripe την επιβεβαίωση της πληρωμής. Συνήθως παίρνει λίγα δευτερόλεπτα.</p>';
+    for(let i=0;i<20;i++){
+      try{ await load(); }catch(e){}
+      if(st.data&&st.data.member&&st.data.member.active){
+        st.waiting=false;
+        statusEl.innerHTML='<p class="mv-ok">Η πληρωμή επιβεβαιώθηκε. Όλες οι κινήσεις είναι ανοιχτές για σένα.</p>';
+        return true;
+      }
+      await sleep(3000);
+    }
+    st.waiting=false;
+    const mail=CONTACT&&CONTACT.indexOf('@')>0?` γράψε μας στο <a href="mailto:${esc(CONTACT)}">${esc(CONTACT)}</a>`:' γράψε μας';
+    statusEl.innerHTML=`<p class="mv-err">Δεν ήρθε ακόμη επιβεβαίωση της πληρωμής. Αν χρεώθηκες, οι κινήσεις θα ανοίξουν μόλις έρθει: ανανέωσε τη σελίδα σε λίγα λεπτά. Αν δεν ανοίξουν,${mail}.</p>`;
+    return true;
+  }
+
+  (async()=>{
+    statusEl.innerHTML='<p>Φορτώνουν οι κινήσεις…</p>';
+    const handled=await afterCheckout();
+    if(!handled){
+      await refresh();
+      if(statusEl.textContent.indexOf('Φορτώνουν')===0) statusEl.innerHTML='';
+    }
+    if(sb) sb.auth.onAuthStateChange(ev=>{ if(ev==='SIGNED_OUT'&&st.session){ st.session=null; refresh(); } });
+  })();
 })();
 
 /* ---------- ΜΑΙΑΝΔΡΟΣ ---------- */

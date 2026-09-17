@@ -596,7 +596,7 @@ footer{font-size:.95rem}
       <a href="#faq">Ερωτήσεις</a>
       <a href="#synedrio">Το Συνέδριο</a>
       <a href="#symmetoxi">Συμμετοχή</a>
-      <a href="#stirixi">Στήριξη</a>
+      <a href="#stirixi" data-if="donate" hidden>Στήριξη</a>
       <a href="#kiniseis">Κινήσεις</a>
     </div>
   </div>
@@ -678,6 +678,7 @@ footer{font-size:.95rem}
         <li><b>Ξαναελέγξαμε ό,τι ήδη γράφαμε.</b> Και τα επτά νούμερα που χρησιμοποιούμε (διαφθορά, Τύπος, κράτος δικαίου, εμπιστοσύνη, ΕΔΔΑ, Ευρωπαϊκή Εισαγγελία, κατώτατος μισθός) ισχύουν ακόμη. Κανένα δεν άλλαξε.</li>
         <li><b>Τι ΔΕΝ μπήκε.</b> Οι εξαγγελίες της ΔΕΘ: καμία δεν έχει γίνει ακόμη νόμος, και εμείς μετράμε μόνο ψηφισμένα. Επίσης κόψαμε ένα στοιχείο για τη δίκη των Τεμπών επειδή ο έλεγχος βρήκε ότι μπέρδευε ποιος μηχανοδηγός ήταν σε ποιο τρένο.</li>
         <li><b>Γιατί ο δείκτης πήγε από −28 σε −27.</b> Δεν αλλάξαμε γνώμη για τίποτα. Μπήκε ένας θετικός νόμος παραπάνω, και η ζυγαριά το έδειξε.</li>
+        <li><b>18.9.2026 — οι ψήφοι σου.</b> Η ψήφος σου δένεται πλέον με τον ίδιο τον νόμο ή την υπόθεση, όχι με τη σειρά της στη λίστα. Έτσι δεν μετακινείται όταν μπαίνει νέο στοιχείο. Ψήφοι σε στοιχεία που είχαν μπει πρόσφατα δεν μπόρεσαν να μεταφερθούν και χάθηκαν· αν θέλεις, ψήφισε ξανά. Οι ψήφοι μένουν πάντα μόνο στη συσκευή σου.</li>
       </ul>
     </div>
 
@@ -1088,8 +1089,9 @@ footer{font-size:.95rem}
         <h3 style="font-size:1.35rem;margin-bottom:6px">Θέλεις το Νομόσιο να γίνει πραγματικός θεσμός λογοδοσίας;</h3>
         <p style="color:var(--ink2);font-size:.95rem;margin:0;max-width:52ch">Ο Περικλής το είπε αλλιώς: όποιος δεν συμμετέχει στα κοινά δεν είναι φιλήσυχος — είναι άχρηστος στην πόλη <span style="white-space:nowrap">(Θουκυδίδης 2.40)</span>.</p>
       </div>
-      <div style="display:flex;align-items:center;gap:18px">
-        <button class="vbtn" id="pledgeBtn" style="font-size:1rem;padding:14px 26px;border-color:var(--bronze);color:var(--bronze-ink)">Δηλώνω ΠΑΡΩΝ</button>
+      <div style="display:flex;flex-direction:column;align-items:flex-start;gap:8px">
+        <button class="vbtn" id="pledgeBtn" aria-describedby="pledgeNote" style="font-size:1rem;padding:14px 26px;border-color:var(--bronze);color:var(--bronze-ink)">Δηλώνω ΠΑΡΩΝ</button>
+        <span class="mv-note" id="pledgeNote" style="margin:0;max-width:32ch">Μένει μόνο σε αυτή τη συσκευή. Δεν στέλνεται πουθενά και δεν μετράμε κανέναν.</span>
       </div>
     </div>
 
@@ -1111,7 +1113,7 @@ footer{font-size:.95rem}
         <p>Η ζυγαριά, τα τεκμήρια με πηγές, το συνέδριο των αρχαίων. Οι ψήφοι σου μένουν μόνο στη συσκευή σου — και δεν αγγίζουν ποτέ τη ζυγαριά.</p>
       </div>
       <div class="rm reveal">
-        <div class="r-k">Φάση Β΄ — nomosio.gr</div>
+        <div class="r-k">Φάση Β΄ — επόμενη</div>
         <h3>Πραγματικές ψηφοφορίες</h3>
         <p>Λογαριασμοί πολιτών, μία ψήφος ανά άνθρωπο, ανοιχτά αποτελέσματα και σχολιασμός για κάθε νόμο και κάθε υπόθεση — με πλήρη διαφάνεια της μεθόδου.</p>
       </div>
@@ -1129,15 +1131,15 @@ footer{font-size:.95rem}
   <div class="wrap">
     <div class="eyebrow">Στήριξη</div>
     <div class="section-head">
-      <h2>Δωρεάν για όλους. Ζει από όσους το στηρίζουν.</h2>
+      <h2>Δωρεάν για όλους. <span data-if="donate" hidden>Ζει από όσους το στηρίζουν.</span><span data-if="no-donate">Θα ζει από όσους το στηρίζουν.</span></h2>
     </div>
-    <p class="lead">Η ζυγαριά, τα τεκμήρια, το Ραντάρ και οι Έξυπνες Κινήσεις είναι ανοιχτά για όλους, χωρίς συνδρομή και χωρίς λογαριασμό. Δεν πουλάμε διαφημίσεις και δεν παίρνουμε κρατική διαφήμιση. Αν σε βοήθησε κάτι εδώ, στήριξε την έρευνα με όσο θέλεις.</p>
+    <p class="lead">Η ζυγαριά, τα τεκμήρια, το Ραντάρ και οι Έξυπνες Κινήσεις είναι ανοιχτά για όλους, χωρίς συνδρομή και χωρίς λογαριασμό. Δεν πουλάμε διαφημίσεις και δεν παίρνουμε κρατική διαφήμιση. <span data-if="donate" hidden>Αν σε βοήθησε κάτι εδώ, στήριξε την έρευνα με όσο θέλεις.</span><span data-if="no-donate">Όταν ανοίξει η στήριξη, θα μπορείς να βοηθήσεις την έρευνα με όσο θέλεις.</span></p>
 
     <div class="pledge reveal" style="margin-top:26px">
       <div>
         <h3 style="font-size:1.35rem;margin-bottom:6px">Στήριξε το Νομόσιο</h3>
-        <p style="color:var(--ink2);font-size:.95rem;margin:0;max-width:54ch">Μία φορά, με όποιο ποσό θέλεις. Όποιος κι αν στηρίζει, η ζυγαριά μένει ίδια για όλους: κινείται μόνο με τεκμήρια.</p>
-        <p style="color:var(--ink3);font-size:.78rem;margin:10px 0 0;font-family:'Source Sans 3',sans-serif">Η πληρωμή γίνεται στη σελίδα της Stripe. Το Νομόσιο δεν βλέπει και δεν κρατά τα στοιχεία της κάρτας σου.</p>
+        <p style="color:var(--ink2);font-size:.95rem;margin:0;max-width:54ch"><span data-if="donate" hidden>Μία φορά, με όποιο ποσό θέλεις.</span><span data-if="no-donate">Θα είναι μία φορά, με όποιο ποσό θέλεις.</span> Όποιος κι αν στηρίζει, η ζυγαριά μένει ίδια για όλους: κινείται μόνο με τεκμήρια.</p>
+        <p style="color:var(--ink3);font-size:.78rem;margin:10px 0 0;font-family:'Source Sans 3',sans-serif"><span data-if="donate" hidden>Η πληρωμή γίνεται στη σελίδα της Stripe. Το Νομόσιο δεν βλέπει και δεν κρατά τα στοιχεία της κάρτας σου.</span><span data-if="no-donate">Όταν ανοίξει, η πληρωμή θα γίνεται στη σελίδα της Stripe· το Νομόσιο δεν θα βλέπει ούτε θα κρατά τα στοιχεία της κάρτας σου.</span></p>
       </div>
       <a class="vbtn ec-btn" style="text-decoration:none" id="donateBtn" href="#stirixi" target="_blank" rel="noopener" hidden>Στήριξε το Νομόσιο</a>
       <span class="mv-note" id="donateSoon" style="margin:0">Η στήριξη ανοίγει πολύ σύντομα.</span>
@@ -1159,7 +1161,7 @@ footer{font-size:.95rem}
     <p class="mv-count" id="mvCount" role="status" aria-live="polite"></p>
     <div class="mv-grid" id="mvGrid"><!-- ΚΙΝΗΣΕΙΣ: τις γράφει το build από το data/moves.json --></div>
 
-    <p class="mv-note" style="margin-top:34px">Σε βοήθησε μια κίνηση; <a href="#stirixi">Στήριξε το Νομόσιο</a>, για να γράφουμε κι άλλες.</p>
+    <p class="mv-note" style="margin-top:34px" data-if="donate" hidden>Σε βοήθησε μια κίνηση; <a href="#stirixi">Στήριξε το Νομόσιο</a>, για να γράφουμε κι άλλες.</p>
   </div>
 </section>
 
@@ -1172,8 +1174,8 @@ footer{font-size:.95rem}
         <h4>Διαφάνεια &amp; όροι</h4>
         <p><strong style="color:var(--ink2)">Ανεξάρτητος, μη κομματικός ιστότοπος.</strong> Δεν ανήκει σε κόμμα και δεν χρηματοδοτείται από κόμμα. Εκδότης: TRADE VESSEL ΙΚΕ, Άγιος Γεώργιος Θήρας, ΑΦΜ 800720400, info@tradevessel.com. Όλα τα στοιχεία προέρχονται από δημόσιες, τεκμηριωμένες πηγές (EPPO, Ευρωπαϊκή Επιτροπή, Ελεγκτικό Συνέδριο, ΕΔΔΑ, Transparency International, RSF, World Justice Project, Ευρωβαρόμετρο, ΟΟΣΑ, δικαστικές αποφάσεις και διεθνή ειδησεογραφικά πρακτορεία) με αναφορά έτους. Τελευταία ενημέρωση: 12 Σεπτεμβρίου 2026.</p>
         <p><strong style="color:var(--ink2)">Τεκμήριο αθωότητας:</strong> όπου δεν υπάρχει αμετάκλητη δικαστική καταδίκη, οι αναφορές αφορούν καταγγελλόμενες ή διερευνώμενες πράξεις και κανένα πρόσωπο δεν θεωρείται ένοχο. Οι αθωώσεις και οι απαλλαγές αναφέρονται ρητά. Ο «Δείκτης Ισορροπίας» αποτιμά τη λειτουργία θεσμών και πολιτικών με δημοσιευμένη μεθοδολογία — δεν αποτελεί κρίση ενοχής προσώπων.</p>
-        <p><strong style="color:var(--ink2)">Στήριξη:</strong> το Νομόσιο είναι δωρεάν για όλους και ζει από προαιρετικές εισφορές προς τον εκδότη. Όποιος κι αν στηρίζει, η ζυγαριά, τα τεκμήρια, το Ραντάρ και οι Κινήσεις μένουν ίδια για όλους. <a href="#stirixi">Στήριξε το Νομόσιο</a></p>
-        <p id="privacy"><strong style="color:var(--ink2)">Ιδιωτικότητα:</strong> υπεύθυνος για τα δεδομένα είναι ο εκδότης (στοιχεία πιο πάνω). Δεν έχουμε βάση δεδομένων με τους επισκέπτες και δεν ζητάμε λογαριασμό. Οι ψήφοι σου και η δήλωση ΠΑΡΩΝ μένουν μόνο στον browser σου και δεν στέλνονται πουθενά· τις σβήνεις καθαρίζοντας τα δεδομένα του ιστότοπου. Αν εγγραφείς στη λίστα email, η διεύθυνσή σου αποθηκεύεται στον πάροχο της λίστας, αποκλειστικά για να λαμβάνεις νέα του Νομόσιου, με σύνδεσμο διαγραφής σε κάθε μήνυμα. Για να λειτουργεί ο ιστότοπος, δεδομένα περνούν σε παρόχους: GitHub Pages (φιλοξενία, κρατά τη διεύθυνση IP σε αρχεία καταγραφής) και, μόνο αν στηρίξεις το Νομόσιο, Stripe (πληρωμές). Η σελίδα φορτώνει επίσης γραμματοσειρές από το Google Fonts, οπότε η διεύθυνση IP σου φτάνει στην Google. Κάποιοι από αυτούς τους παρόχους είναι εταιρείες των ΗΠΑ· η διαβίβαση γίνεται με τις διασφαλίσεις του ΓΚΠΔ. Για πρόσβαση, διόρθωση ή διαγραφή δεδομένων σου γράψε μας στο info@tradevessel.com. Μπορείς επίσης να κάνεις καταγγελία στην Αρχή Προστασίας Δεδομένων (www.dpa.gr).</p>
+        <p data-if="donate" hidden><strong style="color:var(--ink2)">Στήριξη:</strong> το Νομόσιο είναι δωρεάν για όλους και ζει από προαιρετικές εισφορές προς τον εκδότη. Όποιος κι αν στηρίζει, η ζυγαριά, τα τεκμήρια, το Ραντάρ και οι Κινήσεις μένουν ίδια για όλους. <a href="#stirixi">Στήριξε το Νομόσιο</a></p>
+        <p id="privacy"><strong style="color:var(--ink2)">Ιδιωτικότητα:</strong> υπεύθυνος για τα δεδομένα είναι ο εκδότης (στοιχεία πιο πάνω). Δεν έχουμε βάση δεδομένων με τους επισκέπτες και δεν ζητάμε λογαριασμό. Οι ψήφοι σου και η δήλωση ΠΑΡΩΝ μένουν μόνο στον browser σου και δεν στέλνονται πουθενά· τις σβήνεις καθαρίζοντας τα δεδομένα του ιστότοπου. <span data-if="newsletter" hidden>Αν εγγραφείς στη λίστα email, η διεύθυνσή σου αποθηκεύεται στον πάροχο της λίστας, αποκλειστικά για να λαμβάνεις νέα του Νομόσιου, με σύνδεσμο διαγραφής σε κάθε μήνυμα. </span>Για να λειτουργεί ο ιστότοπος, δεδομένα περνούν σε παρόχους: GitHub Pages (φιλοξενία, κρατά τη διεύθυνση IP σε αρχεία καταγραφής), Google Fonts (γραμματοσειρές, φτάνει σε αυτό η διεύθυνση IP σου)<span data-if="donate" hidden> και Stripe (πληρωμές, μόνο αν στηρίξεις το Νομόσιο)</span>. Κάποιοι από αυτούς τους παρόχους είναι εταιρείες των ΗΠΑ· η διαβίβαση γίνεται με τις διασφαλίσεις του ΓΚΠΔ. Για πρόσβαση, διόρθωση ή διαγραφή δεδομένων σου γράψε μας στο info@tradevessel.com. Μπορείς επίσης να κάνεις καταγγελία στην Αρχή Προστασίας Δεδομένων (www.dpa.gr).</p>
       </div>
       <div>
         <h4>Κύριες πηγές</h4>
@@ -1731,7 +1733,7 @@ const BALANCE = Math.round((pIdx.raw+pLaw.raw+pAcc.raw+pPol.raw)/(pIdx.max+pLaw.
   bn.textContent=(BALANCE>0?'+':'')+BALANCE;
   bn.style.color = BALANCE<0 ? 'var(--kata)' : 'var(--pro)';
   const lean = BALANCE<-5 ? 'κατά των πολιτών' : (BALANCE>5 ? 'υπέρ των πολιτών' : 'σε ισορροπία');
-  bt.innerHTML = `Με βάση <strong>${INDICES.length+LAWS.length+CASES.length+MONEY.filter(m=>m.counted).length+PARTIES.length+SCORED_POL.length} τεκμηριωμένα στοιχεία</strong> σε τέσσερις πυλώνες, η ζυγαριά γέρνει σήμερα <strong>${lean}</strong>. Δες πώς υπολογίζεται — και αμφισβήτησέ το με στοιχεία.`;
+  bt.innerHTML = `Με βάση <strong>${INDICES.length+LAWS.length+CASES.length+MONEY.filter(m=>m.counted).length+PARTIES.length+SCORED_POL.length} τεκμηριωμένα στοιχεία</strong> σε τέσσερις πυλώνες, η ζυγαριά γέρνει σήμερα <strong>${lean}</strong>. <a href="${document.getElementById('methodos')?'#methodos':'/methodos'}">Δες πώς υπολογίζεται</a> — και αμφισβήτησέ το με στοιχεία.`;
   const stage=document.querySelector('.scale-stage');
   if(stage) stage.setAttribute('aria-label',`Ζυγαριά της δικαιοσύνης που γέρνει ${lean} — δείκτης ισορροπίας ${BALANCE>0?'+':''}${BALANCE}`);
 })();
@@ -1777,7 +1779,7 @@ setHTML('scandalTimeline', CASES.map((c,i)=>`
         <ul>${c.facts.map(f=>`<li>${f}</li>`).join('')}</ul>
         <div class="srcs">Πηγές: ${c.src}</div>
       </details>
-      <div class="vote" data-vote="case-${i}">
+      <div class="vote" data-vote="${voteKey('case',c.name)}">
         <span class="q">Αποδόθηκε επαρκής λογοδοσία;</span>
         <button class="vbtn" data-v="yes">Ναι</button>
         <button class="vbtn" data-v="no">Όχι</button>
@@ -1793,7 +1795,7 @@ setHTML('lawGrid', LAWS.map((l,i)=>`
     <h3>${l.name}</h3>
     <p class="sum">${l.sum}</p>
     <details><summary>Γιατί αυτή η κατάταξη</summary><ul><li>${l.just}</li></ul></details>
-    <div class="vote" data-vote="law-${i}">
+    <div class="vote" data-vote="${voteKey('law',l.name)}">
       <span class="q">Εσένα σε ωφελεί αυτός ο νόμος;</span>
       <button class="vbtn" data-v="yes">Ναι</button>
       <button class="vbtn" data-v="no">Όχι</button>
@@ -1822,7 +1824,7 @@ function policyCard(p, i){
       <ul>${p.just?`<li><em>Γιατί αυτή η κατάταξη:</em> ${p.just}</li>`:''}${p.facts.map(f=>`<li>${f}</li>`).join('')}</ul>
       <div class="srcs">Πηγές: ${p.src}</div>
     </details>
-    ${scored?`<div class="vote" data-vote="pol-${i}">
+    ${scored?`<div class="vote" data-vote="${voteKey('pol',p.name)}">
       <span class="q">Σε ωφελεί αυτή η πολιτική;</span>
       <button class="vbtn" data-v="yes">Ναι</button>
       <button class="vbtn" data-v="no">Όχι</button>
@@ -1925,7 +1927,7 @@ const FAQ = [
   { q:'Γιατί υποθέσεις που τελείωσαν με αθώωση μετρούν αρνητικά;',
     a:'<p>Ο βαθμός εκεί δεν αφορά τα πρόσωπα — η αθωότητά τους είναι δικαστικά δεδομένη και το γράφουμε ρητά σε κάθε τέτοια κάρτα. Μετρά το θεσμικό αποτύπωμα της υπόθεσης: τα χρόνια δικαστικής εκκρεμότητας, το δημόσιο χρήμα, τον κλονισμό της εμπιστοσύνης — το κόστος που πλήρωσε η κοινωνία μέχρι να υπάρξει κρίση. Η σχετική ρήτρα υπάρχει γραμμένη στη «Μέθοδο».</p>' },
   { q:'Οι ψηφοφορίες της σελίδας μετρούν στη ζυγαριά;',
-    a:'<p>Όχι — και δεν θα μετρήσουν ποτέ. Η ζυγαριά κινείται αποκλειστικά από τεκμήρια. Οι ψήφοι σου μένουν μόνο στη συσκευή σου και δεν στέλνονται πουθενά. Είναι για να πάρεις θέση εσύ· δεν αποδεικνύουν την αλήθεια.</p><p>Όταν έρθουν οι επίσημες ψηφοφορίες στο nomosio.gr με λογαριασμούς (μία ψήφος ανά άνθρωπο), τα αποτελέσματα θα δημοσιεύονται δίπλα στα τεκμήρια — ποτέ στη θέση τους.</p>' },
+    a:'<p>Όχι — και δεν θα μετρήσουν ποτέ. Η ζυγαριά κινείται αποκλειστικά από τεκμήρια. Οι ψήφοι σου μένουν μόνο στη συσκευή σου και δεν στέλνονται πουθενά. Είναι για να πάρεις θέση εσύ· δεν αποδεικνύουν την αλήθεια.</p><p>Αν ανοίξουν κάποτε επίσημες ψηφοφορίες με λογαριασμούς (μία ψήφος ανά άνθρωπο), τα αποτελέσματα θα δημοσιεύονται δίπλα στα τεκμήρια — ποτέ στη θέση τους.</p>' },
   { q:'Μπορεί να κάνετε λάθος;',
     a:'<p>Ναι — και το σύστημα είναι στημένο ώστε το λάθος να μη ζει πολύ. Κάθε αριθμός δείχνει την πηγή του, ώστε να ελέγχεται από οποιονδήποτε. Κάθε δημοσίευση περνά πρώτα από διπλό αντίπαλο έλεγχο: έναν ελεγκτή γεγονότων που προσπαθεί να διαψεύσει τα στοιχεία μας και έναν «εχθρικό δικηγόρο» που ψάχνει άδικες διατυπώσεις. Ό,τι διορθώνεται, διορθώνεται δημόσια, με νέα ημερομηνία ενημέρωσης.</p><p>Αν βρεις λάθος, τεκμηρίωσέ το και θα διορθωθεί. Αυτό είναι το Νομόσιο — ελεγχόμαστε με τους ίδιους κανόνες που ελέγχουμε.</p>' },
   { q:'Το περιεχόμενο το γράφει τεχνητή νοημοσύνη;',
@@ -1933,7 +1935,7 @@ const FAQ = [
   { q:'Δεν εξοπλιζόμαστε για να προστατευτούμε; Γιατί τα εξοπλιστικά δεν μετρούν στα θετικά;',
     a:'<p>Γιατί η ζυγαριά βαθμολογεί μόνο ό,τι τεκμηριώνεται από τρίτους — και η άμυνα είναι η δυσκολότερη περίπτωση: το όφελός της (η αποτροπή) είναι υπαρκτό, αλλά δεν το μετράει εκ των προτέρων κανένας ανεξάρτητος δείκτης· το κόστος της όμως μετριέται (25+ δισ. €, εν μέρει με δανεισμό). Αν βάζαμε «υπέρ» επειδή θεωρούμε σωστή τη στρατηγική, θα κάναμε αυτό που υποσχεθήκαμε να μην κάνουμε ποτέ: γνώμη ντυμένη τεκμήριο. Και ο επόμενος θα απαιτούσε «κατά» επειδή εκείνος πιστεύει ότι τα χρήματα έπρεπε να πάνε αλλού.</p><p>Γι΄ αυτό τα εξοπλιστικά είναι «καταγραφή — χωρίς βαθμό»: δεν ρίχνουν τη ζυγαριά ούτε προς τα εκεί ούτε προς τα εδώ. Σου δίνουμε τα ποσά, τις παραδόσεις και τα επιχειρήματα και των δύο πλευρών (η ελληνογαλλική συμφωνία πέρασε 191–109 — σοβαρή πλειοψηφία, όχι όμως συναίνεση), και η στάθμιση ασφάλειας-κόστους ανήκει σε σένα. Αν αύριο υπάρξουν τεκμηριωμένες εκβάσεις — ανεξάρτητες αναλύσεις που αποδίδουν στην αποτρεπτική ισχύ μετρήσιμη αποκλιμάκωση, ή ευρεία διακομματική συναίνεση — ο βαθμός θα ανέβει. Η ζυγαριά δεν είναι φιλειρηνική ούτε φιλοπόλεμη· είναι φιλο-τεκμηριωμένη.</p>' },
   { q:'Εσείς τι κερδίζετε από αυτό;',
-    a:'<p>Η ζυγαριά και όλα τα τεκμήρια είναι — και θα μείνουν — δωρεάν και ανοιχτά, με άδεια ελεύθερης αναδημοσίευσης (CC BY). Το ίδιο και οι Έξυπνες Κινήσεις. Τη λειτουργία και την έρευνα τις χρηματοδοτούν προαιρετικές εισφορές όσων θέλουν να στηρίξουν, και δεν αγγίζουν ποτέ τη ζυγαριά.</p><p>Δεν πουλάμε διαφημίσεις. Δεν παίρνουμε κρατική διαφήμιση. Δεν χρωστάμε σε τράπεζες.</p>' },
+    a:'<p>Η ζυγαριά και όλα τα τεκμήρια είναι — και θα μείνουν — δωρεάν και ανοιχτά, με άδεια ελεύθερης αναδημοσίευσης (CC BY). Το ίδιο και οι Έξυπνες Κινήσεις. <span data-if="donate" hidden>Τη λειτουργία και την έρευνα τις χρηματοδοτούν προαιρετικές εισφορές όσων θέλουν να στηρίξουν, και δεν αγγίζουν ποτέ τη ζυγαριά.</span><span data-if="no-donate">Η στήριξη με προαιρετική εισφορά ανοίγει σύντομα· όσα δοθούν δεν θα αγγίζουν ποτέ τη ζυγαριά.</span></p><p>Δεν πουλάμε διαφημίσεις. Δεν παίρνουμε κρατική διαφήμιση. Δεν χρωστάμε σε τράπεζες.</p>' },
 ];
 setHTML('faqList', FAQ.map(f=>`
   <details><summary>${f.q}</summary><div class="a">${f.a}</div></details>`).join(''));
@@ -2348,8 +2350,37 @@ function lsGet(k){ try{ return localStorage.getItem(k); }catch(e){ return null; 
 function lsSet(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
 
 /* ---------- ΨΗΦΟΙ ---------- */
+/* Κάθε ψήφος δένεται με το όνομα του στοιχείου, όχι με τη θέση του στη λίστα:
+   όταν μπαίνει νέος νόμος ή υπόθεση, οι ψήφοι μένουν στο σωστό στοιχείο. */
+function voteKey(kind, name){
+  let h=5381;
+  for(const ch of String(name)) h=(Math.imul(h,33)^ch.codePointAt(0))>>>0;
+  return kind+'-'+h.toString(36);
+}
+/* Μεταφορά από τα παλιά κλειδιά θέσης (nomosio-v1-law-3 κ.λπ.), μία φορά ανά συσκευή.
+   Μεταφέρονται μόνο οι θέσεις που έδειχναν πάντα το ίδιο στοιχείο από την πρώτη έκδοση
+   (έλεγχος στο ιστορικό του git, 17.9.2026). Οι υπόλοιπες σβήνονται, γιατί δεν ξέρουμε
+   σε ποιο στοιχείο ανήκαν. Σβήνονται και κλειδιά της εποχής της Supabase. */
+const VOTE_SAFE={case:13, law:13, pol:6};
+(function(){
+  if(lsGet('nomosio-v2-votes')==='1') return;
+  const move=(oldKey,newKey)=>{
+    const val=lsGet('nomosio-v1-'+oldKey);
+    if((val==='yes'||val==='no')&&!lsGet('nomosio-v2-'+newKey)) lsSet('nomosio-v2-'+newKey,val);
+  };
+  CASES.slice(0,VOTE_SAFE.case).forEach((c,i)=>move('case-'+i, voteKey('case',c.name)));
+  LAWS.slice(0,VOTE_SAFE.law).forEach((l,i)=>move('law-'+i, voteKey('law',l.name)));
+  POLICIES.slice(0,VOTE_SAFE.pol).forEach((p,i)=>{ if(p.impact!==null) move('pol-'+i, voteKey('pol',p.name)); });
+  move('trust-gov','trust-gov');
+  try{
+    Object.keys(localStorage)
+      .filter(k=>/^nomosio-v1-(case-\d+|law-\d+|pol-\d+|trust-gov|email-.*)$|^nomosio-vid$|^nomosio-auth/.test(k))
+      .forEach(k=>localStorage.removeItem(k));
+  }catch(e){}
+  lsSet('nomosio-v2-votes','1');
+})();
 document.querySelectorAll('.vote').forEach(v=>{
-  const key='nomosio-v1-'+v.dataset.vote;
+  const key='nomosio-v2-'+v.dataset.vote;
   const btns=v.querySelectorAll('.vbtn');
   function paint(){
     const cur=lsGet(key);
@@ -2379,11 +2410,15 @@ document.querySelectorAll('.vote').forEach(v=>{
 })();
 
 /* ---------- ΣΤΗΡΙΞΗ ---------- */
-/* Ο σύνδεσμος Stripe Payment Link. Όσο μένει κενός, το κουμπί δεν εμφανίζεται. */
+/* Ο σύνδεσμος Stripe Payment Link. Όσο μένει κενός, δεν εμφανίζονται το κουμπί, οι σύνδεσμοι
+   «Στήριξε το Νομόσιο» και οι αναφορές στη Stripe (όλα όσα έχουν data-if="donate"). */
 const DONATE_URL='';
 (function(){
+  const on=/^https:\/\/[^\s"'<>]+$/.test(DONATE_URL);
+  document.querySelectorAll('[data-if="donate"]').forEach(e=>{ e.hidden=!on; });
+  document.querySelectorAll('[data-if="no-donate"]').forEach(e=>{ e.hidden=on; });
   const btn=document.getElementById('donateBtn'), soon=document.getElementById('donateSoon');
-  if(!btn||!/^https:\/\/[^\s"'<>]+$/.test(DONATE_URL)) return;
+  if(!on||!btn) return;
   btn.href=DONATE_URL; btn.hidden=false;
   if(soon) soon.hidden=true;
 })();
@@ -2394,6 +2429,7 @@ const DONATE_URL='';
    Όσο μένει κενή, η φόρμα δεν εμφανίζεται. */
 const NEWSLETTER_URL='';
 (function(){
+  document.querySelectorAll('[data-if="newsletter"]').forEach(e=>{ e.hidden=!NEWSLETTER_URL; });
   if(!NEWSLETTER_URL) return;
   document.querySelectorAll('.email-cap').forEach(form=>{
     const input=form.querySelector('input'), msg=form.querySelector('.ec-msg');
@@ -2446,6 +2482,8 @@ const NEWSLETTER_URL='';
     const b=e.target.closest('[data-f]'); if(!b) return;
     filter=b.dataset.f; lsSet('nomosio-mv-filter',filter);
     render();
+    const again=[...filters.querySelectorAll('[data-f]')].find(x=>x.dataset.f===filter);
+    if(again) again.focus();
   });
   render();
 })();

@@ -38,6 +38,25 @@ const JS = scriptM[1].trim();
 
 /* Αποτύπωμα περιεχομένου: ο browser κατεβάζει ξανά μόνο ό,τι όντως άλλαξε */
 const stamp = t => crypto.createHash('sha1').update(t).digest('hex').slice(0, 8);
+/* Τα τεκμήρια μπαίνουν έτοιμα στο HTML: τρέχουμε το ίδιο script της σελίδας σε ψεύτικο DOM,
+   ώστε να μην υπάρχουν δύο πρότυπα. Στον browser ξαναγράφεται το ίδιο ακριβώς markup. */
+const { prerender } = require('./tools/prerender.js');
+const PRE_IDS = ['pillars', 'indexTiles', 'scandalTimeline', 'lawGrid', 'moneyGrid', 'stGrid', 'zGrid',
+  'hGrid', 'thGrid', 'komGrid', 'radarGrid', 'councilGrid', 'instRows', 'faqList', 'balanceText', 'seatBar', 'seatLegend'];
+const PRE = prerender(JS, PRE_IDS);
+PRE.mvCount = MOVES.length === 1 ? '1 κίνηση' : MOVES.length + ' κινήσεις';
+
+/* Γεμίζει κάθε άδειο δοχείο με ό,τι θα έγραφε εκεί το script. */
+function prefill(html) {
+  let out = html;
+  for (const [id, inner] of Object.entries(PRE)) {
+    if (!inner || !String(inner).trim()) continue;
+    const re = new RegExp('(<([a-z]+)[^>]*\\bid="' + id + '"[^>]*>)\\s*(<\\/\\2>)');
+    out = out.replace(re, (m, open, tag, close) => open + inner + close);
+  }
+  return out;
+}
+
 const CSS_V = stamp(CSS);
 const JS_V = stamp(JS);
 
@@ -240,13 +259,6 @@ function fixLinks(html, onPage) {
   });
 }
 
-/* Οι σελίδες τεκμηρίων γράφονται από το JS· χωρίς JavaScript ο επισκέπτης πρέπει να το μάθει. */
-const SERVER_RENDERED = new Set(['kiniseis', 'symmetoxi', 'methodos', 'arxaioi']);
-function noscriptNote(p) {
-  if (SERVER_RENDERED.has(p.slug)) return '';
-  return '<noscript><p class="wrap" style="padding-top:18px;color:var(--ink2)">Για να δεις τα τεκμήρια χρειάζεται JavaScript. Οι <a href="/kiniseis">Έξυπνες Κινήσεις</a> διαβάζονται και χωρίς αυτό.</p></noscript>\n';
-}
-
 function page(p) {
   const onPage = new Set(p.sections.concat(['privacy', 'top']));
   const body = p.sections.map(sec => {
@@ -257,6 +269,7 @@ function page(p) {
     return SECTIONS[sec] || '';
   }).filter(Boolean).join('\n\n' + MEANDER + '\n\n');
 
+  const filled = prefill(body);
   const isExhibit = p.slug.indexOf('tekmiria/') === 0;
   const pager = isExhibit ? exhibitPager(p.slug.split('/')[1]) : '';
   const canonical = 'https://nomosio.gr/' + p.slug;
@@ -281,7 +294,7 @@ function page(p) {
 <link rel="stylesheet" href="/assets/app.css?v=${CSS_V}">
 <noscript><style>
   .reveal{opacity:1;transform:none}
-  #toTop,#pledgeBtn,#pledgeNote,.pan-btns,.nav-toggle{display:none!important}
+  #toTop,#pledgeBtn,#pledgeNote,.pan-btns,.nav-toggle,.vote,.mv-filters{display:none!important}
 </style></noscript>
 </head>
 <body>
@@ -291,7 +304,7 @@ ${fixLinks(nav(p.slug), onPage)}
 <button id="toTop" aria-label="Επιστροφή στην κορυφή">↑</button>
 
 <main id="main">
-${/<h1[\s>]/.test(body) ? '' : `<h1 class="sr-only">${p.title.replace(/ — Νομόσιο$/, '')}</h1>\n`}${noscriptNote(p)}${fixLinks(body, onPage)}
+${/<h1[\s>]/.test(filled) ? '' : `<h1 class="sr-only">${p.title.replace(/ — Νομόσιο$/, '')}</h1>\n`}${fixLinks(filled, onPage)}
 
 ${pager}
 </main>

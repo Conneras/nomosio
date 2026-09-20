@@ -114,7 +114,19 @@ function prerender(js, expectedIds) {
     const why = error ? `\nΤο script σταμάτησε: ${error.message}` : '';
     throw new Error(`Η προ-απόδοση δεν έπιασε: ${missing.join(', ')}${why}`);
   }
-  return captured;
+  /* Τα const του script δεν γίνονται ιδιότητες του context· τα διαβάζουμε με δεύτερο script
+     στο ίδιο περιβάλλον, όπου οι δηλώσεις του πρώτου είναι ορατές. */
+  let globals = {};
+  try {
+    globals = vm.runInContext(
+      '({ LAWS: typeof LAWS !== "undefined" ? LAWS : null,' +
+      '   CASES: typeof CASES !== "undefined" ? CASES : null,' +
+      '   POLICIES: typeof POLICIES !== "undefined" ? POLICIES : null })',
+      win
+    );
+  } catch (e) { globals = {}; }
+
+  return { captured, globals };
 }
 
 module.exports = { prerender };

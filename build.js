@@ -43,7 +43,16 @@ const stamp = t => crypto.createHash('sha1').update(t).digest('hex').slice(0, 8)
 const { prerender } = require('./tools/prerender.js');
 const PRE_IDS = ['pillars', 'indexTiles', 'scandalTimeline', 'lawGrid', 'moneyGrid', 'stGrid', 'zGrid',
   'hGrid', 'thGrid', 'komGrid', 'radarGrid', 'councilGrid', 'instRows', 'faqList', 'balanceText', 'seatBar', 'seatLegend'];
-const PRE = prerender(JS, PRE_IDS);
+const { captured: PRE, globals: PRE_GLOBALS } = prerender(JS, PRE_IDS);
+
+/* Ο σύνδεσμος «δες το στο Νομόσιο» δείχνει στον ίδιο τον νόμο, όταν είναι σίγουρο ποιος είναι:
+   ο αριθμός νόμου πρέπει να ταιριάζει με έναν και μόνο από τους νόμους της σελίδας. */
+const LAW_NUMS = (PRE_GLOBALS.LAWS || []).map((l, i) => ({ i, num: String(l.num || '').split('·')[0].trim() }));
+function refAnchor(ref, law) {
+  if (ref !== '/tekmiria/nomoi' || !law) return ref;
+  const hits = LAW_NUMS.filter(l => l.num && law.indexOf(l.num) >= 0);
+  return hits.length === 1 ? ref + '#law-' + hits[0].i : ref;
+}
 PRE.mvCount = MOVES.length === 1 ? '1 κίνηση' : MOVES.length + ' κινήσεις';
 
 /* Γεμίζει κάθε άδειο δοχείο με ό,τι θα έγραφε εκεί το script. */
@@ -226,7 +235,7 @@ const localOnly = u => /^\/[a-z0-9\/#-]*$/.test(u || '') ? u : '';
 const day = d => d ? new Date(d).toLocaleDateString('el-GR', { day: 'numeric', month: 'long', year: 'numeric' }) : '';
 
 function moveCard(m) {
-  const act = httpsOnly(m.actionUrl), dl = httpsOnly(m.deadline && m.deadline.sourceUrl), ref = localOnly(m.ref);
+  const act = httpsOnly(m.actionUrl), dl = httpsOnly(m.deadline && m.deadline.sourceUrl), ref = refAnchor(localOnly(m.ref), m.law);
   const who = m.who || [];
   return `<article class="card mv-card" id="mv-${esc(m.id)}" data-who="${esc(who.join('|'))}">
         <div class="meta"><span class="chip">${esc(THEMES[m.theme] || '')}</span></div>

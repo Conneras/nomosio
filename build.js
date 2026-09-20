@@ -240,6 +240,13 @@ function fixLinks(html, onPage) {
   });
 }
 
+/* Οι σελίδες τεκμηρίων γράφονται από το JS· χωρίς JavaScript ο επισκέπτης πρέπει να το μάθει. */
+const SERVER_RENDERED = new Set(['kiniseis', 'symmetoxi', 'methodos', 'arxaioi']);
+function noscriptNote(p) {
+  if (SERVER_RENDERED.has(p.slug)) return '';
+  return '<noscript><p class="wrap" style="padding-top:18px;color:var(--ink2)">Για να δεις τα τεκμήρια χρειάζεται JavaScript. Οι <a href="/kiniseis">Έξυπνες Κινήσεις</a> διαβάζονται και χωρίς αυτό.</p></noscript>\n';
+}
+
 function page(p) {
   const onPage = new Set(p.sections.concat(['privacy', 'top']));
   const body = p.sections.map(sec => {
@@ -272,15 +279,22 @@ function page(p) {
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=GFS+Didot&family=Literata:opsz,wght@7..72,400;7..72,600;7..72,700&family=Source+Sans+3:wght@400;600;700&display=swap">
 <link rel="stylesheet" href="/assets/app.css?v=${CSS_V}">
+<noscript><style>
+  .reveal{opacity:1;transform:none}
+  #toTop,#pledgeBtn,#pledgeNote,.pan-btns,.nav-toggle{display:none!important}
+</style></noscript>
 </head>
 <body>
+<a class="skip" href="#main">Στο περιεχόμενο</a>
 ${fixLinks(nav(p.slug), onPage)}
 
 <button id="toTop" aria-label="Επιστροφή στην κορυφή">↑</button>
 
-${fixLinks(body, onPage)}
+<main id="main">
+${/<h1[\s>]/.test(body) ? '' : `<h1 class="sr-only">${p.title.replace(/ — Νομόσιο$/, '')}</h1>\n`}${noscriptNote(p)}${fixLinks(body, onPage)}
 
 ${pager}
+</main>
 
 ${fixLinks(FOOTER, onPage)}
 

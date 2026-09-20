@@ -19,6 +19,9 @@
   --pro:#5596D6;
   --kata:#D0705A;
   --mixed:#8E96A0;
+  --pro-text:#79AEE2;
+  --kata-text:#E08A75;
+  --mixed-text:#A7AEB6;
   --pro-soft:rgba(85,150,214,.13);
   --kata-soft:rgba(208,112,90,.13);
   --mixed-soft:rgba(142,150,160,.13);
@@ -42,6 +45,9 @@
     --pro:#2E6FA3;
     --kata:#A6492F;
     --mixed:#6B7076;
+    --pro-text:#265D8A;
+    --kata-text:#8E3D27;
+    --mixed-text:#5B6066;
     --pro-soft:rgba(46,111,163,.10);
     --kata-soft:rgba(166,73,47,.10);
     --mixed-soft:rgba(107,112,118,.12);
@@ -51,6 +57,9 @@
   }
 }
 :root[data-theme="light"]{
+  --pro-text:#265D8A;
+  --kata-text:#8E3D27;
+  --mixed-text:#5B6066;
   --ground:#F3EFE7;
   --surface:#FBF9F3;
   --surface2:#FFFFFF;
@@ -145,8 +154,9 @@ nav.open .nt-icon::after{transform:translateY(-5px) rotate(-45deg)}
 @media(max-width:900px){
   .nav-inner{overflow:visible}
   .nav-toggle{display:inline-flex}
-  nav .links{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;margin:0;padding:8px 14px 28px;background:var(--ground);border-bottom:1px solid var(--line);box-shadow:var(--shadow);max-height:calc(100dvh - 62px);overflow-y:auto}
-  nav.open .links{display:flex}
+  nav:not(.js-nav) .links{flex-wrap:wrap;margin-left:0;gap:2px 10px}
+  nav.js-nav .links{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;margin:0;padding:8px 14px 28px;background:var(--ground);border-bottom:1px solid var(--line);box-shadow:var(--shadow);max-height:calc(100dvh - 62px);overflow-y:auto}
+  nav.js-nav.open .links{display:flex}
   nav .links a{font-size:1.12rem;padding:14px 10px;border-radius:0;border-bottom:1px solid var(--line-soft);color:var(--ink)}
   nav .links a:last-child{border-bottom:none}
   nav .links a::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--bronze);margin-right:12px;vertical-align:middle;opacity:.8}
@@ -202,9 +212,9 @@ nav.open .nt-icon::after{transform:translateY(-5px) rotate(-45deg)}
   font-family:'Source Sans 3',sans-serif;font-size:.76rem;font-weight:700;letter-spacing:.06em;
   border-radius:4px;padding:4px 10px;display:inline-block;
 }
-.impact.pro{color:var(--pro);background:var(--pro-soft);border:1px solid var(--pro)}
-.impact.kata{color:var(--kata);background:var(--kata-soft);border:1px solid var(--kata)}
-.impact.mixed{color:var(--mixed);background:var(--mixed-soft);border:1px solid var(--mixed)}
+.impact.pro{color:var(--pro-text);background:var(--pro-soft);border:1px solid var(--pro)}
+.impact.kata{color:var(--kata-text);background:var(--kata-soft);border:1px solid var(--kata)}
+.impact.mixed{color:var(--mixed-text);background:var(--mixed-soft);border:1px solid var(--mixed)}
 .wchip{font-family:'Source Sans 3',sans-serif;font-size:.76rem;color:var(--ink3)}
 .wchip b{color:var(--ink2)}
 
@@ -220,7 +230,7 @@ nav.open .nt-icon::after{transform:translateY(-5px) rotate(-45deg)}
 .card details{border-top:1px dashed var(--line);padding-top:10px}
 .card summary{
   cursor:pointer;font-family:'Source Sans 3',sans-serif;font-size:.83rem;font-weight:600;color:var(--ink3);
-  list-style:none;display:flex;align-items:center;gap:8px;
+  list-style:none;display:flex;align-items:center;gap:8px;min-height:44px;padding:4px 0;
 }
 .card summary::-webkit-details-marker{display:none}
 .card summary::before{content:'+';font-size:1rem;color:var(--bronze);width:14px}
@@ -345,7 +355,7 @@ nav.open .nt-icon::after{transform:translateY(-5px) rotate(-45deg)}
 .roadmap{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:36px}
 @media(max-width:900px){.roadmap{grid-template-columns:1fr}}
 .rm{background:var(--ground);border:1px solid var(--line);border-radius:8px;padding:20px 22px}
-.rm .r-k{font-family:'GFS Didot',serif;color:var(--bronze);font-size:1.2rem;margin-bottom:6px}
+.rm .r-k{font-family:'GFS Didot',serif;color:var(--bronze-ink);font-size:1.2rem;margin-bottom:6px}
 .rm p{font-size:.9rem;color:var(--ink2);margin:0}
 .rm h3{font-size:1.05rem;margin-bottom:6px}
 
@@ -567,6 +577,11 @@ footer{font-size:.95rem}
 .mv-go{align-self:flex-start;text-decoration:none;border-color:var(--bronze);color:var(--bronze-ink);min-height:44px;display:inline-flex;align-items:center}
 .mv-card .srcs a{color:var(--bronze-ink)}
 
+/* ============ ΠΡΟΣΒΑΣΙΜΟΤΗΤΑ ============ */
+.sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.skip{position:absolute;left:-9999px;top:0;z-index:200;background:var(--surface);color:var(--ink);border:1px solid var(--bronze);border-radius:0 0 6px 0;padding:12px 18px;font:700 1rem 'Source Sans 3','Segoe UI',sans-serif;text-decoration:none}
+.skip:focus{left:0}
+
 /* ============ MOTION ============ */
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
 .reveal.in{opacity:1;transform:none}
@@ -576,6 +591,10 @@ footer{font-size:.95rem}
   .vig-float,.flame,.halo,.owl-eye,.sun,.wavefront,.waveback,.coin-wob,.reveal.in .strip-bar span{animation:none}
 }
 </style>
+<noscript><style>
+  .reveal{opacity:1;transform:none}
+  #toTop,#pledgeBtn,#pledgeNote,.pan-btns,.nav-toggle{display:none!important}
+</style></noscript>
 
 <nav aria-label="Κύρια πλοήγηση">
   <div class="nav-inner">
@@ -602,7 +621,7 @@ footer{font-size:.95rem}
   </div>
 </nav>
 
-<button id="toTop" aria-label="Επιστροφή στην κορυφή">↑</button>
+<button id="toTop" aria-label="Επιστροφή στην κορυφή" tabindex="-1" inert>↑</button>
 
 <!-- ============ HERO ============ -->
 <header class="hero" id="top">
@@ -621,8 +640,8 @@ footer{font-size:.95rem}
     </div>
 
     <div class="pan-btns reveal">
-      <button class="vbtn" data-side="pro">Τι ζυγίζει υπέρ;</button>
-      <button class="vbtn" data-side="kata">Τι ζυγίζει κατά;</button>
+      <button class="vbtn" data-side="pro" aria-expanded="false" aria-controls="panPanel">Τι ζυγίζει υπέρ;</button>
+      <button class="vbtn" data-side="kata" aria-expanded="false" aria-controls="panPanel">Τι ζυγίζει κατά;</button>
     </div>
     <div class="pan-panel" id="panPanel" hidden>
       <div class="pp-head"><span id="ppTitle"></span><button class="pp-close" id="ppClose" aria-label="Κλείσιμο">×</button></div>
@@ -656,7 +675,7 @@ footer{font-size:.95rem}
     <div class="section-head">
       <h2>Πώς ζυγίζουμε — τίποτα κρυφό, όλα με πηγή</h2>
     </div>
-    <p class="lead">Ο Αριστοτέλης έδωσε το κριτήριο πριν από 24 αιώνες: ορθό είναι το πολίτευμα που υπηρετεί το κοινό συμφέρον· εκτροπή, αυτό που υπηρετεί μόνο το συμφέρον των αρχόντων. Η ζυγαριά του Νομόσιου εφαρμόζει ακριβώς αυτό το κριτήριο σε τέσσερις πυλώνες τεκμηρίων. Κάθε στοιχείο παίρνει βαθμό από −10 (σε βάρος των πολιτών) έως +10 (υπέρ των πολιτών), με βάρος ανά πυλώνα, και όλα εμφανίζονται αναλυτικά στις ενότητες που ακολουθούν — με τις πηγές τους.</p>
+    <p class="lead">Ο Αριστοτέλης έδωσε το κριτήριο πριν από 24 αιώνες: ορθό είναι το πολίτευμα που υπηρετεί το κοινό συμφέρον· εκτροπή, αυτό που υπηρετεί μόνο το συμφέρον των αρχόντων. Η ζυγαριά του Νομόσιου εφαρμόζει ακριβώς αυτό το κριτήριο σε τέσσερις πυλώνες τεκμηρίων. Κάθε στοιχείο παίρνει βαθμό από −10 (σε βάρος των πολιτών) έως +10 (υπέρ των πολιτών), με βάρος ανά πυλώνα. Κάθε στοιχείο ξεχωριστά, με τις πηγές του, βρίσκεται στα τεκμήρια.</p>
 
     <div style="max-width:640px;margin-top:30px" class="reveal">
       <blockquote class="aq" style="margin:0">
@@ -1040,7 +1059,7 @@ footer{font-size:.95rem}
     <div class="section-head">
       <h2>Συχνές Ερωτήσεις — πώς κρίνουμε, και γιατί να μας πιστέψεις</h2>
     </div>
-    <p class="lead">Η ζυγαριά θα αμφισβητηθεί — και έτσι πρέπει. Εδώ είναι οι απαντήσεις στις ερωτήσεις που θα κάνει το 99% των ανθρώπων, με τα ίδια τεκμήρια που χρησιμοποιούμε παντού. Αν έχεις ερώτηση που δεν απαντιέται εδώ, στείλ' τη μας με στοιχεία.</p>
+    <p class="lead">Η ζυγαριά θα αμφισβητηθεί — και έτσι πρέπει. Εδώ είναι οι απαντήσεις στις ερωτήσεις που θα κάνει το 99% των ανθρώπων, με τα ίδια τεκμήρια που χρησιμοποιούμε παντού. Αν έχεις ερώτηση που δεν απαντιέται εδώ, <a href="mailto:info@tradevessel.com">στείλ' τη μας</a> με στοιχεία.</p>
     <div class="faq" id="faqList"></div>
   </div>
 </section>
@@ -1178,10 +1197,10 @@ footer{font-size:.95rem}
       <div>
         <div class="brand">ΝΟΜΟΣΙΟ</div>
         <h4>Διαφάνεια &amp; όροι</h4>
-        <p><strong style="color:var(--ink2)">Ανεξάρτητος, μη κομματικός ιστότοπος.</strong> Δεν ανήκει σε κόμμα και δεν χρηματοδοτείται από κόμμα. Εκδότης: TRADE VESSEL ΙΚΕ, Άγιος Γεώργιος Θήρας, ΑΦΜ 800720400, info@tradevessel.com. Όλα τα στοιχεία προέρχονται από δημόσιες, τεκμηριωμένες πηγές (EPPO, Ευρωπαϊκή Επιτροπή, Ελεγκτικό Συνέδριο, ΕΔΔΑ, Transparency International, RSF, World Justice Project, Ευρωβαρόμετρο, ΟΟΣΑ, δικαστικές αποφάσεις και διεθνή ειδησεογραφικά πρακτορεία) με αναφορά έτους. Τελευταία ενημέρωση: 12 Σεπτεμβρίου 2026.</p>
+        <p><strong style="color:var(--ink2)">Ανεξάρτητος, μη κομματικός ιστότοπος.</strong> Δεν ανήκει σε κόμμα και δεν χρηματοδοτείται από κόμμα. Εκδότης: TRADE VESSEL ΙΚΕ, Άγιος Γεώργιος Θήρας, ΑΦΜ 800720400, <a href="mailto:info@tradevessel.com">info@tradevessel.com</a>. Όλα τα στοιχεία προέρχονται από δημόσιες, τεκμηριωμένες πηγές (EPPO, Ευρωπαϊκή Επιτροπή, Ελεγκτικό Συνέδριο, ΕΔΔΑ, Transparency International, RSF, World Justice Project, Ευρωβαρόμετρο, ΟΟΣΑ, δικαστικές αποφάσεις και διεθνή ειδησεογραφικά πρακτορεία) με αναφορά έτους. Τελευταία ενημέρωση: 12 Σεπτεμβρίου 2026.</p>
         <p><strong style="color:var(--ink2)">Τεκμήριο αθωότητας:</strong> όπου δεν υπάρχει αμετάκλητη δικαστική καταδίκη, οι αναφορές αφορούν καταγγελλόμενες ή διερευνώμενες πράξεις και κανένα πρόσωπο δεν θεωρείται ένοχο. Οι αθωώσεις και οι απαλλαγές αναφέρονται ρητά. Ο «Δείκτης Ισορροπίας» αποτιμά τη λειτουργία θεσμών και πολιτικών με δημοσιευμένη μεθοδολογία — δεν αποτελεί κρίση ενοχής προσώπων.</p>
         <p data-if="donate" hidden><strong style="color:var(--ink2)">Στήριξη:</strong> το Νομόσιο είναι δωρεάν για όλους και ζει από προαιρετικές εισφορές προς τον εκδότη. Όποιος κι αν στηρίζει, η ζυγαριά, τα τεκμήρια, το Ραντάρ και οι Κινήσεις μένουν ίδια για όλους. <a href="#stirixi">Στήριξε το Νομόσιο</a></p>
-        <p id="privacy"><strong style="color:var(--ink2)">Ιδιωτικότητα:</strong> υπεύθυνος για τα δεδομένα είναι ο εκδότης (στοιχεία πιο πάνω). Δεν έχουμε βάση δεδομένων με τους επισκέπτες και δεν ζητάμε λογαριασμό. Οι ψήφοι σου και η δήλωση ΠΑΡΩΝ μένουν μόνο στον browser σου και δεν στέλνονται πουθενά· τις σβήνεις καθαρίζοντας τα δεδομένα του ιστότοπου. <span data-if="newsletter" hidden>Αν εγγραφείς στη λίστα email, η διεύθυνσή σου αποθηκεύεται στον πάροχο της λίστας, αποκλειστικά για να λαμβάνεις νέα του Νομόσιου, με σύνδεσμο διαγραφής σε κάθε μήνυμα. </span>Για να λειτουργεί ο ιστότοπος, δεδομένα περνούν σε παρόχους: GitHub Pages (φιλοξενία, κρατά τη διεύθυνση IP σε αρχεία καταγραφής), Google Fonts (γραμματοσειρές, φτάνει σε αυτό η διεύθυνση IP σου)<span data-if="donate" hidden> και Stripe (πληρωμές, μόνο αν στηρίξεις το Νομόσιο)</span>. Κάποιοι από αυτούς τους παρόχους είναι εταιρείες των ΗΠΑ· η διαβίβαση γίνεται με τις διασφαλίσεις του ΓΚΠΔ. Για πρόσβαση, διόρθωση ή διαγραφή δεδομένων σου γράψε μας στο info@tradevessel.com. Μπορείς επίσης να κάνεις καταγγελία στην Αρχή Προστασίας Δεδομένων (www.dpa.gr).</p>
+        <p id="privacy"><strong style="color:var(--ink2)">Ιδιωτικότητα:</strong> υπεύθυνος για τα δεδομένα είναι ο εκδότης (στοιχεία πιο πάνω). Δεν έχουμε βάση δεδομένων με τους επισκέπτες και δεν ζητάμε λογαριασμό. Οι ψήφοι σου και η δήλωση ΠΑΡΩΝ μένουν μόνο στον browser σου και δεν στέλνονται πουθενά· τις σβήνεις καθαρίζοντας τα δεδομένα του ιστότοπου. <span data-if="newsletter" hidden>Αν εγγραφείς στη λίστα email, η διεύθυνσή σου αποθηκεύεται στον πάροχο της λίστας, αποκλειστικά για να λαμβάνεις νέα του Νομόσιου, με σύνδεσμο διαγραφής σε κάθε μήνυμα. </span>Για να λειτουργεί ο ιστότοπος, δεδομένα περνούν σε παρόχους: GitHub Pages (φιλοξενία, κρατά τη διεύθυνση IP σε αρχεία καταγραφής), Google Fonts (γραμματοσειρές, φτάνει σε αυτό η διεύθυνση IP σου)<span data-if="donate" hidden> και Stripe (πληρωμές, μόνο αν στηρίξεις το Νομόσιο)</span>. Κάποιοι από αυτούς τους παρόχους είναι εταιρείες των ΗΠΑ· η διαβίβαση γίνεται με τις διασφαλίσεις του ΓΚΠΔ. Για πρόσβαση, διόρθωση ή διαγραφή δεδομένων σου γράψε μας στο <a href="mailto:info@tradevessel.com">info@tradevessel.com</a>. Μπορείς επίσης να κάνεις καταγγελία στην Αρχή Προστασίας Δεδομένων (www.dpa.gr).</p>
       </div>
       <div>
         <h4>Κύριες πηγές</h4>
@@ -2245,13 +2264,15 @@ function gotoEvidence(tid){
     title.textContent= side==='pro' ? 'Τα 5 βαρύτερα τεκμήρια ΥΠΕΡ των πολιτών' : 'Τα 5 βαρύτερα τεκμήρια ΚΑΤΑ των πολιτών';
     panel.className='pan-panel '+side;
     panel.hidden=false;
+    document.querySelectorAll('.pan-btns .vbtn').forEach(b=>b.setAttribute('aria-expanded', String(b.dataset.side===side)));
     list.innerHTML=items.map(e=>`<button class="pp-item" data-t="${e.t}"><span class="pp-name">${e.n}</span><span class="pp-score num">${e.s>0?'+':''}${e.s}</span><span class="pp-bar"><i style="width:${Math.abs(e.s)*10}%"></i></span></button>`).join('');
     list.querySelectorAll('.pp-item').forEach(b=>b.addEventListener('click',()=>{ panel.hidden=true; gotoEvidence(b.dataset.t); }));
     panel.scrollIntoView({block:'nearest',behavior:'smooth'});
   };
   document.querySelectorAll('.pan-btns .vbtn').forEach(b=>b.addEventListener('click',()=>window.__panShow(b.dataset.side)));
-  const ppc=document.getElementById('ppClose'); if(ppc) ppc.addEventListener('click',()=>{ panel.hidden=true; });
-  document.addEventListener('keydown',e=>{ if(e.key==='Escape') panel.hidden=true; });
+  const closePanel=()=>{ panel.hidden=true; document.querySelectorAll('.pan-btns .vbtn').forEach(b=>b.setAttribute('aria-expanded','false')); };
+  const ppc=document.getElementById('ppClose'); if(ppc) ppc.addEventListener('click',closePanel);
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape') closePanel(); });
 
 })();
 
@@ -2278,6 +2299,7 @@ function gotoEvidence(tid){
   if(!nav||!inner||!links) return;
   links.id='navLinks';
   const btn=document.createElement('button');
+  nav.classList.add('js-nav');
   btn.type='button'; btn.className='nav-toggle';
   btn.setAttribute('aria-expanded','false'); btn.setAttribute('aria-controls','navLinks');
   btn.innerHTML='<span class="nt-icon" aria-hidden="true"><i></i></span><span class="nt-txt">Μενού</span>';
@@ -2347,7 +2369,10 @@ function gotoEvidence(tid){
 (function(){
   const b=document.getElementById('toTop');
   if(!b) return;
-  window.addEventListener('scroll',()=>{ b.classList.toggle('show', scrollY>900); },{passive:true});
+  /* Όσο δεν φαίνεται, δεν το πιάνει το Tab και δεν το διαβάζει ο αναγνώστης οθόνης. */
+  const paint=()=>{ const on=scrollY>900; b.classList.toggle('show', on); b.inert=!on; b.tabIndex=on?0:-1; };
+  window.addEventListener('scroll',paint,{passive:true});
+  paint();
   b.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
 })();
 

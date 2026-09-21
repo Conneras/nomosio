@@ -569,6 +569,19 @@ footer{font-size:.95rem}
 .mv-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
 @media(max-width:900px){.mv-grid{grid-template-columns:1fr}}
 .mv-sep{grid-column:1/-1;margin:12px 0 -4px;padding-top:18px;border-top:1px solid var(--line);font:700 1.05rem 'Source Sans 3','Segoe UI',sans-serif;color:var(--ink2)}
+.mv-grid:has(.mv-more[open]){align-items:start}
+.mv-bar{display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px;margin:6px 0 16px}
+.mv-bar .mv-count{margin:0}
+.mv-all{font:600 .92rem 'Source Sans 3','Segoe UI',sans-serif;border:0;background:none;color:var(--bronze-ink);text-decoration:underline;text-underline-offset:3px;cursor:pointer;min-height:44px;padding:0 4px}
+.mv-all:hover{color:var(--ink)}
+.mv-dl-tag{font-weight:700;color:var(--bronze-ink)}
+.mv-card .mv-more>summary{font-size:.98rem;font-weight:700;color:var(--bronze-ink)}
+.mv-card .mv-more>summary:hover{color:var(--ink)}
+.mv-card details:not([open])>summary::before{content:'+'}
+.mv-card details[open]>summary::before{content:'−'}
+.mv-more .mv-s-open,.mv-more[open]>summary .mv-s-closed{display:none}
+.mv-more[open]>summary .mv-s-open{display:inline}
+.mv-body{display:flex;flex-direction:column;gap:12px;padding:6px 0 4px}
 .mv-card h3{font-size:1.28rem}
 .mv-who{font-family:'Source Sans 3',sans-serif;font-size:.95rem;color:var(--ink3);margin:0}
 .mv-steps{margin:2px 0 0;padding-left:24px;color:var(--ink);font-size:1.02rem;display:grid;gap:8px}
@@ -1191,7 +1204,10 @@ footer{font-size:.95rem}
     <p class="mv-disclaimer">Είναι γενική ενημέρωση για όλους, όχι νομική, φορολογική ή ιατρική συμβουλή. Για τη δική σου περίπτωση, ρώτα τον λογιστή, τον δικηγόρο ή τον γιατρό σου.</p>
 
     <div class="mv-filters" id="mvFilters" role="group" aria-label="Ποιον αφορά"></div>
-    <p class="mv-count" id="mvCount" role="status" aria-live="polite"></p>
+    <div class="mv-bar">
+      <p class="mv-count" id="mvCount" role="status" aria-live="polite"></p>
+      <button type="button" class="mv-all" id="mvAll" aria-expanded="false" hidden>Άνοιξε όλες τις κάρτες</button>
+    </div>
     <div class="mv-grid" id="mvGrid"><!-- ΚΙΝΗΣΕΙΣ: τις γράφει το build από το data/moves.json --></div>
 
     <p class="mv-note" style="margin-top:34px" data-if="donate" hidden>Σε βοήθησε μια κίνηση; <a href="#stirixi">Στήριξε το Νομόσιο</a>, για να γράφουμε κι άλλες.</p>
@@ -2525,6 +2541,22 @@ const NEWSLETTER_URL='';
     if(again) again.focus();
   });
   render();
+
+  // Οι κάρτες ανοίγουν με <details>, άρα δουλεύουν και χωρίς JavaScript. Εδώ μόνο οι ευκολίες.
+  const mores=cards.map(c=>c.querySelector('.mv-more')).filter(Boolean), allBtn=document.getElementById('mvAll');
+  if(allBtn&&mores.length){
+    const sync=()=>{ const open=mores.every(d=>d.open); allBtn.textContent=open?'Κλείσε όλες τις κάρτες':'Άνοιξε όλες τις κάρτες'; allBtn.setAttribute('aria-expanded',String(open)); };
+    allBtn.hidden=false;
+    allBtn.addEventListener('click',()=>{ const open=!mores.every(d=>d.open); mores.forEach(d=>{ d.open=open; }); sync(); });
+    mores.forEach(d=>d.addEventListener('toggle',sync));
+  }
+  function openFromHash(){
+    const id=decodeURIComponent(location.hash.slice(1)); if(id.indexOf('mv-')!==0) return;
+    const card=document.getElementById(id), d=card&&card.querySelector('.mv-more'); if(!d) return;
+    if(card.hidden){ filter=''; lsSet('nomosio-mv-filter',''); render(); }
+    d.open=true; card.scrollIntoView({block:'start'});
+  }
+  window.addEventListener('hashchange',openFromHash); openFromHash();
 })();
 
 /* ---------- ΜΑΙΑΝΔΡΟΣ ---------- */

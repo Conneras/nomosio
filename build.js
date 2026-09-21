@@ -238,10 +238,12 @@ function moveCard(m) {
   const act = httpsOnly(m.actionUrl), dl = httpsOnly(m.deadline && m.deadline.sourceUrl), ref = refAnchor(localOnly(m.ref), m.law);
   const who = m.who || [];
   return `<article class="card mv-card" id="mv-${esc(m.id)}" data-who="${esc(who.join('|'))}">
-        <div class="meta"><span class="chip">${esc(THEMES[m.theme] || '')}</span></div>
+        <div class="meta"><span class="chip">${esc(THEMES[m.theme] || '')}</span>${m.deadline && m.deadline.text ? '<span class="mv-dl-tag">Έχει προθεσμία</span>' : ''}</div>
         <h3>${esc(m.title)}</h3>
         <p class="mv-who">Αφορά: ${who.map(esc).join(', ')}</p>
         <p class="sum">${esc(m.benefit)}</p>
+        <details class="mv-more"><summary><span class="mv-s-closed">Δες τα βήματα και τον επίσημο σύνδεσμο</span><span class="mv-s-open">Κλείσε τα βήματα</span></summary>
+        <div class="mv-body">
         <ol class="mv-steps">${(m.steps || []).map(s => `<li>${esc(s)}</li>`).join('')}</ol>
         ${m.watchOut ? `<p class="mv-watch"><b>Πρόσεξε:</b> ${esc(m.watchOut)}</p>` : ''}
         ${m.deadline && m.deadline.text ? `<p class="mv-deadline"><b>Προθεσμία:</b> ${esc(m.deadline.text)}${dl ? ` <a href="${esc(dl)}" target="_blank" rel="noopener">(πηγή)</a>` : ''}</p>` : ''}
@@ -250,6 +252,7 @@ function moveCard(m) {
           const u = httpsOnly(s.url);
           return `<li>${u ? `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(s.title)}</a>` : esc(s.title)}: ${esc(s.confirms)}</li>`;
         }).join('')}</ul></details>
+        </div></details>
         <div class="srcs">Βασίζεται σε: ${esc(m.law || '')}${ref ? ` · <a href="${esc(ref)}">δες το στο Νομόσιο</a>` : ''} · Πηγές ελεγμένες στις ${esc(day(m.checkedOn))}</div>
       </article>`;
 }

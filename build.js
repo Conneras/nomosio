@@ -228,7 +228,7 @@ function exhibitPager(slug) {
 }
 
 /* Οι Έξυπνες Κινήσεις ως κάρτες. Το φίλτρο «ποιον αφορά» διαβάζει το data-who. */
-const THEMES = { work: 'Δουλειά και εισόδημα', home: 'Σπίτι και χαρτιά', health: 'Υγεία και πρόστιμα', rights: 'Ψήφος και δικαιώματα' };
+const THEMES = { work: 'Δουλειά και εισόδημα', money: 'Φόροι και χρέη', home: 'Σπίτι και χαρτιά', health: 'Υγεία και πρόστιμα', rights: 'Ψήφος και δικαιώματα' };
 const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const httpsOnly = u => /^https:\/\/[^\s"'<>]+$/.test(u || '') ? u : '';
 const localOnly = u => /^\/[a-z0-9\/#-]*$/.test(u || '') ? u : '';

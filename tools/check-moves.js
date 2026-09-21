@@ -16,7 +16,7 @@ const ROOT = path.join(__dirname, '..');
 const moves = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'moves.json'), 'utf8'));
 const CHECK = process.argv.includes('--check');
 
-const THEMES = new Set(['work', 'home', 'health', 'rights']);
+const THEMES = new Set(['work', 'money', 'home', 'health', 'rights']);
 const WHO = new Set(['μισθωτός', 'ελεύθερος επαγγελματίας', 'νέος έως 25', 'γονιός', 'ιδιοκτήτης σπιτιού',
   'ενοικιαστής', 'οδηγός', 'ασθενής', 'συνταξιούχος', 'Έλληνας εξωτερικού', 'όλοι']);
 const EMOJI = /\p{Extended_Pictographic}/u;
